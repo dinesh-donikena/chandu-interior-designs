@@ -41,24 +41,25 @@ const notoSansTelugu = Noto_Sans_Telugu({
 
 export const metadata = {
   title: {
-    default: "Chandu Interior Designs | Warangal",
-    template: "%s | Chandu Interior Designs",
+    default: "Chandu Homely Interiors | Warangal",
+    template: "%s | Chandu Homely Interiors",
   },
   description:
-    "Interior design studio in Warangal & Hanamakonda. Home interiors, renovations, shops and offices — local craftsmanship with a modern touch.",
+    "House construction and interior design from Warangal — serving all of Telangana & Andhra Pradesh. Planning, construction and complete home interiors, end to end.",
   keywords: [
+    "house construction Warangal",
     "interior design Warangal",
     "interior designers Hanamakonda",
-    "home interiors Warangal",
-    "house renovation Warangal",
-    "interior design Kazipet",
-    "commercial interiors Warangal",
-    "చందు ఇంటీరియర్ డిజైన్స్",
+    "home interiors Telangana",
+    "house plans Warangal",
+    "modular kitchen Warangal",
+    "చందు హోమ్లీ ఇంటీరియర్స్",
+    "ఇంటి నిర్మాణం వరంగల్",
   ],
   openGraph: {
-    title: "Chandu Interior Designs | Warangal",
+    title: "Chandu Homely Interiors | Warangal",
     description:
-      "Home interiors, renovations, shops and offices in Warangal & Hanamakonda — local craftsmanship with a modern touch.",
+      "House construction and interior design from Warangal — serving all of Telangana & Andhra Pradesh. Planning, construction and complete home interiors.",
     locale: "en_IN",
     type: "website",
   },

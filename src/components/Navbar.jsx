@@ -13,7 +13,6 @@ export default function Navbar() {
   const navLinks = [
     { href: "/", label: t.nav.home },
     { href: "/portfolio", label: t.nav.portfolio },
-    { href: "/about", label: t.nav.about },
     { href: "/testimonials", label: t.nav.testimonials },
     { href: "/contact", label: t.nav.contact },
   ];
@@ -29,7 +28,7 @@ export default function Navbar() {
           href="/"
           className="font-display text-xl md:text-2xl tracking-tight text-primary"
         >
-          Chandu Interior Designs
+          Chandu Homely Interiors
         </Link>
 
         {/* Desktop nav */}

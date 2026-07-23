@@ -5,37 +5,39 @@ import Link from "next/link";
 import { useState } from "react";
 import { useLanguage } from "@/components/LanguageProvider";
 
-// Static project data (images + categories); titles/locations come from translations by index
+// Static project data (images + categories); titles/locations come from
+// translations by index. Unsplash placeholders of real Indian homes —
+// swap with the family's own project photos when they arrive.
 const projectData = [
   {
-    category: "living-room",
+    category: "hall",
     image:
-      "https://lh3.googleusercontent.com/aida-public/AB6AXuA58GGAY56vJ3voJljPH1PpViuQqAg1hPh-pydCQ9tDwz75vgL9ccf0H9Cj64aHq26zVTQUHoSy7C8LEYjPnj8IH1k84fHkE_D44bBoNVgtHZjFG04K0KSm8PejCfeMFTp0TJV4E6scUjM_6pDBm51auk49Ra-xc-SvlSqRKIHeefGdzJ0lziKDqZusL6MX8-qVi3vFyc5Ew87tK9IKQAA-Uzjo8JB_zduNgyWYXv9sSO5QzkR1KFz7swIpQST5wwAd5gJTB--P2gef",
+      "https://images.unsplash.com/photo-1633604712918-6ab1173d0ecd?auto=format&fit=crop&w=900&q=75",
   },
   {
     category: "kitchen",
     image:
-      "https://lh3.googleusercontent.com/aida-public/AB6AXuDUW_4hOflJpz7-aKJO_rHZE-D73v7Kx7CKLrzUJmVfDky-kKd7OygnBBKkoxSRDKSBr6hcNXhJ-x1BktafchrrS0ga93yoziyBfydmIB5zkBcgqzH0CoKJ25cyJjYJXapzOdbBnPGSskFw7pNy6ybTqSwUUuyX7l8muNJDqvkqtP65iqz_Zq2KwL5UVf0jiM3wwPqIiVomalc_lfm-dCk1nBqEqQ4twn9kH9Nbd2oiuD0eRNGBx6fIVq9V53W5Xsa5ZkOGHNxWWbBd",
+      "https://images.unsplash.com/photo-1682662045846-77f6e1ce55b4?auto=format&fit=crop&w=900&q=75",
   },
   {
-    category: "office",
+    category: "bedroom",
     image:
-      "https://lh3.googleusercontent.com/aida-public/AB6AXuDIRsVanuIsTPQMmqLYrJ7QTAmMF6fhk4W1l-dmNMIFmsIXqa_lZQ80Na9l8dDsRNC2FBV4VhlbgX14WqxxvtjDlZlKIjR1MySzbb2258iOfB9D4YvXKqOrJDYSDXHX65rknTExQJjL0iDpeSgSqsNYRnkzjxsiMo1IWF333SVNoj4sDdHYNur2NoeucMK8Y9XPTTh7tf-AFqGrm_8m4qKRz5vjuAbvP-1JzDnaMjCFd8-T6-9ko4QB_QqF1RscoXHNle9dBeAu-B4N",
+      "https://images.unsplash.com/photo-1633605016186-a8a919b14f5d?auto=format&fit=crop&w=900&q=75",
   },
   {
-    category: "living-room",
+    category: "hall",
     image:
-      "https://lh3.googleusercontent.com/aida-public/AB6AXuD1zL_C9zbha-drYbO5_fiQnMUoeDaLGUdC1Xnjfygm3D_KBEAAV9rxyP-ifTXX9rjKY98FQwDp8ZLJDoRhsrDZjY7Khfj1v9E-JrFKQ-kqRfn1cDs0TB6UA-bj7TdZFe-1sAEPOFLQ6S9BC8UlHwGsrSWMl_3W2E2zWpN9HBOl0bGZjaUn_lJGeuOJ7RH0TpOx973bKoIaAXP51vUBWRA2h5Lm3TtBgyS6wxqko4twC_PWXyEmqWH9m5c72FMEqBRRdZMDoT4h8cGd",
+      "https://images.unsplash.com/photo-1774301063167-66623449a95c?auto=format&fit=crop&w=900&q=75",
   },
   {
     category: "kitchen",
     image:
-      "https://lh3.googleusercontent.com/aida-public/AB6AXuCFy7r5mz3jpe9No_xwbXUt8J1G_BItGuIWQhiW9QA3QyskciSiq-oNHhSsTbXZumei2zwhia9p9wJ_rA6bm8IgcRRiYge-HBVXQZ18kjMgMMaDKoE937ALh5AfwhpBCBCsWWEKpP0CYhHQLgIPbTIZ2UJiX3B0qSLDNLea2TEF5tDuB-Xvar5FUavABfovfwyz09pf8ezTaOtM3kK5014uM2GSaAoc3JuL7dbOxp5EJve9KFFDz_hQ8VQ84JU7pXVbSVJXswZUT9rJ",
+      "https://images.unsplash.com/photo-1682662045815-9016c6225dd3?auto=format&fit=crop&w=900&q=75",
   },
   {
-    category: "office",
+    category: "bedroom",
     image:
-      "https://lh3.googleusercontent.com/aida-public/AB6AXuBre39kN1YbN-60X_UYNTvT7LLRjQmcVmU6vaB7c9twDKiRnW_KNMK50Uk4d4yRvUHRT9Q4Uaz9XCVg9b1rgqgDj2VL-pl3XReLm5qYV0o7Ji_EnagWDyU2YdB3DXhMDNzq8vwymfa8bjXGo_WrcXA-zd331jZtfoKb0r9M36HqsCleBa10XtuSPpp7ovZTiWuSzwPKi6kBaoDlPmDuTBaRH-Upbv_96CYzPNO5mQDPCCx3_o6cdY6KIQwt5G9eV9rrgWPG6wKvwD7M",
+      "https://images.unsplash.com/photo-1640912744459-0aea6e0b1bd5?auto=format&fit=crop&w=900&q=75",
   },
 ];
 
@@ -45,9 +47,9 @@ export default function PortfolioContent() {
 
   const categories = [
     { key: "all", label: t.portfolio.filters.all },
-    { key: "living-room", label: t.portfolio.filters.livingRoom },
+    { key: "hall", label: t.portfolio.filters.hall },
     { key: "kitchen", label: t.portfolio.filters.kitchen },
-    { key: "office", label: t.portfolio.filters.office },
+    { key: "bedroom", label: t.portfolio.filters.bedroom },
   ];
 
   const projects = projectData.map((p, i) => ({

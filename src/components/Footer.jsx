@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useLanguage } from "@/components/LanguageProvider";
+import { SITE } from "@/lib/site";
 
 export default function Footer() {
   const { t } = useLanguage();
@@ -11,7 +12,7 @@ export default function Footer() {
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 px-5 md:px-20 py-20 max-w-[1280px] mx-auto">
         <div className="space-y-4">
           <h2 className="font-display text-2xl text-primary">
-            Chandu Interior Designs
+            {SITE.name}
           </h2>
           <p className="text-base text-on-surface-muted max-w-xs leading-relaxed">
             {t.footer.tagline}
@@ -28,12 +29,6 @@ export default function Footer() {
               className="text-on-surface-muted hover:text-primary transition-colors text-base"
             >
               {t.nav.portfolio}
-            </Link>
-            <Link
-              href="/about"
-              className="text-on-surface-muted hover:text-primary transition-colors text-base"
-            >
-              {t.nav.about}
             </Link>
             <Link
               href="/testimonials"
@@ -53,7 +48,7 @@ export default function Footer() {
               {t.footer.contactUs}
             </Link>
             <a
-              href="https://wa.me/919000012345"
+              href={SITE.whatsapp}
               target="_blank"
               rel="noopener noreferrer"
               className="text-on-surface-muted hover:text-primary transition-colors text-base"
@@ -61,7 +56,7 @@ export default function Footer() {
               WhatsApp
             </a>
             <a
-              href="https://instagram.com"
+              href={SITE.instagram}
               target="_blank"
               rel="noopener noreferrer"
               className="text-on-surface-muted hover:text-primary transition-colors text-base"
@@ -80,7 +75,7 @@ export default function Footer() {
           </p>
           <div className="flex gap-3 pt-2">
             <a
-              href="https://wa.me/919000012345"
+              href={SITE.whatsapp}
               target="_blank"
               rel="noopener noreferrer"
               className="w-10 h-10 border border-outline-light flex items-center justify-center rounded-full hover:bg-primary hover:text-white transition-all duration-300 text-primary"
@@ -91,7 +86,7 @@ export default function Footer() {
               </svg>
             </a>
             <a
-              href="https://instagram.com"
+              href={SITE.instagram}
               target="_blank"
               rel="noopener noreferrer"
               className="w-10 h-10 border border-outline-light flex items-center justify-center rounded-full hover:bg-primary hover:text-white transition-all duration-300 text-primary"
@@ -102,7 +97,7 @@ export default function Footer() {
               </svg>
             </a>
             <a
-              href="mailto:hello@chanduinteriors.com"
+              href={`mailto:${SITE.email}`}
               className="w-10 h-10 border border-outline-light flex items-center justify-center rounded-full hover:bg-primary hover:text-white transition-all duration-300 text-primary"
               aria-label="Email"
             >
@@ -126,7 +121,7 @@ export default function Footer() {
 
       <div className="border-t border-outline-light/30 px-5 md:px-20 py-6 max-w-[1280px] mx-auto">
         <p className="text-xs font-semibold text-on-surface-muted text-center md:text-left">
-          &copy; {new Date().getFullYear()} Chandu Interior Designs, Warangal.{" "}
+          &copy; {new Date().getFullYear()} {SITE.name}, Warangal.{" "}
           {t.footer.rights}
         </p>
       </div>

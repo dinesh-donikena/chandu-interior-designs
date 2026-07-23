@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { useState } from "react";
 import { useLanguage } from "@/components/LanguageProvider";
+import { SITE } from "@/lib/site";
 
 export default function ContactContent() {
   const { t } = useLanguage();
@@ -29,7 +30,7 @@ export default function ContactContent() {
         body: JSON.stringify({
           access_key: "YOUR_ACCESS_KEY",
           ...data,
-          subject: `New inquiry from ${data.name} - Chandu Interior Designs`,
+          subject: `New inquiry from ${data.name} - ${SITE.name}`,
         }),
       });
 
@@ -172,7 +173,7 @@ export default function ContactContent() {
                       <path d="M1.5 4.5a3 3 0 013-3h1.372c.86 0 1.61.586 1.819 1.42l1.105 4.423a1.875 1.875 0 01-.694 1.955l-1.293.97c-.135.101-.164.249-.126.352a11.285 11.285 0 006.697 6.697c.103.038.25.009.352-.126l.97-1.293a1.875 1.875 0 011.955-.694l4.423 1.105c.834.209 1.42.959 1.42 1.82V19.5a3 3 0 01-3 3h-2.25C8.552 22.5 1.5 15.448 1.5 6.75V4.5z" />
                     </svg>
                     <div>
-                      <p className="text-base text-on-surface">+91 90000 12345</p>
+                      <p className="text-base text-on-surface">{SITE.phoneDisplay}</p>
                       <p className="text-xs font-semibold text-on-surface-muted">
                         {t.contact.hours}
                       </p>
@@ -184,7 +185,7 @@ export default function ContactContent() {
                     </svg>
                     <div>
                       <p className="text-base text-on-surface">
-                        hello@chanduinteriors.com
+                        {SITE.email}
                       </p>
                       <p className="text-xs font-semibold text-on-surface-muted">
                         {t.contact.responseTime}
@@ -223,7 +224,7 @@ export default function ContactContent() {
               {/* Social links */}
               <div className="flex flex-wrap gap-4 pt-4">
                 <a
-                  href="https://wa.me/919000012345"
+                  href={SITE.whatsapp}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center gap-2 px-6 py-3 bg-surface-container ghost-border rounded-full hover:bg-surface-high transition-colors"
@@ -236,7 +237,7 @@ export default function ContactContent() {
                   </span>
                 </a>
                 <a
-                  href="https://instagram.com"
+                  href={SITE.instagram}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center gap-2 px-6 py-3 bg-surface-container ghost-border rounded-full hover:bg-surface-high transition-colors"

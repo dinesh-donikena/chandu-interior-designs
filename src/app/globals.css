@@ -5,11 +5,12 @@
   --color-primary-container: #4a4238;
   --color-primary-light: #d1c5b7;
   --color-primary-fixed: #eee0d2;
-  --color-surface: #fcf9f8;
+  /* Clean white base with warm ivory section tints */
+  --color-surface: #ffffff;
   --color-surface-dim: #dcd9d9;
-  --color-surface-container: #f0eded;
-  --color-surface-low: #f6f3f2;
-  --color-surface-high: #eae7e7;
+  --color-surface-container: #f4f1ec;
+  --color-surface-low: #faf8f5;
+  --color-surface-high: #ece8e1;
   --color-on-surface: #1b1c1c;
   --color-on-surface-muted: #4c463f;
   --color-secondary: #5f5e5b;
@@ -34,7 +35,7 @@ html {
 
 body {
   font-family: var(--font-montserrat), var(--font-noto-sans-telugu), sans-serif;
-  background-color: #fcf9f8;
+  background-color: #ffffff;
   color: #1b1c1c;
 }
 
@@ -84,7 +85,7 @@ body {
   width: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #fcf9f8;
+  background: #ffffff;
 }
 ::-webkit-scrollbar-thumb {
   background: #332c23;

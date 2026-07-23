@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useLanguage } from "@/components/LanguageProvider";
+import { SITE } from "@/lib/site";
 
 const serviceIcons = [
   <svg key="home" className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.2}>
@@ -16,20 +17,22 @@ const serviceIcons = [
   </svg>,
 ];
 
+// Placeholder photos of real Indian homes (Unsplash) — swap with the
+// family's own project photos when they arrive.
 const projectImages = [
   {
     image:
-      "https://lh3.googleusercontent.com/aida-public/AB6AXuC8A9EujJpFERZJKDCcg-Mo0ulvazuPRMhiydzeuOZMTj41yEo775OeLtUEm5IziAI-QetTbAbJvLhtVrHJKgjI1sfBjQEumWT3QjuhXINONnkW2pTjeoHhuZ_ODHEs9zfr7BOxnpPYIJl09cyU6zLdL7jCjKewm_YWkCX2PsIAeEwdtr6wcVcByM5JNrCSW9gFfKHtXWYVEO-Ohz_aOiOelH5Yt-rFqYnw4FLoXLm3_RSnO7WFCDj44_DqqZ4nefFARiQU8qF-0BXf",
+      "https://images.unsplash.com/photo-1682662046457-74fd5b199b92?auto=format&fit=crop&w=1200&q=75",
     className: "col-span-12 md:col-span-8 h-[500px]",
   },
   {
     image:
-      "https://lh3.googleusercontent.com/aida-public/AB6AXuAcLGhC4g2gjVzeTIIzvQmkAI6Lc6ZAhMkqhIgx1CpS3wJtCqsDzZnUCafRrtBFoKpbwWLpPsJbrnM7GDHnnhqWs8kLseuOx97mSqUnE8CFXKC8RGF4J6yoBKo8g0ED9Ur7pTemm-csrHIV4__s3RV43krt1uuB1wAnAzxnDbrtdUKyA4HwoNSfou46xOTXGk-kTUh44A6oD7nNFGrfkWKnyajC-8tktpdAZ5mpyCLQjMyfeN9GXsqqUBI5bsTWN6booiGqATVscFJg",
+      "https://images.unsplash.com/photo-1745429523615-2a82c60bfc02?auto=format&fit=crop&w=800&q=75",
     className: "col-span-12 md:col-span-4 h-[500px]",
   },
   {
     image:
-      "https://lh3.googleusercontent.com/aida-public/AB6AXuCI8cgJtsBBzLuO505NRnI3-y1EKqeghmGxv4XFKXNQm8kSWUr1ETFAO0vy0Dqf0PxKG1padAm7AFUK3gcGxk3vOARvwaIGRjsK8Iwau_WlkX8G56u4CNoglb4zgLVuLwfhOw1KNBwqRvRL413TTa05y5Km91y8a-gKkZ9BNMCxnjsTeKVdem7Z90WxIPhr-ijopNcjXF2MkfHKsqOC8bXAe3YxXCoNHv9wwL91oIFq1ocQLR3qh10C6xXYNodkFS2j09-0ecUaSPVc",
+      "https://images.unsplash.com/photo-1745429523617-0d837856ca35?auto=format&fit=crop&w=1200&q=75",
     className: "col-span-12 h-[400px]",
   },
 ];
@@ -43,10 +46,10 @@ export default function HomeContent() {
       <section className="relative h-[90vh] min-h-[600px] flex items-center overflow-hidden">
         <div className="absolute inset-0 z-0">
           <Image
-            src="https://lh3.googleusercontent.com/aida-public/AB6AXuDmkUyThY2vLgNSkDemqYssdldBVaMmd1_KhbznueZi0va4_w3miwCgHVv_uQQWRyHBcDkA7KPZFe9yOvc0bcJTsPUUt_p0G_WpYm6E3bK-63u955NcH6qEPg4TEi-ZKX9ourN09vS37jpHvIsJNpU0oz5Jp43DH9fi6tep9lPT7-AF2KyrtbLxvxGwRp9PBM0FKCfpC7yeEN9E-qvoP_WmzZR5Et-QAru8Q1pxmOXajKu4GVhhi8emrGdVe1_1J7cdEVZJZyLrrym6"
-            alt="Luxury living room interior with warm bronze accents"
+            src="https://images.unsplash.com/photo-1745301558339-44eb3217d5da?auto=format&fit=crop&w=1920&q=75"
+            alt="Hall with pooja mandir, false ceiling and marble flooring"
             fill
-            className="object-cover brightness-[0.65]"
+            className="object-cover brightness-[0.6]"
             priority
           />
         </div>
@@ -187,7 +190,7 @@ export default function HomeContent() {
               {t.home.ctaButton}
             </Link>
             <a
-              href="https://wa.me/919000012345"
+              href={SITE.whatsapp}
               target="_blank"
               rel="noopener noreferrer"
               className="border border-white/30 text-white px-10 py-5 text-xs font-semibold uppercase tracking-[0.1em] hover:bg-white/10 transition-colors duration-300"
