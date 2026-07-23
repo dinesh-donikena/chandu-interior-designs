@@ -28,7 +28,7 @@ export default function TestimonialsContent() {
           {t.testimonials.items.map((item) => (
             <div
               key={item.name}
-              className="ghost-border p-10 relative flex flex-col justify-between bg-surface-low min-h-[400px]"
+              className="card-soft ghost-border rounded-lg p-10 relative flex flex-col justify-between min-h-[360px]"
             >
               <svg
                 className="absolute top-6 right-8 w-20 h-20 opacity-10 text-primary pointer-events-none"

@@ -3,7 +3,7 @@
 // English: warm, plain, local — a family business talking, not an agency.
 // Telugu: written FRESH as natural spoken Telugu (Telangana style), not
 // translated sentence-by-sentence from English. Short sentences, everyday
-// loanwords (ప్లానింగ్, బడ్జెట్, కిచెన్), and local touches (గృహప్రవేశం).
+// loanwords (ప్లానింగ్, బడ్జెట్, కిచెన్) and a friendly, direct tone.
 // The two languages carry the same meaning but each reads like it was
 // written in that language first.
 
@@ -22,9 +22,9 @@ export const translations = {
       heroTitle1: "Your Dream House,",
       heroTitle2: "Our Responsibility.",
       heroCta: "See Our Work",
-      introHeading: "We build homes. We make them beautiful.",
+      introHeading: "From foundation to interiors — one team.",
       introP1:
-        "Chandu Homely Interiors is a house construction and interior design company from Warangal. A new house from the ground up, or a fresh look for the one you have — we take care of planning, construction and interiors, end to end.",
+        "Chandu Homely Interiors is a house construction and interior design company from Warangal. Whether you're building a new house or updating the one you live in, we take care of everything — planning, construction and interiors — under one roof.",
       introP2:
         "We work across Telangana and Andhra Pradesh. Big or small, we treat every house like our own.",
       servicesLabel: "Our Services",
@@ -32,15 +32,15 @@ export const translations = {
       services: [
         {
           title: "House Construction",
-          desc: "From foundation to finishing — quality materials, honest work, and a house that stands strong for generations.",
+          desc: "From foundation to finishing — quality materials, skilled work, and a house that stands strong for generations.",
         },
         {
           title: "Interior Design",
           desc: "Hall, bedrooms, modular kitchen, pooja room, TV unit, false ceiling — we design it and get it made.",
         },
         {
-          title: "Planning & 3D Design",
-          desc: "House plans, elevations and 3D views — see your house before the first brick is laid.",
+          title: "Planning",
+          desc: "House plans, elevations and layouts that use every square foot wisely.",
         },
       ],
       portfolioLabel: "Our Work",
@@ -51,9 +51,9 @@ export const translations = {
         { title: "Independent House", location: "Warangal" },
         { title: "2BHK Flat Interiors", location: "Kazipet" },
       ],
-      ctaHeading: "Shall we start your house?",
+      ctaHeading: "Planning to build or renovate?",
       ctaText:
-        "One call is enough. We'll come to your site, listen to your plans, and give you an honest estimate.",
+        "One call is enough. We'll come to your site, listen to your plans, and give you a clear estimate.",
       ctaButton: "Talk to Us",
       ctaWhatsApp: "Message on WhatsApp",
     },
@@ -71,7 +71,7 @@ export const translations = {
         { title: "TV Unit & Wall Panelling", location: "Hanamakonda" },
         { title: "Modular Kitchen", location: "Warangal" },
         { title: "Master Bedroom", location: "Kazipet" },
-        { title: "Pooja Room & Niche Wall", location: "Hanamakonda" },
+        { title: "Hall Interiors", location: "Hanamakonda" },
         { title: "Kitchen in Glossy Finish", location: "Warangal" },
         { title: "Guest Bedroom", location: "Hanamakonda" },
       ],
@@ -104,7 +104,7 @@ export const translations = {
       ],
       processLabel: "Our Process",
       processHeading: "How It Works",
-      processText: "Four steps — from first meeting to gruhapravesham.",
+      processText: "Four simple steps from start to finish.",
       steps: [
         {
           title: "First Meeting",
@@ -112,7 +112,7 @@ export const translations = {
         },
         {
           title: "Plan & Estimate",
-          desc: "See your house in 3D before work starts, with a clear estimate. Nothing hidden.",
+          desc: "A clear plan and a clear cost estimate before work starts. Nothing hidden.",
         },
         {
           title: "Work Begins",
@@ -120,7 +120,7 @@ export const translations = {
         },
         {
           title: "Handover",
-          desc: "We hand over the keys — your house is ready for gruhapravesham.",
+          desc: "We walk you through the finished house and hand over the keys.",
         },
       ],
       ctaHeading: "Let's talk about your house.",
@@ -168,17 +168,17 @@ export const translations = {
       portfolio: "మా పనులు",
       testimonials: "కస్టమర్ల మాటలు",
       contact: "కాంటాక్ట్",
-      consultation: "మాట్లాడండి",
-      bookConsultation: "మాతో మాట్లాడండి",
+      consultation: "కాంటాక్ట్ చేయండి",
+      bookConsultation: "కాంటాక్ట్ చేయండి",
       toggleLabel: "English",
     },
     home: {
       heroTitle1: "మీ ఇంటి కల,",
       heroTitle2: "మా బాధ్యత.",
       heroCta: "మా పనులు చూడండి",
-      introHeading: "ఇల్లు కడతాం. అందంగా తీర్చిదిద్దుతాం.",
+      introHeading: "పునాది నుంచి ఇంటీరియర్స్ దాకా — అంతా మేమే.",
       introP1:
-        "చందు హోమ్లీ ఇంటీరియర్స్ — వరంగల్ నుంచి మీ కోసం. కొత్త ఇల్లు కట్టాలన్నా, ఉన్న ఇంటిని కొత్తగా మార్చాలన్నా — ప్లానింగ్, కన్‌స్ట్రక్షన్, ఇంటీరియర్స్ అన్నీ ఒకే చోట. మీరు నిశ్చింతగా ఉండండి, ఇంటి పని మాకు వదిలేయండి.",
+        "చందు హోమ్లీ ఇంటీరియర్స్ — వరంగల్‌కి చెందిన హౌస్ కన్‌స్ట్రక్షన్ & ఇంటీరియర్ డిజైన్ కంపెనీ. కొత్త ఇల్లు కట్టడమైనా, ఉన్న ఇంటిని మార్చడమైనా — ప్లానింగ్, కన్‌స్ట్రక్షన్, ఇంటీరియర్స్ అన్నీ ఒకే దగ్గర. టెన్షన్ అంతా మాది, హాయిగా ఉండడం మీది.",
       introP2:
         "తెలంగాణ, ఆంధ్రప్రదేశ్‌లో ఎక్కడైనా వస్తాం. ఇల్లు చిన్నదైనా పెద్దదైనా — మా ఇల్లే అనుకుని కడతాం.",
       servicesLabel: "మా సర్వీసులు",
@@ -186,15 +186,15 @@ export const translations = {
       services: [
         {
           title: "ఇంటి నిర్మాణం",
-          desc: "పునాది నుంచి ఫినిషింగ్ దాకా — మంచి మెటీరియల్, నిజాయితీ పని. తరాలు నిలిచే ఇల్లు.",
+          desc: "పునాది నుంచి ఫినిషింగ్ దాకా — మంచి మెటీరియల్, నైపుణ్యం ఉన్న పని. తరాలు నిలిచే ఇల్లు.",
         },
         {
           title: "ఇంటీరియర్ డిజైన్",
           desc: "హాల్, బెడ్‌రూమ్, మాడ్యులర్ కిచెన్, పూజ గది, టీవీ యూనిట్, ఫాల్స్ సీలింగ్ — డిజైన్ చేసి, చేయించి ఇస్తాం.",
         },
         {
-          title: "ప్లానింగ్ & 3D డిజైన్",
-          desc: "ప్లాన్లు, ఎలివేషన్లు, 3D వ్యూలు — ఇటుక పెట్టక ముందే మీ ఇంటిని కళ్లారా చూడండి.",
+          title: "ప్లానింగ్",
+          desc: "ప్లాన్లు, ఎలివేషన్లు, లేఅవుట్లు — స్థలం వృథా కాకుండా, ప్రతి అడుగూ లెక్కగా.",
         },
       ],
       portfolioLabel: "మా పనులు",
@@ -205,10 +205,10 @@ export const translations = {
         { title: "ఇండిపెండెంట్ హౌస్", location: "వరంగల్" },
         { title: "2BHK ఫ్లాట్ ఇంటీరియర్స్", location: "కాజీపేట" },
       ],
-      ctaHeading: "మీ ఇంటి పని మొదలుపెడదామా?",
+      ctaHeading: "ఇల్లు కట్టాలని ఆలోచిస్తున్నారా?",
       ctaText:
-        "ఒక్క కాల్ చాలు. మీ దగ్గరికి మేమే వస్తాం — స్థలం చూసి, మీ ఆలోచనలు విని, నిజాయితీగా ఎస్టిమేట్ చెప్తాం.",
-      ctaButton: "మాట్లాడండి",
+        "ఒక్క కాల్ చాలు. మీ దగ్గరికి మేమే వస్తాం — స్థలం చూసి, మీ ఆలోచనలు విని, ఖర్చు అంచనా స్పష్టంగా చెప్తాం.",
+      ctaButton: "కాంటాక్ట్ చేయండి",
       ctaWhatsApp: "WhatsApp చేయండి",
     },
     portfolio: {
@@ -225,7 +225,7 @@ export const translations = {
         { title: "టీవీ యూనిట్ & వాల్ ప్యానెలింగ్", location: "హనుమకొండ" },
         { title: "మాడ్యులర్ కిచెన్", location: "వరంగల్" },
         { title: "మాస్టర్ బెడ్‌రూమ్", location: "కాజీపేట" },
-        { title: "పూజ గది & గోడ డిజైన్", location: "హనుమకొండ" },
+        { title: "హాల్ ఇంటీరియర్స్", location: "హనుమకొండ" },
         { title: "గ్లాసీ ఫినిష్ కిచెన్", location: "వరంగల్" },
         { title: "గెస్ట్ బెడ్‌రూమ్", location: "హనుమకొండ" },
       ],
@@ -258,7 +258,7 @@ export const translations = {
       ],
       processLabel: "మా పద్ధతి",
       processHeading: "పని ఎలా జరుగుతుందంటే…",
-      processText: "మొదటి మీటింగ్ నుంచి గృహప్రవేశం దాకా — నాలుగే స్టెప్స్.",
+      processText: "మొదలు నుంచి చివరి దాకా — నాలుగే స్టెప్స్.",
       steps: [
         {
           title: "ముందు కలుద్దాం",
@@ -266,15 +266,15 @@ export const translations = {
         },
         {
           title: "ప్లాన్ & ఎస్టిమేట్",
-          desc: "పని మొదలవ్వక ముందే 3Dలో మీ ఇల్లు చూపిస్తాం. ఖర్చు ఎంతో స్పష్టంగా చెప్తాం — దాపరికం ఉండదు.",
+          desc: "పని మొదలవ్వక ముందే ప్లాన్, ఖర్చు అంచనా స్పష్టంగా మీ ముందు పెడతాం — దాపరికం ఉండదు.",
         },
         {
           title: "పని మొదలు",
           desc: "మెటీరియల్, పనివాళ్లు, క్వాలిటీ — అన్నీ మేమే చూసుకుంటాం. మీకు ఎప్పటికప్పుడు అప్డేట్ ఇస్తాం.",
         },
         {
-          title: "గృహప్రవేశం",
-          desc: "తాళాలు మీ చేతికి. ఇక శుభముహూర్తం చూసుకోవడమే!",
+          title: "హ్యాండోవర్",
+          desc: "పని పూర్తయ్యాక ఇల్లంతా మీతో కలిసి చూస్తాం. తాళాలు మీ చేతికి.",
         },
       ],
       ctaHeading: "రండి, మీ ఇంటి గురించి మాట్లాడుకుందాం.",

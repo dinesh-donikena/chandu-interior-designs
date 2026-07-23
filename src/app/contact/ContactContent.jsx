@@ -65,7 +65,7 @@ export default function ContactContent() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-16">
           {/* Contact Form */}
           <div className="lg:col-span-7">
-            <div className="bg-surface-low p-8 md:p-12 ghost-border rounded-lg">
+            <div className="card-soft ghost-border p-8 md:p-12 rounded-lg">
               <form className="space-y-8" onSubmit={handleSubmit}>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                   <div>

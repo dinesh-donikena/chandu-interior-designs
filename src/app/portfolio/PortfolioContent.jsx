@@ -22,12 +22,12 @@ const projectData = [
   {
     category: "bedroom",
     image:
-      "https://images.unsplash.com/photo-1633605016186-a8a919b14f5d?auto=format&fit=crop&w=900&q=75",
+      "https://images.unsplash.com/photo-1771327811766-5f4149190b3d?auto=format&fit=crop&w=900&q=75",
   },
   {
     category: "hall",
     image:
-      "https://images.unsplash.com/photo-1774301063167-66623449a95c?auto=format&fit=crop&w=900&q=75",
+      "https://images.unsplash.com/photo-1682662045247-3740fa9f51c6?auto=format&fit=crop&w=900&q=75",
   },
   {
     category: "kitchen",
@@ -37,7 +37,7 @@ const projectData = [
   {
     category: "bedroom",
     image:
-      "https://images.unsplash.com/photo-1640912744459-0aea6e0b1bd5?auto=format&fit=crop&w=900&q=75",
+      "https://images.unsplash.com/photo-1771328756144-02bde5549a9a?auto=format&fit=crop&w=900&q=75",
   },
 ];
 
