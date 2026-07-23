@@ -18,13 +18,14 @@
   --color-tertiary: #223026;
   --color-error: #ba1a1a;
 
-  --font-display: "Playfair Display", serif;
-  --font-body: "Montserrat", sans-serif;
+  /* Telugu Noto fonts as fallbacks — Latin fonts carry no Telugu glyphs */
+  --font-display: var(--font-playfair), var(--font-noto-serif-telugu), serif;
+  --font-body: var(--font-montserrat), var(--font-noto-sans-telugu), sans-serif;
 }
 
 ::selection {
-  background-color: var(--color-primary-fixed);
-  color: var(--color-primary);
+  background-color: #eee0d2;
+  color: #332c23;
 }
 
 html {
@@ -32,9 +33,16 @@ html {
 }
 
 body {
-  font-family: var(--font-body);
-  background-color: var(--color-surface);
-  color: var(--color-on-surface);
+  font-family: var(--font-montserrat), var(--font-noto-sans-telugu), sans-serif;
+  background-color: #fcf9f8;
+  color: #1b1c1c;
+}
+
+/* Telugu script is taller than Latin — give headings a bit more breathing room */
+:lang(te) h1,
+:lang(te) h2,
+:lang(te) h3 {
+  line-height: 1.35;
 }
 
 /* Ghost border utility */
@@ -76,10 +84,10 @@ body {
   width: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: var(--color-surface);
+  background: #fcf9f8;
 }
 ::-webkit-scrollbar-thumb {
-  background: var(--color-primary);
+  background: #332c23;
 }
 
 /* Form focus styles */

@@ -3,18 +3,24 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
-
-const navLinks = [
-  { href: "/", label: "Home" },
-  { href: "/portfolio", label: "Portfolio" },
-  { href: "/about", label: "About" },
-  { href: "/testimonials", label: "Testimonials" },
-  { href: "/contact", label: "Contact" },
-];
+import { useLanguage } from "@/components/LanguageProvider";
 
 export default function Navbar() {
   const pathname = usePathname();
   const [mobileOpen, setMobileOpen] = useState(false);
+  const { lang, setLang, t } = useLanguage();
+
+  const navLinks = [
+    { href: "/", label: t.nav.home },
+    { href: "/portfolio", label: t.nav.portfolio },
+    { href: "/about", label: t.nav.about },
+    { href: "/testimonials", label: t.nav.testimonials },
+    { href: "/contact", label: t.nav.contact },
+  ];
+
+  function toggleLang() {
+    setLang(lang === "en" ? "te" : "en");
+  }
 
   return (
     <nav className="bg-surface/90 backdrop-blur-md sticky top-0 z-50 border-b border-outline-light/30">
@@ -43,12 +49,36 @@ export default function Navbar() {
           ))}
         </div>
 
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-3 md:gap-4">
+          {/* Language toggle — shows the language you'd switch TO */}
+          <button
+            onClick={toggleLang}
+            className="flex items-center gap-1.5 border border-outline-light rounded-full px-3 py-1.5 text-xs font-semibold text-primary hover:bg-primary hover:text-white hover:border-primary transition-colors duration-300"
+            aria-label={
+              lang === "en" ? "Switch to Telugu" : "Switch to English"
+            }
+          >
+            <svg
+              className="w-3.5 h-3.5"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              strokeWidth={1.5}
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M12 21a9 9 0 100-18 9 9 0 000 18zm0 0c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m-9 9h18"
+              />
+            </svg>
+            {t.nav.toggleLabel}
+          </button>
+
           <Link
             href="/contact"
             className="hidden md:block bg-primary text-white px-6 py-2 text-xs font-semibold uppercase tracking-[0.1em] hover:opacity-80 transition-opacity"
           >
-            Consultation
+            {t.nav.consultation}
           </Link>
 
           {/* Mobile hamburger */}
@@ -105,7 +135,7 @@ export default function Navbar() {
             onClick={() => setMobileOpen(false)}
             className="mt-4 block text-center bg-primary text-white px-6 py-3 text-xs font-semibold uppercase tracking-[0.1em]"
           >
-            Book Consultation
+            {t.nav.bookConsultation}
           </Link>
         </div>
       )}

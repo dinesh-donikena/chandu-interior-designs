@@ -1,6 +1,11 @@
+"use client";
+
 import Link from "next/link";
+import { useLanguage } from "@/components/LanguageProvider";
 
 export default function Footer() {
+  const { t } = useLanguage();
+
   return (
     <footer className="bg-surface-container">
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 px-5 md:px-20 py-20 max-w-[1280px] mx-auto">
@@ -9,44 +14,43 @@ export default function Footer() {
             Chandu Interior Designs
           </h2>
           <p className="text-base text-on-surface-muted max-w-xs leading-relaxed">
-            Crafting timeless spaces that bridge architectural heritage and
-            contemporary lifestyle in Warangal & Hanamakonda.
+            {t.footer.tagline}
           </p>
         </div>
 
         <div className="grid grid-cols-2 gap-8">
           <div className="flex flex-col gap-3">
             <span className="text-xs font-semibold uppercase tracking-[0.1em] text-primary">
-              Company
+              {t.footer.pages}
             </span>
             <Link
               href="/portfolio"
               className="text-on-surface-muted hover:text-primary transition-colors text-base"
             >
-              Portfolio
+              {t.nav.portfolio}
             </Link>
             <Link
               href="/about"
               className="text-on-surface-muted hover:text-primary transition-colors text-base"
             >
-              About
+              {t.nav.about}
             </Link>
             <Link
               href="/testimonials"
               className="text-on-surface-muted hover:text-primary transition-colors text-base"
             >
-              Testimonials
+              {t.nav.testimonials}
             </Link>
           </div>
           <div className="flex flex-col gap-3">
             <span className="text-xs font-semibold uppercase tracking-[0.1em] text-primary">
-              Connect
+              {t.footer.connect}
             </span>
             <Link
               href="/contact"
               className="text-on-surface-muted hover:text-primary transition-colors text-base"
             >
-              Contact Us
+              {t.footer.contactUs}
             </Link>
             <a
               href="https://wa.me/919000012345"
@@ -69,12 +73,10 @@ export default function Footer() {
 
         <div className="space-y-4">
           <span className="text-xs font-semibold uppercase tracking-[0.1em] text-primary block">
-            Office
+            {t.footer.office}
           </span>
-          <p className="text-on-surface-muted text-base leading-relaxed">
-            Hanamakonda,
-            <br />
-            Warangal, Telangana - 506001
+          <p className="text-on-surface-muted text-base leading-relaxed whitespace-pre-line">
+            {t.footer.address}
           </p>
           <div className="flex gap-3 pt-2">
             <a
@@ -124,8 +126,8 @@ export default function Footer() {
 
       <div className="border-t border-outline-light/30 px-5 md:px-20 py-6 max-w-[1280px] mx-auto">
         <p className="text-xs font-semibold text-on-surface-muted text-center md:text-left">
-          &copy; {new Date().getFullYear()} Chandu Interior Designs, Warangal.
-          All rights reserved.
+          &copy; {new Date().getFullYear()} Chandu Interior Designs, Warangal.{" "}
+          {t.footer.rights}
         </p>
       </div>
     </footer>

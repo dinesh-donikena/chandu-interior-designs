@@ -1,0 +1,12 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "chandu-dev",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "dev"],
+      "cwd": "/Users/dineshdonikena/Downloads/chandu-interior-designs",
+      "port": 3000
+    }
+  ]
+}
