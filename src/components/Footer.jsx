@@ -21,7 +21,7 @@ export default function Footer() {
 
         <div className="grid grid-cols-2 gap-8">
           <div className="flex flex-col gap-3">
-            <span className="text-xs font-semibold uppercase tracking-[0.1em] text-primary">
+            <span className="text-xs font-semibold uppercase tracking-[0.1em] text-accent">
               {t.footer.pages}
             </span>
             <Link
@@ -38,7 +38,7 @@ export default function Footer() {
             </Link>
           </div>
           <div className="flex flex-col gap-3">
-            <span className="text-xs font-semibold uppercase tracking-[0.1em] text-primary">
+            <span className="text-xs font-semibold uppercase tracking-[0.1em] text-accent">
               {t.footer.connect}
             </span>
             <Link
@@ -67,7 +67,7 @@ export default function Footer() {
         </div>
 
         <div className="space-y-4">
-          <span className="text-xs font-semibold uppercase tracking-[0.1em] text-primary block">
+          <span className="text-xs font-semibold uppercase tracking-[0.1em] text-accent block">
             {t.footer.office}
           </span>
           <p className="text-on-surface-muted text-base leading-relaxed whitespace-pre-line">
@@ -78,7 +78,7 @@ export default function Footer() {
               href={SITE.whatsapp}
               target="_blank"
               rel="noopener noreferrer"
-              className="w-10 h-10 border border-outline-light flex items-center justify-center rounded-full hover:bg-primary hover:text-white transition-all duration-300 text-primary"
+              className="w-10 h-10 border border-outline-light flex items-center justify-center rounded-full hover:bg-accent hover:text-white hover:border-accent transition-all duration-300 text-primary"
               aria-label="WhatsApp"
             >
               <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
@@ -89,7 +89,7 @@ export default function Footer() {
               href={SITE.instagram}
               target="_blank"
               rel="noopener noreferrer"
-              className="w-10 h-10 border border-outline-light flex items-center justify-center rounded-full hover:bg-primary hover:text-white transition-all duration-300 text-primary"
+              className="w-10 h-10 border border-outline-light flex items-center justify-center rounded-full hover:bg-accent hover:text-white hover:border-accent transition-all duration-300 text-primary"
               aria-label="Instagram"
             >
               <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
@@ -98,7 +98,7 @@ export default function Footer() {
             </a>
             <a
               href={`mailto:${SITE.email}`}
-              className="w-10 h-10 border border-outline-light flex items-center justify-center rounded-full hover:bg-primary hover:text-white transition-all duration-300 text-primary"
+              className="w-10 h-10 border border-outline-light flex items-center justify-center rounded-full hover:bg-accent hover:text-white hover:border-accent transition-all duration-300 text-primary"
               aria-label="Email"
             >
               <svg

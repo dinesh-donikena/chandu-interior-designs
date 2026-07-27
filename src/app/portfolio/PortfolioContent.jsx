@@ -81,8 +81,8 @@ export default function PortfolioContent() {
               onClick={() => setFilter(cat.key)}
               className={`relative text-xs font-semibold uppercase tracking-[0.1em] transition-colors pb-1 ${
                 filter === cat.key
-                  ? "text-primary font-bold border-b-2 border-primary"
-                  : "text-on-surface-muted hover:text-primary"
+                  ? "text-primary font-bold border-b-2 border-accent"
+                  : "text-on-surface-muted hover:text-accent"
               }`}
             >
               {cat.label}
@@ -127,7 +127,7 @@ export default function PortfolioContent() {
           </h2>
           <Link
             href="/contact"
-            className="inline-block bg-primary text-white px-10 py-4 text-xs font-semibold uppercase tracking-[0.1em] hover:opacity-90 transition-all duration-300"
+            className="inline-block bg-accent text-white px-10 py-4 text-xs font-semibold uppercase tracking-[0.1em] hover:bg-accent-dark transition-colors duration-300"
           >
             {t.portfolio.ctaButton}
           </Link>

@@ -52,6 +52,30 @@ export const translations = {
         { title: "Living Room", location: "Sample Design" },
       ],
       ctaHeading: "Planning to build or renovate?",
+      faqLabel: "Questions",
+      faqHeading: "Commonly Asked",
+      faq: [
+        {
+          q: "Do you take up only interiors, or construction as well?",
+          a: "Both. Some customers ask us only to build, some only for interiors, and some for everything from start to finish. You choose what you need.",
+        },
+        {
+          q: "Do you work outside Warangal?",
+          a: "Yes. We work across Telangana and Andhra Pradesh. Tell us where the site is and we will come and see it.",
+        },
+        {
+          q: "How do we start?",
+          a: "Call or message us on WhatsApp. We visit the site, talk about what you want, and then give you a plan and a cost estimate.",
+        },
+        {
+          q: "How is the cost decided?",
+          a: "It depends on the size of the work, the materials you choose and the condition of the site. You get the estimate in writing before any work starts.",
+        },
+        {
+          q: "Can we choose our own materials?",
+          a: "Yes. We show you the options and prices for each, and you decide. If you already have something in mind, we work with that.",
+        },
+      ],
       ctaText:
         "Call or message us — we'll visit your site, understand what you need, and give you a clear cost estimate.",
       ctaButton: "Talk to Us",
@@ -206,6 +230,30 @@ export const translations = {
         { title: "లివింగ్ రూమ్", location: "శాంపిల్ డిజైన్" },
       ],
       ctaHeading: "ఇల్లు కట్టాలని ఆలోచిస్తున్నారా?",
+      faqLabel: "సందేహాలు",
+      faqHeading: "తరచుగా అడిగే ప్రశ్నలు",
+      faq: [
+        {
+          q: "మీరు ఇంటీరియర్స్ మాత్రమే చేస్తారా, కన్‌స్ట్రక్షన్ కూడా చేస్తారా?",
+          a: "రెండూ చేస్తాం. కొందరు ఇల్లు కట్టడానికి మాత్రమే అడుగుతారు, కొందరు ఇంటీరియర్స్ మాత్రమే, కొందరు మొదటి నుంచి చివరి వరకు అన్నీ. మీకు ఏది కావాలో అదే చేస్తాం.",
+        },
+        {
+          q: "వరంగల్ బయట కూడా పని చేస్తారా?",
+          a: "అవును. తెలంగాణ, ఆంధ్రప్రదేశ్‌లో పని చేస్తాం. మీ స్థలం ఎక్కడ ఉందో చెప్పండి — వచ్చి చూస్తాం.",
+        },
+        {
+          q: "ఎలా మొదలుపెట్టాలి?",
+          a: "కాల్ చేయండి లేదా WhatsApp లో మెసేజ్ చేయండి. సైట్‌కి వచ్చి, మీకేం కావాలో మాట్లాడుకుని, ప్లాన్‌తో పాటు ఖర్చు అంచనా ఇస్తాం.",
+        },
+        {
+          q: "ఖర్చు ఎలా నిర్ణయిస్తారు?",
+          a: "పని ఎంత ఉంది, ఏ మెటీరియల్ ఎంచుకున్నారు, సైట్ పరిస్థితి ఎలా ఉంది — వీటిని బట్టి ఉంటుంది. పని మొదలవ్వక ముందే ఎస్టిమేట్ రాతపూర్వకంగా ఇస్తాం.",
+        },
+        {
+          q: "మెటీరియల్ మేమే ఎంచుకోవచ్చా?",
+          a: "తప్పకుండా. ఏ మెటీరియల్‌కి ఎంత ధర ఉందో చూపిస్తాం, మీరు నిర్ణయించుకోండి. మీ దగ్గర ఇప్పటికే ఏదైనా ఆలోచన ఉంటే దాని ప్రకారమే చేస్తాం.",
+        },
+      ],
       ctaText:
         "ఒక్క కాల్ చాలు. మీ దగ్గరికి మేమే వస్తాం — స్థలం చూసి, మీ ఆలోచనలు విని, ఖర్చు అంచనా స్పష్టంగా చెప్తాం.",
       ctaButton: "కాంటాక్ట్ చేయండి",

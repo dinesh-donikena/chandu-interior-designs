@@ -11,7 +11,7 @@ export default function TestimonialsContent() {
     <>
       {/* Header */}
       <header className="pt-24 pb-12 px-5 md:px-20 max-w-[1280px] mx-auto text-center">
-        <span className="text-xs font-semibold uppercase tracking-[0.1em] text-secondary block mb-4">
+        <span className="text-xs font-semibold uppercase tracking-[0.1em] text-accent block mb-4">
           {t.testimonials.label}
         </span>
         <h1 className="font-display text-4xl md:text-6xl text-primary mb-6">
@@ -31,7 +31,7 @@ export default function TestimonialsContent() {
               className="card-soft ghost-border rounded-lg p-10 relative flex flex-col justify-between min-h-[360px]"
             >
               <svg
-                className="absolute top-6 right-8 w-20 h-20 opacity-10 text-primary pointer-events-none"
+                className="absolute top-6 right-8 w-20 h-20 opacity-20 text-accent pointer-events-none"
                 fill="currentColor"
                 viewBox="0 0 24 24"
               >
@@ -58,7 +58,7 @@ export default function TestimonialsContent() {
         <div className="px-5 md:px-20 max-w-[1280px] mx-auto">
           <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
             <div className="max-w-xl">
-              <span className="text-xs font-semibold uppercase tracking-[0.1em] text-secondary block mb-4">
+              <span className="text-xs font-semibold uppercase tracking-[0.1em] text-accent block mb-4">
                 {t.testimonials.processLabel}
               </span>
               <h2 className="font-display text-3xl md:text-5xl text-primary">
@@ -75,7 +75,7 @@ export default function TestimonialsContent() {
 
             {t.testimonials.steps.map((step, i) => (
               <div key={step.title} className="group relative z-10">
-                <div className="w-20 h-20 bg-surface ghost-border rounded-full flex items-center justify-center mb-8 transition-all duration-300 group-hover:bg-primary group-hover:text-white">
+                <div className="w-20 h-20 bg-surface ghost-border rounded-full flex items-center justify-center mb-8 text-primary transition-all duration-300 group-hover:bg-accent group-hover:text-white group-hover:border-accent">
                   <span className="font-display text-2xl">
                     {String(i + 1).padStart(2, "0")}
                   </span>
@@ -106,7 +106,7 @@ export default function TestimonialsContent() {
               </h2>
               <Link
                 href="/contact"
-                className="inline-block bg-primary text-white px-10 py-4 text-xs font-semibold uppercase tracking-[0.1em] hover:bg-primary-container transition-colors"
+                className="inline-block bg-accent text-white px-10 py-4 text-xs font-semibold uppercase tracking-[0.1em] hover:bg-accent-dark transition-colors"
               >
                 {t.testimonials.ctaButton}
               </Link>

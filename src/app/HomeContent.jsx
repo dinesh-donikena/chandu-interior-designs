@@ -42,30 +42,30 @@ export default function HomeContent() {
 
   return (
     <>
-      {/* Hero */}
-      {/* Hero — text sits on the right so the pooja mandir on the left stays
-          visible; on small screens the frame pans left to keep it in shot and
-          the text drops to the bottom. */}
-      <section className="relative h-[90vh] min-h-[600px] flex items-end pb-16 md:items-center md:pb-0 overflow-hidden">
+      {/* Hero — text always sits bottom-left inside the scrim, so it reads the
+          same on laptop, tablet and phone. The frame pans left on smaller
+          screens to keep the pooja mandir in shot. */}
+      <section className="relative h-[90vh] min-h-[600px] flex items-end overflow-hidden">
         <div className="absolute inset-0 z-0">
           <Image
             src="https://images.unsplash.com/photo-1745301558339-44eb3217d5da?auto=format&fit=crop&w=1920&q=75"
             alt="Hall with pooja mandir, false ceiling and marble flooring"
             fill
-            className="object-cover object-[28%_center] lg:object-center brightness-[0.6]"
+            className="object-cover object-[28%_center] lg:object-center"
             priority
           />
+          <div className="hero-scrim absolute inset-0" />
         </div>
-        <div className="relative z-10 max-w-[1280px] mx-auto px-5 md:px-20 w-full">
-          <div className="max-w-3xl md:ml-auto md:text-right">
-            <h1 className="font-display text-4xl md:text-7xl font-bold text-white mb-8 leading-[1.15] tracking-tight">
+        <div className="relative z-10 max-w-[1280px] mx-auto px-5 md:px-8 lg:px-20 w-full pb-14 md:pb-20">
+          <div className="max-w-3xl">
+            <h1 className="font-display text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-8 leading-[1.15] tracking-tight">
               {t.home.heroTitle1}
               <br />
               {t.home.heroTitle2}
             </h1>
             <Link
               href="/portfolio"
-              className="inline-flex items-center gap-2 bg-primary text-white px-8 py-4 text-xs font-semibold uppercase tracking-[0.1em] hover:bg-primary-container transition-colors duration-300 group"
+              className="inline-flex items-center gap-2 bg-accent text-white px-8 py-4 text-xs font-semibold uppercase tracking-[0.1em] hover:bg-accent-dark transition-colors duration-300 group"
             >
               {t.home.heroCta}
               <svg
@@ -102,7 +102,7 @@ export default function HomeContent() {
       <section className="py-24 md:py-32 bg-surface-low">
         <div className="max-w-[1280px] mx-auto px-5 md:px-20">
           <div className="text-center mb-16">
-            <span className="text-xs font-semibold uppercase tracking-[0.2em] text-primary block mb-4">
+            <span className="text-xs font-semibold uppercase tracking-[0.2em] text-accent block mb-4">
               {t.home.servicesLabel}
             </span>
             <h2 className="font-display text-3xl md:text-4xl text-primary">
@@ -113,13 +113,10 @@ export default function HomeContent() {
             {t.home.services.map((service, i) => (
               <div
                 key={service.title}
-                className="p-10 bg-surface border border-outline-light/30 hover:border-primary transition-colors duration-500 relative group overflow-hidden"
+                className="p-10 bg-surface border border-outline-light/60 hover:border-accent hover:shadow-[0_6px_28px_rgba(46,42,36,0.08)] transition-all duration-500 relative group overflow-hidden"
               >
-                <span className="absolute -top-4 -right-2 text-[120px] font-display text-primary/5 select-none font-bold">
-                  &ldquo;
-                </span>
                 <div className="relative z-10">
-                  <div className="text-primary mb-6">{serviceIcons[i]}</div>
+                  <div className="text-accent mb-6">{serviceIcons[i]}</div>
                   <h3 className="font-display text-2xl mb-4 text-primary">
                     {service.title}
                   </h3>
@@ -135,7 +132,7 @@ export default function HomeContent() {
       <section className="py-24 md:py-32 max-w-[1280px] mx-auto px-5 md:px-20">
         <div className="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
           <div>
-            <span className="text-xs font-semibold uppercase tracking-[0.2em] text-primary block mb-4">
+            <span className="text-xs font-semibold uppercase tracking-[0.2em] text-accent block mb-4">
               {t.home.portfolioLabel}
             </span>
             <h2 className="font-display text-3xl md:text-5xl text-primary">
@@ -144,7 +141,7 @@ export default function HomeContent() {
           </div>
           <Link
             href="/portfolio"
-            className="text-xs font-semibold uppercase tracking-[0.1em] text-primary border-b border-primary pb-1 hover:opacity-70 transition-opacity"
+            className="text-xs font-semibold uppercase tracking-[0.1em] text-accent border-b border-accent pb-1 hover:text-accent-dark hover:border-accent-dark transition-colors"
           >
             {t.home.portfolioLink}
           </Link>
@@ -176,6 +173,45 @@ export default function HomeContent() {
         </div>
       </section>
 
+      {/* FAQ — native <details> so it works without JS and Google can read it */}
+      <section className="py-24 md:py-32 bg-surface-low">
+        <div className="max-w-3xl mx-auto px-5 md:px-8">
+          <div className="text-center mb-14">
+            <span className="text-xs font-semibold uppercase tracking-[0.2em] text-accent block mb-4">
+              {t.home.faqLabel}
+            </span>
+            <h2 className="font-display text-3xl md:text-4xl text-primary">
+              {t.home.faqHeading}
+            </h2>
+          </div>
+
+          <div className="space-y-3">
+            {t.home.faq.map((item) => (
+              <details
+                key={item.q}
+                className="faq-item bg-surface ghost-border rounded-lg px-6 md:px-8"
+              >
+                <summary className="flex items-center justify-between gap-6 py-5 text-base md:text-lg font-semibold text-primary">
+                  {item.q}
+                  <svg
+                    className="faq-icon w-5 h-5 shrink-0 text-accent"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    strokeWidth={2}
+                  >
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                  </svg>
+                </summary>
+                <p className="pb-6 -mt-1 text-base text-on-surface-muted leading-relaxed">
+                  {item.a}
+                </p>
+              </details>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* CTA */}
       <section className="bg-primary py-24 text-center">
         <div className="max-w-[1280px] mx-auto px-5 md:px-20">
@@ -188,7 +224,7 @@ export default function HomeContent() {
           <div className="flex flex-col md:flex-row gap-6 justify-center">
             <Link
               href="/contact"
-              className="bg-white text-primary px-10 py-5 text-xs font-semibold uppercase tracking-[0.1em] hover:bg-surface-container transition-colors duration-300"
+              className="bg-accent text-white px-10 py-5 text-xs font-semibold uppercase tracking-[0.1em] hover:bg-accent-dark transition-colors duration-300"
             >
               {t.home.ctaButton}
             </Link>
