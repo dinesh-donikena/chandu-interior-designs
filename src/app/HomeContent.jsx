@@ -43,18 +43,21 @@ export default function HomeContent() {
   return (
     <>
       {/* Hero */}
-      <section className="relative h-[90vh] min-h-[600px] flex items-center overflow-hidden">
+      {/* Hero — text sits on the right so the pooja mandir on the left stays
+          visible; on small screens the frame pans left to keep it in shot and
+          the text drops to the bottom. */}
+      <section className="relative h-[90vh] min-h-[600px] flex items-end pb-16 md:items-center md:pb-0 overflow-hidden">
         <div className="absolute inset-0 z-0">
           <Image
             src="https://images.unsplash.com/photo-1745301558339-44eb3217d5da?auto=format&fit=crop&w=1920&q=75"
             alt="Hall with pooja mandir, false ceiling and marble flooring"
             fill
-            className="object-cover brightness-[0.6]"
+            className="object-cover object-[28%_center] lg:object-center brightness-[0.6]"
             priority
           />
         </div>
         <div className="relative z-10 max-w-[1280px] mx-auto px-5 md:px-20 w-full">
-          <div className="max-w-3xl">
+          <div className="max-w-3xl md:ml-auto md:text-right">
             <h1 className="font-display text-4xl md:text-7xl font-bold text-white mb-8 leading-[1.15] tracking-tight">
               {t.home.heroTitle1}
               <br />

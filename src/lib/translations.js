@@ -22,11 +22,11 @@ export const translations = {
       heroTitle1: "Your Dream House,",
       heroTitle2: "Our Responsibility.",
       heroCta: "See Our Work",
-      introHeading: "From foundation to interiors — one team.",
+      introHeading: "Construction and interiors — separately or together.",
       introP1:
         "Chandu Homely Interiors is a house construction and interior design company from Warangal. Whether you're building a new house or updating the one you live in, we take care of everything — planning, construction and interiors — under one roof.",
       introP2:
-        "We work across Telangana and Andhra Pradesh. Big or small, we treat every house like our own.",
+        "We work across Telangana and Andhra Pradesh.",
       servicesLabel: "Our Services",
       servicesHeading: "What We Do",
       services: [
@@ -44,23 +44,23 @@ export const translations = {
         },
       ],
       portfolioLabel: "Our Work",
-      portfolioHeading: "Some of Our Projects",
+      portfolioHeading: "Design Samples",
       portfolioLink: "See All",
       projects: [
-        { title: "Our Own Home", location: "Hanamakonda" },
-        { title: "Independent House", location: "Warangal" },
-        { title: "2BHK Flat Interiors", location: "Kazipet" },
+        { title: "Hall", location: "Sample Design" },
+        { title: "Living Room & Kitchen", location: "Sample Design" },
+        { title: "Living Room", location: "Sample Design" },
       ],
       ctaHeading: "Planning to build or renovate?",
       ctaText:
-        "One call is enough. We'll come to your site, listen to your plans, and give you a clear estimate.",
+        "Call or message us — we'll visit your site, understand what you need, and give you a clear cost estimate.",
       ctaButton: "Talk to Us",
       ctaWhatsApp: "Message on WhatsApp",
     },
     portfolio: {
       title: "Our Work",
       intro:
-        "Behind every house is a family's dream. Here are a few we've completed.",
+        "These are sample designs showing the kind of work we do. Photos from our own projects are coming soon.",
       filters: {
         all: "All",
         hall: "Hall",
@@ -68,12 +68,12 @@ export const translations = {
         bedroom: "Bedroom",
       },
       projects: [
-        { title: "TV Unit & Wall Panelling", location: "Hanamakonda" },
-        { title: "Modular Kitchen", location: "Warangal" },
-        { title: "Master Bedroom", location: "Kazipet" },
-        { title: "Hall Interiors", location: "Hanamakonda" },
-        { title: "Kitchen in Glossy Finish", location: "Warangal" },
-        { title: "Guest Bedroom", location: "Hanamakonda" },
+        { title: "TV Unit & Wall Panelling", location: "Sample Design" },
+        { title: "Modular Kitchen", location: "Sample Design" },
+        { title: "Master Bedroom", location: "Sample Design" },
+        { title: "Hall Interiors", location: "Sample Design" },
+        { title: "Kitchen in Glossy Finish", location: "Sample Design" },
+        { title: "Guest Bedroom", location: "Sample Design" },
       ],
       ctaHeading: "Your house could be next.",
       ctaButton: "Start Your Project",
@@ -86,7 +86,7 @@ export const translations = {
         {
           quote:
             "We were in Hyderabad while our house work was going on. They sent photos at every stage and finished on time. Honest, dependable people.",
-          name: "Ramesh garu",
+          name: "Ramesh",
           project: "House Construction, Hanamakonda",
         },
         {
@@ -98,7 +98,7 @@ export const translations = {
         {
           quote:
             "Neat work, and always reachable on phone. A few small delays, but the final result was worth it.",
-          name: "Venkatesh garu",
+          name: "Venkatesh",
           project: "House Renovation, Kazipet",
         },
       ],
@@ -119,8 +119,8 @@ export const translations = {
           desc: "Materials, workers, quality — we handle everything and keep you updated at every stage.",
         },
         {
-          title: "Handover",
-          desc: "We walk you through the finished house and hand over the keys.",
+          title: "Completion",
+          desc: "We finish the work and go through it with you.",
         },
       ],
       ctaHeading: "Let's talk about your house.",
@@ -176,11 +176,11 @@ export const translations = {
       heroTitle1: "మీ ఇంటి కల,",
       heroTitle2: "మా బాధ్యత.",
       heroCta: "మా పనులు చూడండి",
-      introHeading: "పునాది నుంచి ఇంటీరియర్స్ దాకా — అంతా మేమే.",
+      introHeading: "కన్‌స్ట్రక్షన్ కావాలన్నా, ఇంటీరియర్స్ కావాలన్నా, రెండూ కావాలన్నా.",
       introP1:
-        "చందు హోమ్లీ ఇంటీరియర్స్ — వరంగల్‌కి చెందిన హౌస్ కన్‌స్ట్రక్షన్ & ఇంటీరియర్ డిజైన్ కంపెనీ. కొత్త ఇల్లు కట్టడమైనా, ఉన్న ఇంటిని మార్చడమైనా — ప్లానింగ్, కన్‌స్ట్రక్షన్, ఇంటీరియర్స్ అన్నీ ఒకే దగ్గర. టెన్షన్ అంతా మాది, హాయిగా ఉండడం మీది.",
+        "చందు హోమ్లీ ఇంటీరియర్స్ — వరంగల్‌కి చెందిన హౌస్ కన్‌స్ట్రక్షన్ & ఇంటీరియర్ డిజైన్ కంపెనీ. కొత్త ఇల్లు కట్టడమైనా, ఉన్న ఇంటిని మార్చడమైనా — ప్లానింగ్, కన్‌స్ట్రక్షన్, ఇంటీరియర్స్ అన్నీ ఒకే దగ్గర.",
       introP2:
-        "తెలంగాణ, ఆంధ్రప్రదేశ్‌లో ఎక్కడైనా వస్తాం. ఇల్లు చిన్నదైనా పెద్దదైనా — మా ఇల్లే అనుకుని కడతాం.",
+        "మేము తెలంగాణ, ఆంధ్రప్రదేశ్‌లో పని చేస్తాం.",
       servicesLabel: "మా సర్వీసులు",
       servicesHeading: "మేము చేసే పనులు",
       services: [
@@ -198,12 +198,12 @@ export const translations = {
         },
       ],
       portfolioLabel: "మా పనులు",
-      portfolioHeading: "మేము చేసిన కొన్ని ఇళ్లు",
+      portfolioHeading: "డిజైన్ శాంపిల్స్",
       portfolioLink: "అన్నీ చూడండి",
       projects: [
-        { title: "మా సొంత ఇల్లు", location: "హనుమకొండ" },
-        { title: "ఇండిపెండెంట్ హౌస్", location: "వరంగల్" },
-        { title: "2BHK ఫ్లాట్ ఇంటీరియర్స్", location: "కాజీపేట" },
+        { title: "హాల్", location: "శాంపిల్ డిజైన్" },
+        { title: "లివింగ్ రూమ్ & కిచెన్", location: "శాంపిల్ డిజైన్" },
+        { title: "లివింగ్ రూమ్", location: "శాంపిల్ డిజైన్" },
       ],
       ctaHeading: "ఇల్లు కట్టాలని ఆలోచిస్తున్నారా?",
       ctaText:
@@ -214,7 +214,7 @@ export const translations = {
     portfolio: {
       title: "మా పనులు",
       intro:
-        "ప్రతి ఇంటి వెనుక ఒక కుటుంబం కల ఉంటుంది. మేము పూర్తి చేసిన కొన్ని పనులు ఇక్కడ చూడండి.",
+        "ఇవి మేము చేసే పనుల తరహాను చూపించే శాంపిల్ డిజైన్లు. మా సొంత ప్రాజెక్ట్ ఫోటోలు త్వరలో పెడతాం.",
       filters: {
         all: "అన్నీ",
         hall: "హాల్",
@@ -222,12 +222,12 @@ export const translations = {
         bedroom: "బెడ్‌రూమ్",
       },
       projects: [
-        { title: "టీవీ యూనిట్ & వాల్ ప్యానెలింగ్", location: "హనుమకొండ" },
-        { title: "మాడ్యులర్ కిచెన్", location: "వరంగల్" },
-        { title: "మాస్టర్ బెడ్‌రూమ్", location: "కాజీపేట" },
-        { title: "హాల్ ఇంటీరియర్స్", location: "హనుమకొండ" },
-        { title: "గ్లాసీ ఫినిష్ కిచెన్", location: "వరంగల్" },
-        { title: "గెస్ట్ బెడ్‌రూమ్", location: "హనుమకొండ" },
+        { title: "టీవీ యూనిట్ & వాల్ ప్యానెలింగ్", location: "శాంపిల్ డిజైన్" },
+        { title: "మాడ్యులర్ కిచెన్", location: "శాంపిల్ డిజైన్" },
+        { title: "మాస్టర్ బెడ్‌రూమ్", location: "శాంపిల్ డిజైన్" },
+        { title: "హాల్ ఇంటీరియర్స్", location: "శాంపిల్ డిజైన్" },
+        { title: "గ్లాసీ ఫినిష్ కిచెన్", location: "శాంపిల్ డిజైన్" },
+        { title: "గెస్ట్ బెడ్‌రూమ్", location: "శాంపిల్ డిజైన్" },
       ],
       ctaHeading: "తర్వాత మీ ఇల్లే.",
       ctaButton: "ఇప్పుడే మొదలుపెట్టండి",
@@ -240,7 +240,7 @@ export const translations = {
         {
           quote:
             "ఇంటి పని జరుగుతున్నప్పుడు మేము హైదరాబాద్‌లో ఉన్నాం. ప్రతి స్టేజ్ ఫోటోలు పంపించారు, చెప్పిన టైమ్‌కి పూర్తి చేశారు. నమ్మకంగా పని చేసే మనుషులు.",
-          name: "రమేష్ గారు",
+          name: "రమేష్",
           project: "ఇంటి నిర్మాణం, హనుమకొండ",
         },
         {
@@ -252,7 +252,7 @@ export const translations = {
         {
           quote:
             "పని శుభ్రంగా చేశారు. ఫోన్ చేస్తే ఎప్పుడూ అందుబాటులో ఉన్నారు. అక్కడక్కడ కాస్త ఆలస్యమైనా, ఫైనల్ రిజల్ట్ చూశాక సంతోషమే.",
-          name: "వెంకటేష్ గారు",
+          name: "వెంకటేష్",
           project: "ఇంటి రెనొవేషన్, కాజీపేట",
         },
       ],
@@ -261,20 +261,20 @@ export const translations = {
       processText: "మొదలు నుంచి చివరి దాకా — నాలుగే స్టెప్స్.",
       steps: [
         {
-          title: "ముందు కలుద్దాం",
-          desc: "మీ స్థలానికి వస్తాం. మీకేం కావాలో వింటాం. బడ్జెట్ మాట్లాడుకుందాం.",
+          title: "మొదటి మీటింగ్",
+          desc: "ఫోన్‌లో అయినా, నేరుగా అయినా — మీ అవసరాలు, స్థలం, బడ్జెట్ గురించి మాట్లాడుకుంటాం.",
         },
         {
           title: "ప్లాన్ & ఎస్టిమేట్",
-          desc: "పని మొదలవ్వక ముందే ప్లాన్, ఖర్చు అంచనా స్పష్టంగా మీ ముందు పెడతాం — దాపరికం ఉండదు.",
+          desc: "పని మొదలవ్వక ముందే ప్లాన్, ఖర్చు అంచనా మీకు ఇస్తాం.",
         },
         {
           title: "పని మొదలు",
           desc: "మెటీరియల్, పనివాళ్లు, క్వాలిటీ — అన్నీ మేమే చూసుకుంటాం. మీకు ఎప్పటికప్పుడు అప్డేట్ ఇస్తాం.",
         },
         {
-          title: "హ్యాండోవర్",
-          desc: "పని పూర్తయ్యాక ఇల్లంతా మీతో కలిసి చూస్తాం. తాళాలు మీ చేతికి.",
+          title: "పని పూర్తి",
+          desc: "పని పూర్తి చేసి, మీతో కలిసి ఒకసారి చూస్తాం.",
         },
       ],
       ctaHeading: "రండి, మీ ఇంటి గురించి మాట్లాడుకుందాం.",
