@@ -29,14 +29,19 @@ export default function Navbar() {
     };
   }, [menuOpen]);
 
-  const langSwitch = (size = "sm") => (
+  // `w-fit` in the bar keeps the pill hugging its buttons; in the drawer both
+  // halves flex so the whole control is tappable — a stretched container with
+  // narrow buttons left a dead zone that looked clickable but wasn't.
+  const langSwitch = (variant = "bar") => (
     <div
-      className="flex items-center border border-outline-light rounded-full overflow-hidden"
+      className={`flex items-center border border-outline-light rounded-full overflow-hidden ${
+        variant === "drawer" ? "w-full" : "w-fit"
+      }`}
       role="group"
       aria-label="Language"
     >
       {[
-        { key: "en", label: "EN" },
+        { key: "en", label: "English" },
         { key: "te", label: "తెలుగు" },
       ].map((opt) => (
         <button
@@ -44,8 +49,8 @@ export default function Navbar() {
           onClick={() => setLang(opt.key)}
           aria-pressed={lang === opt.key}
           className={`${
-            size === "lg"
-              ? "px-4 py-2 text-sm"
+            variant === "drawer"
+              ? "flex-1 py-2.5 text-sm"
               : "px-2.5 lg:px-3 py-1.5 text-[11px] lg:text-xs"
           } font-semibold transition-colors duration-300 ${
             lang === opt.key
@@ -53,7 +58,7 @@ export default function Navbar() {
               : "text-secondary hover:text-primary"
           }`}
         >
-          {opt.label}
+          {variant === "drawer" ? opt.label : opt.key === "en" ? "EN" : opt.label}
         </button>
       ))}
     </div>
@@ -158,6 +163,8 @@ export default function Navbar() {
             </div>
 
             <div className="flex-1 overflow-y-auto px-6 py-4">
+              <div className="pb-5">{langSwitch("drawer")}</div>
+
               {navLinks.map((link) => (
                 <Link
                   key={link.href}
@@ -185,8 +192,6 @@ export default function Navbar() {
                   </svg>
                 </Link>
               ))}
-
-              <div className="mt-8">{langSwitch("lg")}</div>
             </div>
 
             <div className="px-6 py-6 border-t border-outline-light/60">
