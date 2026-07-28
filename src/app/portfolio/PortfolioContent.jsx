@@ -6,29 +6,18 @@ import { useState } from "react";
 import { useLanguage } from "@/components/LanguageProvider";
 
 // Static project data (images + categories); titles/locations come from
-// translations by index. Unsplash placeholders of real Indian homes —
-// swap with the family's own project photos when they arrive.
+// translations by index. Real photos from the Hanamakonda renovation are
+// marked below; the rest remain Unsplash samples until real bedroom and
+// second-kitchen photos come in.
 const projectData = [
-  {
-    category: "hall",
-    image:
-      "https://images.unsplash.com/photo-1633604712918-6ab1173d0ecd?auto=format&fit=crop&w=900&q=75",
-  },
-  {
-    category: "kitchen",
-    image:
-      "https://images.unsplash.com/photo-1682662045846-77f6e1ce55b4?auto=format&fit=crop&w=900&q=75",
-  },
+  { category: "hall", image: "/portfolio/hanamakonda-tv-unit.jpg" }, // real
+  { category: "kitchen", image: "/portfolio/hanamakonda-kitchen.jpg" }, // real
   {
     category: "bedroom",
     image:
       "https://images.unsplash.com/photo-1771327811766-5f4149190b3d?auto=format&fit=crop&w=900&q=75",
   },
-  {
-    category: "hall",
-    image:
-      "https://images.unsplash.com/photo-1682662045247-3740fa9f51c6?auto=format&fit=crop&w=900&q=75",
-  },
+  { category: "hall", image: "/portfolio/hanamakonda-hall-arch.jpg" }, // real
   {
     category: "kitchen",
     image:
@@ -39,6 +28,7 @@ const projectData = [
     image:
       "https://images.unsplash.com/photo-1771328756144-02bde5549a9a?auto=format&fit=crop&w=900&q=75",
   },
+  { category: "hall", image: "/portfolio/hanamakonda-wash-counter.jpg" }, // real
 ];
 
 export default function PortfolioContent() {

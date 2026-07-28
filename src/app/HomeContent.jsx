@@ -17,23 +17,21 @@ const serviceIcons = [
   </svg>,
 ];
 
-// Placeholder photos of real Indian homes (Unsplash) — swap with the
-// family's own project photos when they arrive.
+// Real photos from the Hanamakonda renovation. Slot shape follows the
+// photo's own shape — the landscape kitchen gets the wide cell, the two
+// portrait shots get tall narrow cells — so nothing is cropped to a sliver.
 const projectImages = [
   {
-    image:
-      "https://images.unsplash.com/photo-1682662046457-74fd5b199b92?auto=format&fit=crop&w=1200&q=75",
-    className: "col-span-12 md:col-span-8 h-[500px]",
+    image: "/portfolio/hanamakonda-kitchen.jpg",
+    className: "col-span-12 md:col-span-6 aspect-[16/10]",
   },
   {
-    image:
-      "https://images.unsplash.com/photo-1745429523615-2a82c60bfc02?auto=format&fit=crop&w=800&q=75",
-    className: "col-span-12 md:col-span-4 h-[500px]",
+    image: "/portfolio/hanamakonda-tv-unit.jpg",
+    className: "col-span-6 md:col-span-3 aspect-[2/3]",
   },
   {
-    image:
-      "https://images.unsplash.com/photo-1745429523617-0d837856ca35?auto=format&fit=crop&w=1200&q=75",
-    className: "col-span-12 h-[400px]",
+    image: "/portfolio/hanamakonda-wash-counter.jpg",
+    className: "col-span-6 md:col-span-3 aspect-[2/3]",
   },
 ];
 
@@ -43,15 +41,14 @@ export default function HomeContent() {
   return (
     <>
       {/* Hero — text always sits bottom-left inside the scrim, so it reads the
-          same on laptop, tablet and phone. The frame pans left on smaller
-          screens to keep the pooja mandir in shot. */}
+          same on laptop, tablet and phone. */}
       <section className="relative h-[90vh] min-h-[600px] flex items-end overflow-hidden">
         <div className="absolute inset-0 z-0">
           <Image
-            src="https://images.unsplash.com/photo-1745301558339-44eb3217d5da?auto=format&fit=crop&w=1920&q=75"
-            alt="Hall with pooja mandir, false ceiling and marble flooring"
+            src="/portfolio/hanamakonda-hall-arch.jpg"
+            alt="Carved wood entrance arch opening into the pooja room and kitchen, Hanamakonda"
             fill
-            className="object-cover object-[28%_center] lg:object-center"
+            className="object-cover"
             priority
           />
           <div className="hero-scrim absolute inset-0" />
@@ -146,7 +143,7 @@ export default function HomeContent() {
             {t.home.portfolioLink}
           </Link>
         </div>
-        <div className="grid grid-cols-12 gap-6">
+        <div className="grid grid-cols-12 gap-6 items-start">
           {t.home.projects.map((project, i) => (
             <div
               key={project.title}
