@@ -22,7 +22,7 @@ export const translations = {
       heroTitle1: "Your Dream House,",
       heroTitle2: "Our Responsibility.",
       heroCta: "See Our Work",
-      introHeading: "Construction and interiors — separately or together.",
+      introHeading: "Construction, interiors, or both — we do it all.",
       introP1:
         "Chandu Homely Interiors is a house construction and interior design company from Warangal. Whether you're building a new house or updating the one you live in, we take care of everything — planning, construction and interiors — under one roof.",
       introP2:
@@ -47,6 +47,7 @@ export const translations = {
       portfolioHeading: "Recent Work",
       portfolioLink: "See All",
       projects: [
+        { title: "Wood-Carved Hall Arch", location: "Hanamakonda" },
         { title: "Modular Kitchen", location: "Hanamakonda" },
         { title: "TV Unit & Wall Panelling", location: "Hanamakonda" },
         { title: "Wash Counter", location: "Hanamakonda" },
@@ -61,7 +62,7 @@ export const translations = {
         },
         {
           q: "Do you work outside Warangal?",
-          a: "Yes. We work across Telangana and Andhra Pradesh. Tell us where the site is and we will come and see it.",
+          a: "Yes — we take on projects across both Telangana and Andhra Pradesh. Wherever your site is, we'll come and see it.",
         },
         {
           q: "How do we start?",
@@ -201,11 +202,11 @@ export const translations = {
       heroTitle1: "మీ ఇంటి కల,",
       heroTitle2: "మా బాధ్యత.",
       heroCta: "మా పనులు చూడండి",
-      introHeading: "కన్‌స్ట్రక్షన్ కావాలన్నా, ఇంటీరియర్స్ కావాలన్నా, రెండూ కావాలన్నా.",
+      introHeading: "కన్‌స్ట్రక్షన్, ఇంటీరియర్స్, లేదా రెండూ — అన్నీ మేమే చూసుకుంటాం.",
       introP1:
         "చందు హోమ్లీ ఇంటీరియర్స్ — వరంగల్‌కి చెందిన హౌస్ కన్‌స్ట్రక్షన్ & ఇంటీరియర్ డిజైన్ కంపెనీ. కొత్త ఇల్లు కట్టడమైనా, ఉన్న ఇంటిని మార్చడమైనా — ప్లానింగ్, కన్‌స్ట్రక్షన్, ఇంటీరియర్స్ అన్నీ ఒకే దగ్గర.",
       introP2:
-        "మేము తెలంగాణ, ఆంధ్రప్రదేశ్‌లో పని చేస్తాం.",
+        "మేము తెలంగాణ, ఆంధ్రప్రదేశ్ అంతటా పని చేస్తాం.",
       servicesLabel: "మా సర్వీసులు",
       servicesHeading: "మేము చేసే పనులు",
       services: [
@@ -226,6 +227,7 @@ export const translations = {
       portfolioHeading: "ఇటీవలి పనులు",
       portfolioLink: "అన్నీ చూడండి",
       projects: [
+        { title: "చెక్క పనితో హాల్ ఆర్చ్", location: "హనుమకొండ" },
         { title: "మాడ్యులర్ కిచెన్", location: "హనుమకొండ" },
         { title: "టీవీ యూనిట్ & వాల్ ప్యానెలింగ్", location: "హనుమకొండ" },
         { title: "వాష్ కౌంటర్", location: "హనుమకొండ" },
@@ -240,10 +242,10 @@ export const translations = {
         },
         {
           q: "వరంగల్ బయట కూడా పని చేస్తారా?",
-          a: "అవును. తెలంగాణ, ఆంధ్రప్రదేశ్‌లో పని చేస్తాం. మీ స్థలం ఎక్కడ ఉందో చెప్పండి — వచ్చి చూస్తాం.",
+          a: "అవును. తెలంగాణ, ఆంధ్రప్రదేశ్ — రెండు రాష్ట్రాల్లోనూ మా సర్వీస్ ఉంది. మీ స్థలం ఎక్కడున్నా వచ్చి చూస్తాం.",
         },
         {
-          q: "ఎలా మొదలుపెట్టాలి?",
+          q: "ఎలా మొదలుపెడదాం?",
           a: "కాల్ చేయండి లేదా WhatsApp లో మెసేజ్ చేయండి. సైట్‌కి వచ్చి, మీకేం కావాలో మాట్లాడుకుని, ప్లాన్‌తో పాటు ఖర్చు అంచనా ఇస్తాం.",
         },
         {

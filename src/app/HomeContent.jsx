@@ -22,6 +22,10 @@ const serviceIcons = [
 // portrait shots get tall narrow cells — so nothing is cropped to a sliver.
 const projectImages = [
   {
+    image: "/portfolio/hanamakonda-hall-arch.jpg",
+    className: "col-span-12 aspect-[16/10] md:aspect-[16/7]",
+  },
+  {
     image: "/portfolio/hanamakonda-kitchen.jpg",
     className: "col-span-12 md:col-span-6 aspect-[16/10]",
   },
@@ -40,13 +44,13 @@ export default function HomeContent() {
 
   return (
     <>
-      {/* Hero — text always sits bottom-left inside the scrim, so it reads the
-          same on laptop, tablet and phone. */}
-      <section className="relative h-[90vh] min-h-[600px] flex items-end overflow-hidden">
+      {/* Hero — native Indian home behind a bottom-up scrim so the heading
+          stays readable; same crop on every screen. */}
+      <section className="relative h-[88vh] min-h-[560px] flex items-end overflow-hidden">
         <div className="absolute inset-0 z-0">
           <Image
-            src="/portfolio/hanamakonda-hall-arch.jpg"
-            alt="Carved wood entrance arch opening into the pooja room and kitchen, Hanamakonda"
+            src="https://images.unsplash.com/photo-1713192704825-74a0017f585d?auto=format&fit=crop&w=1920&q=75"
+            alt="Warm Indian living room with an arched opening, marble floor and ceiling fan"
             fill
             className="object-cover"
             priority
@@ -78,15 +82,17 @@ export default function HomeContent() {
         </div>
       </section>
 
-      {/* Introduction */}
-      <section className="py-24 md:py-32 max-w-[1280px] mx-auto px-5 md:px-20">
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
-          <div className="md:col-span-5">
-            <h2 className="font-display text-3xl md:text-5xl text-primary mb-6 leading-tight">
+      {/* Introduction — stays stacked until lg. On tablet the big heading in a
+          narrow column was colliding with the paragraph, so the split only
+          kicks in on wide screens. */}
+      <section className="py-20 md:py-28 lg:py-32 max-w-[1280px] mx-auto px-5 md:px-20">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-10 items-start">
+          <div className="lg:col-span-5">
+            <h2 className="font-display text-3xl md:text-4xl lg:text-5xl text-primary mb-6 leading-tight">
               {t.home.introHeading}
             </h2>
           </div>
-          <div className="md:col-span-7">
+          <div className="lg:col-span-7">
             <p className="text-lg text-secondary mb-4 leading-relaxed">
               {t.home.introP1}
             </p>
