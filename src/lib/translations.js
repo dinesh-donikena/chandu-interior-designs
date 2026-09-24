@@ -25,7 +25,7 @@ export const translations = {
       heroCta: "See Our Work",
       introHeading: "Construction, interiors, or both — we do it all.",
       introP1:
-        "Chandu Homely Interiors is a house construction and interior design company from Warangal. Whether you're building a new house or updating the one you live in, we take care of everything — planning, construction and interiors — under one roof.",
+        "Mana Illu Interiors and Constructions is a house construction and interior design company from Warangal. Whether you're building a new house or updating the one you live in, we take care of everything — planning, construction and interiors — under one roof.",
       introP2:
         "We work across Telangana and Andhra Pradesh.",
       servicesLabel: "Our Services",
@@ -210,7 +210,7 @@ export const translations = {
       heroCta: "మా పనులు చూడండి",
       introHeading: "కన్‌స్ట్రక్షన్, ఇంటీరియర్స్, లేదా రెండూ — అన్నీ మేమే చూసుకుంటాం.",
       introP1:
-        "చందు హోమ్లీ ఇంటీరియర్స్ — వరంగల్‌కి చెందిన హౌస్ కన్‌స్ట్రక్షన్ & ఇంటీరియర్ డిజైన్ కంపెనీ. కొత్త ఇల్లు కట్టడమైనా, ఉన్న ఇంటిని మార్చడమైనా — ప్లానింగ్, కన్‌స్ట్రక్షన్, ఇంటీరియర్స్ అన్నీ ఒకే దగ్గర.",
+        "మన ఇల్లు ఇంటీరియర్స్ & కన్‌స్ట్రక్షన్స్ — వరంగల్‌కి చెందిన హౌస్ కన్‌స్ట్రక్షన్ & ఇంటీరియర్ డిజైన్ కంపెనీ. కొత్త ఇల్లు కట్టడమైనా, ఉన్న ఇంటిని మార్చడమైనా — ప్లానింగ్, కన్‌స్ట్రక్షన్, ఇంటీరియర్స్ అన్నీ ఒకే దగ్గర.",
       introP2:
         "మేము తెలంగాణ, ఆంధ్రప్రదేశ్ అంతటా పని చేస్తాం.",
       servicesLabel: "మా సర్వీసులు",

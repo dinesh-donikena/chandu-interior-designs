@@ -45,8 +45,8 @@ const notoSansTelugu = Noto_Sans_Telugu({
 export const metadata = {
   metadataBase: new URL(SITE.url),
   title: {
-    default: "Chandu Homely Interiors | Warangal",
-    template: "%s | Chandu Homely Interiors",
+    default: "Mana Illu Interiors and Constructions | Warangal",
+    template: "%s | Mana Illu Interiors and Constructions",
   },
   description:
     "House construction and interior design from Warangal — serving all of Telangana & Andhra Pradesh. Planning, construction and complete home interiors, end to end.",
@@ -57,11 +57,12 @@ export const metadata = {
     "home interiors Telangana",
     "house plans Warangal",
     "modular kitchen Warangal",
-    "చందు హోమ్లీ ఇంటీరియర్స్",
+    "Mana Illu Interiors",
+    "మన ఇల్లు ఇంటీరియర్స్",
     "ఇంటి నిర్మాణం వరంగల్",
   ],
   openGraph: {
-    title: "Chandu Homely Interiors | Warangal",
+    title: "Mana Illu Interiors and Constructions | Warangal",
     description:
       "House construction and interior design from Warangal — serving all of Telangana & Andhra Pradesh. Planning, construction and complete home interiors.",
     locale: "en_IN",
@@ -78,6 +79,9 @@ const localBusinessSchema = {
   "@context": "https://schema.org",
   "@type": "HomeAndConstructionBusiness",
   name: SITE.name,
+  // Earlier trading name (and current Instagram) — helps Google connect
+  // people searching the old name to this site.
+  alternateName: "Chandu Homely Interiors",
   description:
     "House construction and interior design from Warangal, serving Telangana and Andhra Pradesh.",
   url: SITE.url,

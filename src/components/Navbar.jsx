@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useLanguage } from "@/components/LanguageProvider";
+import Logo from "@/components/Logo";
 
 export default function Navbar() {
   const pathname = usePathname();
@@ -26,7 +27,6 @@ export default function Navbar() {
   }
 
   // Lock page scrolling while the drawer is open.
-
   useEffect(() => {
     document.body.style.overflow = menuOpen ? "hidden" : "";
     return () => {
@@ -73,11 +73,8 @@ export default function Navbar() {
     <>
       <nav className="bg-surface/90 backdrop-blur-md sticky top-0 z-50 border-b border-outline-light/50">
         <div className="flex justify-between items-center w-full px-5 md:px-8 lg:px-20 py-4 max-w-[1280px] mx-auto gap-3 md:gap-4">
-          <Link
-            href="/"
-            className="font-display text-base sm:text-lg md:text-xl lg:text-2xl tracking-tight text-primary whitespace-nowrap"
-          >
-            Chandu Homely Interiors
+          <Link href="/" className="shrink-0">
+            <Logo />
           </Link>
 
           {/* Laptop nav — links stay visible from lg up. Spacing tightens
@@ -146,9 +143,7 @@ export default function Navbar() {
           />
           <div className="drawer-panel absolute top-0 right-0 h-full w-[82%] max-w-sm bg-surface shadow-2xl flex flex-col">
             <div className="flex items-center justify-between px-6 py-5 border-b border-outline-light/60">
-              <span className="font-display text-lg text-primary">
-                Chandu Homely Interiors
-              </span>
+              <Logo />
               <button
                 onClick={() => setMenuOpen(false)}
                 className="text-primary p-1"

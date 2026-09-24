@@ -1,12 +1,14 @@
 // Central place for business identity & links — edit once, updates everywhere.
 export const SITE = {
-  name: "Chandu Homely Interiors",
+  name: "Mana Illu Interiors and Constructions",
   whatsapp: "https://wa.me/919133509293",
+  // Still the old Chandu Homely page — swap for the new Mana Illu handle
+  // once it is live (it feeds the footer, Contact page and Google schema).
   instagram: "https://www.instagram.com/chandu__homely_interiors/",
   phoneDisplay: "+91 91335 09293",
   phoneHref: "tel:+919133509293",
   // No business inbox yet, so email is hidden everywhere. Set a real address
-  // (e.g. "chanduhomely@gmail.com") and it appears on Contact + footer.
+  // (e.g. "hello@manailluinteriors.com") and it appears on Contact + footer.
   email: null,
 
   // Swap for the Google Business Profile link / exact street address once

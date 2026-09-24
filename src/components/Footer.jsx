@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useLanguage } from "@/components/LanguageProvider";
+import Logo from "@/components/Logo";
 import { SITE } from "@/lib/site";
 
 export default function Footer() {
@@ -11,8 +12,8 @@ export default function Footer() {
     <footer className="bg-surface-container">
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 px-5 md:px-20 py-20 max-w-[1280px] mx-auto">
         <div className="space-y-4">
-          <h2 className="font-display text-2xl text-primary">
-            {SITE.name}
+          <h2 aria-label={SITE.name}>
+            <Logo large />
           </h2>
           <p className="text-base text-on-surface-muted max-w-xs leading-relaxed">
             {t.footer.tagline}
