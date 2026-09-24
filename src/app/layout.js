@@ -67,6 +67,9 @@ export const metadata = {
     locale: "en_IN",
     type: "website",
   },
+  // Share image comes from app/opengraph-image.jpg (a real project photo);
+  // the large card makes it fill the WhatsApp / Facebook link preview.
+  twitter: { card: "summary_large_image" },
 };
 
 // Tells Google this is a local business in Hanamakonda, which is what
@@ -79,7 +82,7 @@ const localBusinessSchema = {
     "House construction and interior design from Warangal, serving Telangana and Andhra Pradesh.",
   url: SITE.url,
   telephone: SITE.phoneDisplay,
-  image: `${SITE.url}/og-image.jpg`,
+  image: `${SITE.url}/portfolio/hanamakonda-hall-arch.jpg`,
   address: {
     "@type": "PostalAddress",
     addressLocality: SITE.address.locality,

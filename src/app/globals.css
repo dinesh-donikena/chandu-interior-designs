@@ -78,13 +78,35 @@ body {
   );
 }
 
-/* Reveal overlay for portfolio items */
+/* Eyebrow sits higher on the photo than the heading, where the scrim is
+   lighter — a soft shadow keeps it legible over bright ceilings. */
+.hero-eyebrow {
+  text-shadow: 0 1px 12px rgba(25, 20, 14, 0.6);
+}
+/* Wide tracking pulls Telugu conjuncts apart — keep it tight and a touch
+   larger so the line reads as words, not scattered glyphs. */
+:lang(te) .hero-eyebrow {
+  letter-spacing: 0.02em;
+  font-size: 0.95rem;
+}
+
+/* Caption overlay for project photos. Touch screens have no hover, so the
+   caption stays visible there; with a real pointer it fades in on hover. */
 .reveal-overlay {
   background: linear-gradient(
     to top,
     rgba(25, 20, 14, 0.85) 0%,
     rgba(25, 20, 14, 0) 55%
   );
+  transition: opacity 0.5s ease;
+}
+@media (hover: hover) {
+  .reveal-overlay {
+    opacity: 0;
+  }
+  .group:hover .reveal-overlay {
+    opacity: 1;
+  }
 }
 
 /* Page transition — runs on every route change */

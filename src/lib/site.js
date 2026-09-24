@@ -5,8 +5,16 @@ export const SITE = {
   instagram: "https://www.instagram.com/chandu__homely_interiors/",
   phoneDisplay: "+91 91335 09293",
   phoneHref: "tel:+919133509293",
-  // Placeholder — swap when a real business email exists
-  email: "hello@chanduinteriors.com",
+  // No business inbox yet, so email is hidden everywhere. Set a real address
+  // (e.g. "chanduhomely@gmail.com") and it appears on Contact + footer.
+  email: null,
+
+  // Swap for the Google Business Profile link / exact street address once
+  // the owner shares it — the map pin then lands on the office itself.
+  mapsLink:
+    "https://www.google.com/maps/search/?api=1&query=Hanamakonda%2C+Warangal%2C+Telangana",
+  mapsEmbed:
+    "https://maps.google.com/maps?q=Hanamakonda%2C+Warangal%2C+Telangana&z=13&output=embed",
 
   // TODO: set NEXT_PUBLIC_SITE_URL in Vercel once the domain is bought.
   // Used for sitemap.xml, robots.txt and structured data.

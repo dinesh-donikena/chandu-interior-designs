@@ -24,18 +24,22 @@ const projectImages = [
   {
     image: "/portfolio/hanamakonda-hall-arch.jpg",
     className: "col-span-12 aspect-[16/10] md:aspect-[16/7]",
+    sizes: "(min-width: 1280px) 1120px, 100vw",
   },
   {
     image: "/portfolio/hanamakonda-kitchen.jpg",
     className: "col-span-12 md:col-span-6 aspect-[16/10]",
+    sizes: "(min-width: 768px) 50vw, 100vw",
   },
   {
     image: "/portfolio/hanamakonda-tv-unit.jpg",
     className: "col-span-6 md:col-span-3 aspect-[2/3]",
+    sizes: "(min-width: 768px) 25vw, 50vw",
   },
   {
     image: "/portfolio/hanamakonda-wash-counter.jpg",
     className: "col-span-6 md:col-span-3 aspect-[2/3]",
+    sizes: "(min-width: 768px) 25vw, 50vw",
   },
 ];
 
@@ -59,6 +63,9 @@ export default function HomeContent() {
         </div>
         <div className="relative z-10 max-w-[1280px] mx-auto px-5 md:px-8 lg:px-20 w-full pb-14 md:pb-20">
           <div className="max-w-3xl">
+            <p className="hero-eyebrow text-[11px] md:text-sm font-semibold uppercase tracking-[0.2em] text-accent-light mb-4 md:mb-5">
+              {t.home.heroEyebrow}
+            </p>
             <h1 className="font-display text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-8 leading-[1.15] tracking-tight">
               {t.home.heroTitle1}
               <br />
@@ -133,7 +140,7 @@ export default function HomeContent() {
 
       {/* Featured Projects */}
       <section className="py-24 md:py-32 max-w-[1280px] mx-auto px-5 md:px-20">
-        <div className="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 gap-6">
           <div>
             <span className="text-xs font-semibold uppercase tracking-[0.2em] text-accent block mb-4">
               {t.home.portfolioLabel}
@@ -153,23 +160,22 @@ export default function HomeContent() {
           {t.home.projects.map((project, i) => (
             <div
               key={project.title}
-              className={`${projectImages[i].className} relative group overflow-hidden`}
+              className={`${projectImages[i].className} relative group overflow-hidden bg-surface-high`}
             >
               <Image
                 src={projectImages[i].image}
                 alt={project.title}
                 fill
+                sizes={projectImages[i].sizes}
                 className="object-cover transition-transform duration-700 group-hover:scale-105"
               />
-              <div className="reveal-overlay absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center backdrop-blur-[2px]">
-                <div className="text-center px-6">
-                  <h4 className="font-display text-2xl text-white mb-2">
-                    {project.title}
-                  </h4>
-                  <p className="text-xs text-white/80 uppercase tracking-[0.1em] font-semibold">
-                    {project.location}
-                  </p>
-                </div>
+              <div className="reveal-overlay absolute inset-0 flex flex-col justify-end p-4 md:p-8">
+                <h3 className="font-display text-lg md:text-2xl text-white mb-1 leading-snug">
+                  {project.title}
+                </h3>
+                <p className="text-[10px] md:text-xs text-white/80 uppercase tracking-[0.1em] font-semibold">
+                  {project.location}
+                </p>
               </div>
             </div>
           ))}

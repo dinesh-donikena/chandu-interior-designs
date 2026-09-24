@@ -8,27 +8,34 @@ import { useLanguage } from "@/components/LanguageProvider";
 // Static project data (images + categories); titles/locations come from
 // translations by index. Real photos from the Hanamakonda renovation are
 // marked below; the rest remain Unsplash samples until real bedroom and
-// second-kitchen photos come in.
+// second-kitchen photos come in. Width/height are each photo's real
+// proportions, so the masonry reserves the right space before images load.
 const projectData = [
-  { category: "hall", image: "/portfolio/hanamakonda-tv-unit.jpg" }, // real
-  { category: "kitchen", image: "/portfolio/hanamakonda-kitchen.jpg" }, // real
+  { category: "hall", image: "/portfolio/hanamakonda-tv-unit.jpg", w: 2000, h: 3000 }, // real
+  { category: "kitchen", image: "/portfolio/hanamakonda-kitchen.jpg", w: 2000, h: 1125 }, // real
   {
     category: "bedroom",
     image:
       "https://images.unsplash.com/photo-1771327811766-5f4149190b3d?auto=format&fit=crop&w=900&q=75",
+    w: 900,
+    h: 600,
   },
-  { category: "hall", image: "/portfolio/hanamakonda-hall-arch.jpg" }, // real
+  { category: "hall", image: "/portfolio/hanamakonda-hall-arch.jpg", w: 2600, h: 1625 }, // real
   {
     category: "kitchen",
     image:
       "https://images.unsplash.com/photo-1682662045815-9016c6225dd3?auto=format&fit=crop&w=900&q=75",
+    w: 900,
+    h: 600,
   },
   {
     category: "bedroom",
     image:
       "https://images.unsplash.com/photo-1771328756144-02bde5549a9a?auto=format&fit=crop&w=900&q=75",
+    w: 900,
+    h: 600,
   },
-  { category: "hall", image: "/portfolio/hanamakonda-wash-counter.jpg" }, // real
+  { category: "hall", image: "/portfolio/hanamakonda-wash-counter.jpg", w: 2000, h: 3000 }, // real
 ];
 
 export default function PortfolioContent() {
@@ -69,6 +76,7 @@ export default function PortfolioContent() {
             <button
               key={cat.key}
               onClick={() => setFilter(cat.key)}
+              aria-pressed={filter === cat.key}
               className={`relative text-xs font-semibold uppercase tracking-[0.1em] transition-colors pb-1 ${
                 filter === cat.key
                   ? "text-primary font-bold border-b-2 border-accent"
@@ -87,17 +95,18 @@ export default function PortfolioContent() {
           {filtered.map((project) => (
             <div
               key={project.image}
-              className="masonry-item group relative cursor-pointer overflow-hidden"
+              className="masonry-item group relative overflow-hidden bg-surface-high"
             >
               <Image
                 src={project.image}
                 alt={project.title}
-                width={600}
-                height={400}
+                width={project.w}
+                height={project.h}
+                sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
                 className="w-full h-auto object-cover transition-transform duration-700 group-hover:scale-105"
               />
-              <div className="reveal-overlay absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-400 flex flex-col justify-end p-8">
-                <h3 className="font-display text-2xl text-white mb-1">
+              <div className="reveal-overlay absolute inset-0 flex flex-col justify-end p-6 md:p-8">
+                <h3 className="font-display text-xl md:text-2xl text-white mb-1">
                   {project.title}
                 </h3>
                 <p className="text-xs text-white/80 uppercase tracking-[0.1em] font-semibold">

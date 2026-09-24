@@ -17,10 +17,15 @@ export default function Navbar() {
     { href: "/contact", label: t.nav.contact },
   ];
 
-  // Close the drawer on navigation, and lock scrolling while it is open.
-  useEffect(() => {
+  // Close the drawer on navigation (incl. browser back/forward) — adjusted
+  // during render rather than in an effect, per React's guidance.
+  const [prevPath, setPrevPath] = useState(pathname);
+  if (pathname !== prevPath) {
+    setPrevPath(pathname);
     setMenuOpen(false);
-  }, [pathname]);
+  }
+
+  // Lock page scrolling while the drawer is open.
 
   useEffect(() => {
     document.body.style.overflow = menuOpen ? "hidden" : "";
@@ -75,8 +80,9 @@ export default function Navbar() {
             Chandu Homely Interiors
           </Link>
 
-          {/* Laptop nav — links stay visible from lg up */}
-          <div className="hidden lg:flex items-center gap-8">
+          {/* Laptop nav — links stay visible from lg up. Spacing tightens
+              below xl so the bar fits at 1024px, Telugu labels included. */}
+          <div className="hidden lg:flex items-center gap-6 xl:gap-8">
             {navLinks.map((link) => (
               <Link
                 key={link.href}
@@ -93,12 +99,14 @@ export default function Navbar() {
           </div>
 
           {/* Right group — kept clearly apart from the menu links */}
-          <div className="flex items-center gap-3 lg:gap-4 lg:ml-10">
+          <div className="flex items-center gap-3 lg:gap-4 lg:ml-6 xl:ml-10">
             {langSwitch()}
 
+            {/* Same destination as the Contact link, so it only joins the
+                bar once there is room for both (xl). */}
             <Link
               href="/contact"
-              className="hidden lg:block bg-accent text-white px-6 py-2 text-xs font-semibold uppercase tracking-[0.1em] whitespace-nowrap hover:bg-accent-dark transition-colors"
+              className="hidden xl:block bg-accent text-white px-6 py-2 text-xs font-semibold uppercase tracking-[0.1em] whitespace-nowrap hover:bg-accent-dark transition-colors"
             >
               {t.nav.consultation}
             </Link>
