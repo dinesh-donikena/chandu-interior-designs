@@ -105,9 +105,12 @@ body {
 
 /* ── Hero: two doorways ────────────────────────────────────────
    At rest a doorway stands on the floor, centred under the headline,
-   framing the TV unit. Scrolling walks you towards it: it grows, then a
-   second arch opens inside it onto the wood-carved hall arch, until the
-   hall fills the screen. Both are true arches at every step. Without
+   framing the TV unit. Scrolling walks you towards it and it grows.
+   Landscape screens: a second arch then opens inside it onto the
+   wood-carved hall arch (a landscape photo) until the hall fills the
+   screen. Portrait screens can't hold that photo uncropped, so there the
+   TV unit itself grows — full width on phones (whole unit, nothing cut),
+   full screen on tablets. Both are true arches at every step. Without
    scroll-driven animation, or with reduced motion, it stays a doorway. */
 @property --arch-w {
   syntax: "<length>";
@@ -141,6 +144,13 @@ body {
     --arch-w-end: 86vw;
   }
 }
+/* Portrait tablets: wide enough that the arch's straight sides clear the
+   screen, so the TV unit ends full screen (only ceiling/floor trimmed) */
+@media (min-width: 768px) and (orientation: portrait) {
+  .hero-frame {
+    --arch-w-end: 150vw;
+  }
+}
 @media (min-width: 1024px) {
   .hero-frame {
     --arch-hr: 0.62;
@@ -149,17 +159,22 @@ body {
   }
 }
 
-/* Doorway 1 — the TV unit, framed whole, growing as you approach */
+/* Doorway 1 — the TV unit, framed whole, growing as you approach. The
+   photo's box follows the arch but never outgrows the screen, so once the
+   arch passes the edges the photo settles at a plain full-screen fit
+   instead of zooming in; the arch mask itself keeps growing freely. */
 .hero-door {
   position: absolute;
   bottom: 0;
   left: 50%;
-  width: var(--arch-w);
-  height: calc(var(--arch-w) * 1.4);
+  width: min(var(--arch-w), 100%);
+  height: min(calc(var(--arch-w) * 1.4), 100%);
   transform: translateX(-50%);
   background: #ddd5c8;
-  -webkit-mask: var(--arch) no-repeat 0 0 / 100% 100%;
-  mask: var(--arch) no-repeat 0 0 / 100% 100%;
+  -webkit-mask: var(--arch) no-repeat 50% 100% / var(--arch-w)
+    calc(var(--arch-w) * 1.4);
+  mask: var(--arch) no-repeat 50% 100% / var(--arch-w)
+    calc(var(--arch-w) * 1.4);
 }
 .hero-door img {
   object-position: 45% 50%;
@@ -175,11 +190,16 @@ body {
   mask: var(--arch) no-repeat 50% 100% / var(--inner-w)
     calc(var(--inner-w) * 1.4);
 }
-/* Portrait screens can't hold the whole arch — show the carved pillar
-   and the glowing pooja door instead of a slice of kitchen. */
+/* The hall-arch reveal and its caption are for landscape screens only */
 @media (orientation: portrait) {
-  .hero-reveal img {
-    object-position: 22% 50%;
+  .hero-reveal,
+  .hero-caption-land {
+    display: none;
+  }
+}
+@media (orientation: landscape) {
+  .hero-caption-port {
+    display: none;
   }
 }
 
@@ -268,6 +288,29 @@ body {
       animation-name: reveal;
       animation-timing-function: linear;
       animation-range: 62svh 85svh;
+    }
+    @media (orientation: portrait) {
+      .hero-frame {
+        animation-name: door-grow;
+        animation-range: 0 70svh;
+      }
+    }
+    /* Phones: the doorway only grows to full width, so a shorter pinned
+       stretch keeps it from feeling stuck */
+    @media (orientation: portrait) and (max-width: 767px) {
+      .hero-stage {
+        height: calc(100svh - var(--nav-h) + 55svh);
+      }
+      .hero-frame {
+        animation-range: 0 42svh;
+      }
+      .hero-copy {
+        animation-range: 0 20svh;
+      }
+      .hero-scrim,
+      .hero-caption {
+        animation-range: 28svh 46svh;
+      }
     }
   }
 }

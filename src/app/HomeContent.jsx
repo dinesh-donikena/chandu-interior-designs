@@ -58,7 +58,8 @@ export default function HomeContent() {
       {/* Hero — the arched doorway (behaviour lives in globals.css) */}
       <section className="hero-stage">
         <div className="hero-frame">
-          {/* Two real photos, two doorways (behaviour in globals.css) */}
+          {/* Two real photos, two doorways — the second only on landscape
+              screens (behaviour in globals.css) */}
           <div className="hero-door">
             <Image
               src="/portfolio/hanamakonda-tv-unit.jpg"
@@ -115,8 +116,11 @@ export default function HomeContent() {
             </a>
           </div>
 
-          <p className="hero-caption text-[10px] md:text-xs font-semibold uppercase tracking-[0.2em] text-white/90">
+          <p className="hero-caption hero-caption-land text-[10px] md:text-xs font-semibold uppercase tracking-[0.2em] text-white/90">
             {t.home.heroCaption}
+          </p>
+          <p className="hero-caption hero-caption-port text-[10px] md:text-xs font-semibold uppercase tracking-[0.2em] text-white/90">
+            {t.home.heroCaptionTv}
           </p>
         </div>
       </section>
