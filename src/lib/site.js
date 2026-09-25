@@ -18,9 +18,11 @@ export const SITE = {
   mapsEmbed:
     "https://maps.google.com/maps?q=Hanamakonda%2C+Warangal%2C+Telangana&z=13&output=embed",
 
-  // TODO: set NEXT_PUBLIC_SITE_URL in Vercel once the domain is bought.
-  // Used for sitemap.xml, robots.txt and structured data.
-  url: process.env.NEXT_PUBLIC_SITE_URL || "https://chandu-interior-designs.vercel.app",
+  // The site's own address — canonical links, sitemap.xml, robots.txt,
+  // share previews and structured data all use it. Free Vercel address for
+  // now; switch to https://manailluinteriors.com once it's bought and
+  // connected (or set NEXT_PUBLIC_SITE_URL in Vercel).
+  url: process.env.NEXT_PUBLIC_SITE_URL || "https://manailluinteriors.vercel.app",
 
   // Address is partial on purpose — owner will supply the street line.
   address: {
