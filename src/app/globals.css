@@ -105,11 +105,11 @@ body {
 
 /* ── Hero: the doorway ─────────────────────────────────────────
    At rest a doorway stands on the floor, centred under the headline,
-   framing the TV unit. Scrolling walks you towards it and it grows —
-   always a true arch — to the biggest size that shows the whole unit
-   uncropped: full width on phones, full height on laptops, full screen
-   on portrait tablets (only ceiling/floor trimmed). HeroScroll drives it;
-   with reduced motion (or no JS) it simply stays a doorway. */
+   framing the whole TV unit. Scrolling walks you towards it: the arch
+   grows until its curved top passes the frame and the doorway becomes a
+   full-height rectangle — the whole unit, uncropped, like a framed photo
+   on wide screens; full screen on phones. HeroScroll drives it; with
+   reduced motion (or no JS) it stays a doorway. */
 @property --arch-w {
   syntax: "<length>";
   inherits: true;
@@ -134,9 +134,9 @@ body {
   /* Resting width (static) and the live width the scroll animation grows */
   --arch-w0: min(var(--arch-wmax), calc(var(--frame-h) * var(--arch-hr) / 1.4));
   --arch-w: var(--arch-w0);
-  /* Largest doorway that still fits the screen: width-bound on phones,
-     height-bound on laptops */
-  --arch-w-end: min(100vw, calc(var(--frame-h) / 1.4));
+  /* Wide enough that the arch's straight sides (0.9 × its width tall)
+     clear the whole frame, so the doorway ends as a full rectangle */
+  --arch-w-end: max(110vw, calc(var(--frame-h) / 0.85));
   --arch: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 140' preserveAspectRatio='none'%3E%3Cpath d='M0 140V50A50 50 0 0 1 100 50V140Z'/%3E%3C/svg%3E");
   position: relative;
   height: var(--frame-h);
@@ -148,13 +148,6 @@ body {
     --arch-wmax: 56vw;
   }
 }
-/* Portrait tablets: wide enough that the arch's straight sides clear the
-   screen, so the TV unit ends full screen (only ceiling/floor trimmed) */
-@media (min-width: 768px) and (orientation: portrait) {
-  .hero-frame {
-    --arch-w-end: 150vw;
-  }
-}
 @media (min-width: 1024px) {
   .hero-frame {
     --arch-hr: 0.62;
@@ -162,16 +155,17 @@ body {
   }
 }
 
-/* The TV unit, framed whole. The photo's box follows the arch but never
-   outgrows the screen, so where the arch passes the edges (tablets) the
-   photo settles at a plain full-screen fit instead of zooming in; the
-   arch mask itself keeps growing freely. (50% centres the mask:
-   percentages there apply to the leftover space.) */
+/* The TV unit, framed whole. The photo's box follows the arch but stops
+   at the screen edges and at the photo's own 2:3 shape, so it never
+   zooms into a close-up: wide screens end on the whole unit, phones end
+   full screen. The arch mask keeps growing past the box, which is what
+   turns the dome into a rectangle. (50% centres the mask: percentages
+   there apply to the leftover space.) */
 .hero-door {
   position: absolute;
   bottom: 0;
   left: 50%;
-  width: min(var(--arch-w), 100%);
+  width: min(var(--arch-w), 100%, calc(var(--frame-h) * 2 / 3));
   height: min(calc(var(--arch-w) * 1.4), 100%);
   transform: translateX(-50%);
   background: #ddd5c8;
@@ -180,8 +174,10 @@ body {
   mask: var(--arch) no-repeat 50% 100% / var(--arch-w)
     calc(var(--arch-w) * 1.4);
 }
+/* Phones end full screen, trimming the photo's sides — keep the lit glass
+   column in view. Elsewhere the box matches the photo, so nothing is cut. */
 .hero-door img {
-  object-position: 45% 50%;
+  object-position: 60% 72%;
 }
 
 /* Copy sits on the limewash above the doorway */
