@@ -108,14 +108,14 @@ body {
    framing the TV unit. Scrolling walks you towards it and it grows —
    always a true arch — to the biggest size that shows the whole unit
    uncropped: full width on phones, full height on laptops, full screen
-   on portrait tablets (only ceiling/floor trimmed). Without scroll-driven
-   animation, or with reduced motion, it simply stays a doorway. */
+   on portrait tablets (only ceiling/floor trimmed). HeroScroll drives it;
+   with reduced motion (or no JS) it simply stays a doorway. */
 @property --arch-w {
   syntax: "<length>";
   inherits: true;
   initial-value: 0px;
 }
-/* Registered so they compute to px — the scroll fallback script reads them */
+/* Registered so they compute to px — the HeroScroll script reads them */
 @property --arch-w0 {
   syntax: "<length>";
   inherits: true;
@@ -231,71 +231,18 @@ body {
   );
 }
 
-@supports (animation-timeline: scroll()) {
-  @media (prefers-reduced-motion: no-preference) {
-    /* A short pinned stretch drives the growth — long enough to feel,
-       short enough not to feel stuck */
-    .hero-stage {
-      height: calc(100svh - var(--nav-h) + 55svh);
-    }
-    .hero-frame {
-      position: sticky;
-      top: var(--nav-h);
-    }
-    .hero-frame,
-    .hero-copy,
-    .hero-scrim,
-    .hero-caption {
-      animation-fill-mode: both;
-      animation-timeline: scroll(root block);
-    }
-    /* Ease-in: slow at first, then quicker — like walking up to a door */
-    .hero-frame {
-      animation-name: door-grow;
-      animation-timing-function: cubic-bezier(0.45, 0, 0.8, 0.3);
-      animation-range: 0 42svh;
-    }
-    .hero-copy {
-      animation-name: copy-out;
-      animation-timing-function: linear;
-      animation-range: 0 20svh;
-    }
-    .hero-scrim,
-    .hero-caption {
-      animation-name: reveal;
-      animation-timing-function: linear;
-      animation-range: 28svh 46svh;
-    }
-  }
-}
-/* Browsers without scroll-driven animations (Safari/iOS before support
-   landed — which includes Chrome on iPhone — and Firefox): the
-   HeroScrollFallback script adds .hero-js and drives the same values from
-   a scroll listener, so the doorway still grows instead of scrolling away */
+/* The growth is driven by HeroScroll (a scroll listener) in every browser:
+   engines differ too much in CSS scroll-driven animation support, and the
+   animated values here are main-thread properties anyway. The script adds
+   .hero-js, which pins the frame while the doorway grows and then holds the
+   full image for a stretch, so even a quick swipe shows it. Reduced-motion
+   visitors (and no-JS) keep the still doorway. */
 .hero-stage.hero-js {
-  height: calc(100svh - var(--nav-h) + 55svh);
+  height: calc(100svh - var(--nav-h) + 80svh);
 }
 .hero-js .hero-frame {
   position: sticky;
   top: var(--nav-h);
-}
-
-@keyframes door-grow {
-  to {
-    --arch-w: var(--arch-w-end);
-  }
-}
-@keyframes copy-out {
-  to {
-    opacity: 0;
-    transform: translateY(-28px);
-    visibility: hidden;
-  }
-}
-@keyframes reveal {
-  to {
-    opacity: 1;
-  }
 }
 
 /* Scroll cue — a slow drift down, nothing louder */
