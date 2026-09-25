@@ -67,6 +67,11 @@ body {
 :lang(te) h3 {
   line-height: 1.35;
 }
+/* Wide letter-spacing suits Latin capitals; in Telugu it pulls conjuncts
+   apart. Unlayered, so it wins over Tailwind's tracking-[…] utilities. */
+:lang(te) [class*="tracking-["] {
+  letter-spacing: 0.01em;
+}
 /* Telugu has no true italic — a slanted fake reads as broken type */
 :lang(te) em {
   font-style: normal;
@@ -99,89 +104,115 @@ body {
 }
 
 /* ── Hero: the arched doorway ──────────────────────────────────
-   The walkthrough video sits behind the page, seen through an arch
-   standing on the floor — the carved arch is the studio's signature.
-   Where scroll-driven animation is supported, scrolling opens the
-   arch until the home fills the screen. Elsewhere, or with reduced
-   motion, it simply stays a doorway.                               */
+   A doorway stands on the floor, centred under the headline, with the
+   real walkthrough behind it. Where scroll-driven animation is
+   supported, scrolling grows the doorway — always a true arch, never a
+   squashed one — until the home fills the screen. Elsewhere, or with
+   reduced motion, it simply stays a doorway.                        */
+@property --arch-w {
+  syntax: "<length>";
+  inherits: true;
+  initial-value: 0px;
+}
+
 .hero-frame {
-  --arch-t: 44%;
-  --arch-x: 7vw;
-  --arch-l: var(--arch-x);
-  --arch-r: var(--arch-x);
-  --arch-round: 100vw;
+  --frame-h: max(calc(100svh - var(--nav-h)), 560px);
+  --arch-hr: 0.56; /* share of the frame height the doorway stands */
+  --arch-wmax: 78vw;
+  /* Resting width (static) and the live width the scroll animation grows */
+  --arch-w0: min(var(--arch-wmax), calc(var(--frame-h) * var(--arch-hr) / 1.4));
+  --arch-w: var(--arch-w0);
+  /* At rest the footage sits lower, so the doorway frames the TV wall
+     rather than the floor; it settles back as the doorway opens. */
+  --media-y: 24%;
+  --media-x: 0%;
   position: relative;
-  height: calc(100svh - var(--nav-h));
-  min-height: 560px;
+  height: var(--frame-h);
   overflow: hidden;
 }
 @media (min-width: 768px) {
   .hero-frame {
-    --arch-t: 40%;
-    --arch-x: 16vw;
+    --arch-hr: 0.58;
+    --arch-wmax: 56vw;
+    --media-y: 15%;
+  }
+}
+/* The landscape cut is centred on the teak arch; the TV wall sits a little
+   left of that, so nudge it into the middle of the resting doorway. */
+@media (orientation: landscape) {
+  .hero-frame {
+    --media-x: 5%;
   }
 }
 @media (min-width: 1024px) {
   .hero-frame {
-    --arch-t: 9%;
-    --arch-l: 52%;
-    --arch-r: max(5vw, calc((100vw - 1280px) / 2 + 5rem));
-    --arch-round: 60vw;
+    --arch-hr: 0.62;
+    --arch-wmax: 34vw;
+    --media-y: 20%;
   }
 }
 
-.hero-video {
+/* The arch is a mask: a true semicircle on straight sides (1 : 1.4) */
+.hero-media {
+  --arch: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 140' preserveAspectRatio='none'%3E%3Cpath d='M0 140V50A50 50 0 0 1 100 50V140Z'/%3E%3C/svg%3E");
+  position: absolute;
+  inset: 0;
+  background: #ddd5c8;
+  -webkit-mask-image: var(--arch);
+  mask-image: var(--arch);
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-size: var(--arch-w) calc(var(--arch-w) * 1.4);
+  mask-size: var(--arch-w) calc(var(--arch-w) * 1.4);
+  /* 50% centres the mask (percentages here apply to the leftover space) */
+  -webkit-mask-position: 50% 100%;
+  mask-position: 50% 100%;
+}
+.hero-shift {
+  position: absolute;
+  inset: 0;
+  transform: translate(var(--media-x), var(--media-y));
+}
+.hero-fill {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  background: #ddd5c8;
-  clip-path: inset(
-    var(--arch-t) var(--arch-r) 0 var(--arch-l) round var(--arch-round)
-      var(--arch-round) 0 0
-  );
 }
 
-/* Copy sits on the limewash above the arch (phones) or beside it */
+/* Copy sits on the limewash above the doorway */
 .hero-copy {
   position: absolute;
-  inset: 0 0 calc(100% - var(--arch-t)) 0;
+  inset: 0 0 calc(var(--arch-w0) * 1.4) 0;
   display: flex;
   flex-direction: column;
+  align-items: center;
   justify-content: center;
+  text-align: center;
   padding: 0 20px;
 }
-@media (min-width: 768px) {
-  .hero-copy {
-    padding: 0 16vw;
-  }
-}
-@media (min-width: 1024px) {
-  .hero-copy {
-    inset: 0 calc(100% - var(--arch-l) + 3vw) 0 0;
-    padding: 0 0 0 max(5rem, calc((100vw - 1280px) / 2 + 5rem));
-  }
-}
 
-/* Revealed only once the arch has opened */
+/* Revealed only once the doorway has opened */
 .hero-scrim,
 .hero-caption {
   opacity: 0;
 }
+/* Phones: left-aligned, clear of the floating WhatsApp/call buttons */
 .hero-caption {
   position: absolute;
-  bottom: 24px;
   left: 20px;
+  right: 96px;
+  bottom: 24px;
 }
 @media (min-width: 768px) {
   .hero-caption {
-    left: 32px;
+    left: 96px;
+    text-align: center;
   }
 }
 @media (min-width: 1024px) {
   .hero-caption {
-    left: max(5rem, calc((100vw - 1280px) / 2 + 5rem));
     bottom: 36px;
   }
 }
@@ -200,38 +231,55 @@ body {
   @media (prefers-reduced-motion: no-preference) {
     /* One extra screen of scroll drives the opening */
     .hero-stage {
-      height: calc(200svh - var(--nav-h));
+      height: calc(100svh - var(--nav-h) + 100svh);
     }
     .hero-frame {
       position: sticky;
       top: var(--nav-h);
     }
-    .hero-video,
+    .hero-frame,
+    .hero-shift,
     .hero-copy,
     .hero-scrim,
     .hero-caption {
-      animation-timing-function: linear;
       animation-fill-mode: both;
       animation-timeline: scroll(root block);
     }
-    .hero-video {
+    /* Ease-in: the doorway grows slowly, then rushes past — like walking up to it */
+    .hero-frame {
       animation-name: arch-open;
-      animation-range: 0 75svh;
+      animation-timing-function: cubic-bezier(0.45, 0, 0.8, 0.3);
+      animation-range: 0 80svh;
+    }
+    /* Settles before the growing arch reaches the empty band above it */
+    .hero-shift {
+      animation-name: media-settle;
+      animation-timing-function: ease-out;
+      animation-range: 0 10svh;
     }
     .hero-copy {
       animation-name: copy-out;
-      animation-range: 0 32svh;
+      animation-timing-function: linear;
+      animation-range: 0 26svh;
     }
     .hero-scrim,
     .hero-caption {
       animation-name: reveal;
-      animation-range: 50svh 80svh;
+      animation-timing-function: linear;
+      animation-range: 60svh 85svh;
     }
   }
 }
+/* 280vw: wide enough that the arch's straight sides clear even a tall
+   phone screen, no wider — a smaller target keeps the opening gentle */
 @keyframes arch-open {
   to {
-    clip-path: inset(0 0 0 0 round 0 0 0 0);
+    --arch-w: 280vw;
+  }
+}
+@keyframes media-settle {
+  to {
+    transform: none;
   }
 }
 @keyframes copy-out {

@@ -5,8 +5,8 @@ import Link from "next/link";
 import { useState } from "react";
 import { useLanguage } from "@/components/LanguageProvider";
 
-// Every photo is the studio's own work from the Hanamakonda home (the two
-// bedrooms and the pooja panel are stills from the 4K walkthrough video).
+// Every photo is the studio's own work from the Hanamakonda home (the
+// bedroom is a still from the 4K walkthrough video).
 // Titles/locations come from translations by index. Width/height are each
 // photo's real proportions, so the masonry reserves the right space before
 // images load.
@@ -15,8 +15,8 @@ const projectData = [
   { category: "kitchen", image: "/portfolio/hanamakonda-kitchen.jpg", w: 2000, h: 1125 },
   { category: "bedroom", image: "/portfolio/hanamakonda-bedroom-olive.jpg", w: 2000, h: 1125 },
   { category: "hall", image: "/portfolio/hanamakonda-hall-arch.jpg", w: 2600, h: 1625 },
-  { category: "pooja", image: "/portfolio/hanamakonda-pooja-door.jpg", w: 1200, h: 1800 },
-  { category: "bedroom", image: "/portfolio/hanamakonda-bedroom-white.jpg", w: 2000, h: 1125 },
+  { category: "pooja", image: "/portfolio/hanamakonda-pooja-panel.jpg", w: 1200, h: 1800 },
+  { category: "pooja", image: "/portfolio/hanamakonda-pooja-room.jpg", w: 1200, h: 1800 },
   { category: "hall", image: "/portfolio/hanamakonda-wash-counter.jpg", w: 2000, h: 3000 },
 ];
 

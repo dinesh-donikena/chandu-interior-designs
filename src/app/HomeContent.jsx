@@ -6,9 +6,9 @@ import HeroVideo from "@/components/HeroVideo";
 import { useLanguage } from "@/components/LanguageProvider";
 import { SITE } from "@/lib/site";
 
-// Real photos and video stills from the Hanamakonda home — no stock. Portrait
-// shots get arch-topped frames, echoing the carved arch the studio is known
-// for. Titles/locations come from translations by index.
+// Real photos of the Hanamakonda home — no stock. Titles/locations come from
+// translations by index. Frames stay rectangular: an arch top would clip the
+// carved symbols in the corners of the pooja panel.
 const work = [
   {
     image: "/portfolio/hanamakonda-hall-arch.jpg",
@@ -23,28 +23,28 @@ const work = [
     sizes: "(min-width: 768px) 50vw, 100vw",
   },
   {
-    image: "/portfolio/hanamakonda-pooja-door.jpg",
+    image: "/portfolio/hanamakonda-pooja-panel.jpg",
     className: "col-span-6 md:col-span-3",
-    frame: "aspect-[2/3] rounded-t-full",
+    frame: "aspect-[2/3]",
     sizes: "(min-width: 768px) 25vw, 50vw",
   },
   {
     image: "/portfolio/hanamakonda-tv-unit.jpg",
     className: "col-span-6 md:col-span-3",
-    frame: "aspect-[2/3] rounded-t-full",
+    frame: "aspect-[2/3]",
     sizes: "(min-width: 768px) 25vw, 50vw",
   },
   {
     image: "/portfolio/hanamakonda-bedroom-olive.jpg",
-    className: "col-span-12 md:col-span-6",
+    className: "col-span-12 md:col-span-8",
     frame: "aspect-[16/10]",
-    sizes: "(min-width: 768px) 50vw, 100vw",
+    sizes: "(min-width: 768px) 66vw, 100vw",
   },
   {
-    image: "/portfolio/hanamakonda-bedroom-white.jpg",
-    className: "col-span-12 md:col-span-6",
-    frame: "aspect-[16/10]",
-    sizes: "(min-width: 768px) 50vw, 100vw",
+    image: "/portfolio/hanamakonda-wash-counter.jpg",
+    className: "col-span-12 md:col-span-4",
+    frame: "aspect-[4/5]",
+    sizes: "(min-width: 768px) 33vw, 100vw",
   },
 ];
 
@@ -59,18 +59,21 @@ export default function HomeContent() {
       {/* Hero — the arched doorway (behaviour lives in globals.css) */}
       <section className="hero-stage">
         <div className="hero-frame">
-          <HeroVideo />
+          <div className="hero-media">
+            <div className="hero-shift">
+              <HeroVideo />
+            </div>
+          </div>
           <div className="hero-scrim" aria-hidden="true" />
 
           <div className="hero-copy">
-            <p className="eyebrow mb-4 md:mb-6">{t.home.heroEyebrow}</p>
-            <h1 className="font-display font-medium text-primary text-[2.1rem] leading-[1.12] md:text-5xl lg:text-[3.5rem] xl:text-[4.25rem] lg:leading-[1.06] tracking-tight">
-              {t.home.heroTitle1}
-              <br />
+            <p className="eyebrow mb-3 md:mb-5">{t.home.heroEyebrow}</p>
+            <h1 className="font-display font-medium text-primary text-[2.05rem] leading-[1.12] md:text-5xl lg:text-[3.3rem] xl:text-[3.8rem] lg:leading-[1.08] tracking-tight">
+              {t.home.heroTitle1} <br className="lg:hidden" />
               <em className="italic text-accent">{t.home.heroTitle2}</em>
             </h1>
 
-            <div className="hidden lg:flex flex-wrap gap-4 mt-10">
+            <div className="hidden md:flex flex-wrap justify-center gap-4 mt-7 lg:mt-8">
               <Link href="/portfolio" className={`${btnPrimary} group`}>
                 {t.home.heroCta}
                 <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -89,7 +92,7 @@ export default function HomeContent() {
 
             <a
               href="#intro"
-              className="mt-5 lg:mt-12 inline-flex items-center gap-2 self-start text-[11px] font-semibold uppercase tracking-[0.2em] text-on-surface-muted hover:text-accent transition-colors"
+              className="mt-4 md:mt-6 inline-flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.2em] text-on-surface-muted hover:text-accent transition-colors"
             >
               {t.home.heroCue}
               <svg className="hero-cue-arrow w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -208,9 +211,9 @@ export default function HomeContent() {
               {t.home.faqNote}{" "}
               <a
                 href={SITE.phoneHref}
-                className="text-primary font-semibold border-b border-accent whitespace-nowrap hover:text-accent transition-colors"
+                className="text-primary font-semibold border-b border-accent hover:text-accent transition-colors"
               >
-                {SITE.phoneDisplay}
+                {t.home.faqCall}
               </a>
             </p>
           </div>

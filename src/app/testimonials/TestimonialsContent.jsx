@@ -94,14 +94,15 @@ export default function TestimonialsContent() {
       <section className="py-24 md:py-32 px-5 md:px-20 max-w-[1280px] mx-auto">
         <div className="relative w-full h-[500px] md:h-[600px] overflow-hidden rounded-lg">
           <Image
-            src="/portfolio/hanamakonda-bedroom-olive.jpg"
-            alt="Bedroom with glossy olive wardrobe in a Hanamakonda home"
+            src="/portfolio/hanamakonda-arch-straight.jpg"
+            alt="Teak hall arch framing a backlit TV wall in a Hanamakonda home"
             fill
             sizes="(min-width: 1280px) 1120px, 100vw"
             className="object-cover"
           />
-          <div className="absolute inset-0 bg-primary/20 flex items-center justify-center">
-            <div className="text-center p-12 bg-surface/90 backdrop-blur-md max-w-xl mx-4">
+          {/* Card sits inside the teak arch, so keep the tint light */}
+          <div className="absolute inset-0 bg-primary/5 flex items-center justify-center">
+            <div className="text-center px-7 py-9 md:p-12 bg-surface/90 backdrop-blur-md max-w-[78%] md:max-w-xl">
               <h2 className="font-display text-2xl md:text-3xl text-primary mb-6">
                 {t.testimonials.ctaHeading}
               </h2>

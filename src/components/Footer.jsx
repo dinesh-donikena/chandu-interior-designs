@@ -10,9 +10,9 @@ export default function Footer() {
 
   return (
     <footer className="bg-surface-container">
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 px-5 md:px-20 py-20 max-w-[1280px] mx-auto">
-        <div className="space-y-4">
-          <h2 aria-label={SITE.name}>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 lg:gap-6 px-5 md:px-20 py-20 max-w-[1280px] mx-auto">
+        <div className="space-y-4 md:col-span-2 lg:col-span-1">
+          <h2 aria-label={t.brand.full}>
             <Logo large />
           </h2>
           <p className="text-base text-on-surface-muted max-w-xs leading-relaxed">
@@ -126,7 +126,7 @@ export default function Footer() {
         {/* Right padding on phones keeps the line clear of the floating
             WhatsApp/call buttons, which sit over this corner at page end. */}
         <p className="text-xs font-semibold text-on-surface-muted pr-20 md:pr-0">
-          &copy; {new Date().getFullYear()} {SITE.name}, Warangal.{" "}
+          &copy; {new Date().getFullYear()} {t.brand.full}, {t.footer.city}.{" "}
           {t.footer.rights}
         </p>
       </div>

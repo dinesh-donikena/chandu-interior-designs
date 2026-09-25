@@ -9,17 +9,22 @@
 
 export const translations = {
   en: {
+    brand: {
+      name: "Mana Illu",
+      trade: "Interiors & Constructions",
+      full: "Mana Illu Interiors and Constructions",
+    },
     nav: {
       home: "Home",
       portfolio: "Our Work",
-      testimonials: "Client Words",
+      testimonials: "Testimonials",
       contact: "Contact",
       consultation: "Talk to Us",
       bookConsultation: "Talk to Us",
       toggleLabel: "తెలుగు",
     },
     home: {
-      heroEyebrow: "House Construction & Interiors, Warangal",
+      heroEyebrow: "House Construction & Interiors",
       heroTitle1: "Your Dream House,",
       heroTitle2: "Our Responsibility.",
       heroCta: "See Our Work",
@@ -57,20 +62,17 @@ export const translations = {
         { title: "Backlit Pooja Panel", location: "Hanamakonda" },
         { title: "TV Unit & Wall Panelling", location: "Hanamakonda" },
         { title: "Bedroom Wardrobe", location: "Hanamakonda" },
-        { title: "Headboard & Wardrobe", location: "Hanamakonda" },
+        { title: "Wash Counter", location: "Hanamakonda" },
       ],
       ctaHeading: "Planning to build or renovate?",
       faqLabel: "Questions",
       faqHeading: "Commonly Asked",
-      faqNote: "Anything else on your mind? Just call —",
+      faqNote: "Anything else on your mind?",
+      faqCall: "Just give us a call.",
       faq: [
         {
           q: "Do you take up only interiors, or construction as well?",
           a: "Both. Some customers ask us only to build, some only for interiors, and some for everything from start to finish. You choose what you need.",
-        },
-        {
-          q: "Do you work outside Warangal?",
-          a: "Yes — we take on projects across both Telangana and Andhra Pradesh. Wherever your site is, we'll come and see it.",
         },
         {
           q: "How do we start?",
@@ -107,14 +109,14 @@ export const translations = {
         { title: "Bedroom Wardrobe", location: "Hanamakonda" },
         { title: "Wood-Carved Hall Arch", location: "Hanamakonda" },
         { title: "Backlit Pooja Panel", location: "Hanamakonda" },
-        { title: "Headboard & Wardrobe", location: "Hanamakonda" },
+        { title: "Pooja Room", location: "Hanamakonda" },
         { title: "Wash Counter", location: "Hanamakonda" },
       ],
       ctaHeading: "Your house could be next.",
       ctaButton: "Start Your Project",
     },
     testimonials: {
-      label: "Client Words",
+      label: "Testimonials",
       title: "What Our Clients Say",
       intro: "A few words from families we've built for.",
       items: [
@@ -197,11 +199,17 @@ export const translations = {
       office: "Office",
       contactUs: "Contact Us",
       address: "Hanamakonda,\nWarangal, Telangana - 506001",
+      city: "Warangal",
       rights: "All rights reserved.",
     },
   },
 
   te: {
+    brand: {
+      name: "మన ఇల్లు",
+      trade: "ఇంటీరియర్స్ & కన్‌స్ట్రక్షన్స్",
+      full: "మన ఇల్లు ఇంటీరియర్స్ & కన్‌స్ట్రక్షన్స్",
+    },
     nav: {
       home: "హోమ్",
       portfolio: "మా పనులు",
@@ -212,7 +220,7 @@ export const translations = {
       toggleLabel: "English",
     },
     home: {
-      heroEyebrow: "ఇంటి నిర్మాణం & ఇంటీరియర్స్ · వరంగల్",
+      heroEyebrow: "ఇంటి నిర్మాణం & ఇంటీరియర్స్",
       heroTitle1: "మీ ఇంటి కల,",
       heroTitle2: "మా బాధ్యత.",
       heroCta: "మా పనులు చూడండి",
@@ -249,20 +257,17 @@ export const translations = {
         { title: "పూజ గది లైటింగ్ ప్యానెల్", location: "హనుమకొండ" },
         { title: "టీవీ యూనిట్ & వాల్ ప్యానెలింగ్", location: "హనుమకొండ" },
         { title: "బెడ్‌రూమ్ వార్డ్‌రోబ్", location: "హనుమకొండ" },
-        { title: "హెడ్‌బోర్డ్ & వార్డ్‌రోబ్", location: "హనుమకొండ" },
+        { title: "వాష్ కౌంటర్", location: "హనుమకొండ" },
       ],
       ctaHeading: "ఇల్లు కట్టాలని ఆలోచిస్తున్నారా?",
       faqLabel: "సందేహాలు",
       faqHeading: "తరచుగా అడిగే ప్రశ్నలు",
-      faqNote: "ఇంకా ఏమైనా అడగాలంటే కాల్ చేయండి —",
+      faqNote: "ఇంకా ఏమైనా సందేహాలున్నాయా?",
+      faqCall: "కాల్ చేయండి.",
       faq: [
         {
           q: "మీరు ఇంటీరియర్స్ మాత్రమే చేస్తారా, కన్‌స్ట్రక్షన్ కూడా చేస్తారా?",
           a: "రెండూ చేస్తాం. కొందరు ఇల్లు కట్టడానికి మాత్రమే అడుగుతారు, కొందరు ఇంటీరియర్స్ మాత్రమే, కొందరు మొదటి నుంచి చివరి వరకు అన్నీ. మీకు ఏది కావాలో అదే చేస్తాం.",
-        },
-        {
-          q: "వరంగల్ బయట కూడా పని చేస్తారా?",
-          a: "అవును. తెలంగాణ, ఆంధ్రప్రదేశ్ — రెండు రాష్ట్రాల్లోనూ మా సర్వీస్ ఉంది. మీ స్థలం ఎక్కడున్నా వచ్చి చూస్తాం.",
         },
         {
           q: "ఎలా మొదలుపెడదాం?",
@@ -299,7 +304,7 @@ export const translations = {
         { title: "బెడ్‌రూమ్ వార్డ్‌రోబ్", location: "హనుమకొండ" },
         { title: "చెక్క పనితో హాల్ ఆర్చ్", location: "హనుమకొండ" },
         { title: "పూజ గది లైటింగ్ ప్యానెల్", location: "హనుమకొండ" },
-        { title: "హెడ్‌బోర్డ్ & వార్డ్‌రోబ్", location: "హనుమకొండ" },
+        { title: "పూజ గది", location: "హనుమకొండ" },
         { title: "వాష్ కౌంటర్", location: "హనుమకొండ" },
       ],
       ctaHeading: "తర్వాత మీ ఇల్లే.",
@@ -388,6 +393,7 @@ export const translations = {
       office: "ఆఫీస్",
       contactUs: "కాంటాక్ట్ చేయండి",
       address: "హనుమకొండ,\nవరంగల్, తెలంగాణ - 506001",
+      city: "వరంగల్",
       rights: "అన్ని హక్కులూ మావే.",
     },
   },
