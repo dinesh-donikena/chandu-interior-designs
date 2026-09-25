@@ -29,7 +29,7 @@ export const translations = {
       heroTitle2: "Our Responsibility.",
       heroCta: "See Our Work",
       heroCue: "Step inside",
-      heroCaption: "Hanamakonda residence · Hall & TV unit",
+      heroCaption: "Wood-carved hall arch · Hanamakonda",
       nameMeaning:
         "Mana Illu means “our home” in Telugu — and we build yours like our own.",
       introHeading: "Construction, interiors, or both — we do it all.",
@@ -225,7 +225,7 @@ export const translations = {
       heroTitle2: "మా బాధ్యత.",
       heroCta: "మా పనులు చూడండి",
       heroCue: "లోపలికి రండి",
-      heroCaption: "హనుమకొండ ఇల్లు · హాల్ & టీవీ యూనిట్",
+      heroCaption: "చెక్క పనితో హాల్ ఆర్చ్ · హనుమకొండ",
       nameMeaning: "మీ ఇంటిని మా సొంత ఇంటిలా కడతాం.",
       introHeading: "కన్‌స్ట్రక్షన్, ఇంటీరియర్స్, లేదా రెండూ — అన్నీ మేమే చూసుకుంటాం.",
       introP1:

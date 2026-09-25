@@ -2,7 +2,6 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import HeroVideo from "@/components/HeroVideo";
 import { useLanguage } from "@/components/LanguageProvider";
 import { SITE } from "@/lib/site";
 
@@ -59,10 +58,25 @@ export default function HomeContent() {
       {/* Hero — the arched doorway (behaviour lives in globals.css) */}
       <section className="hero-stage">
         <div className="hero-frame">
-          <div className="hero-media">
-            <div className="hero-shift">
-              <HeroVideo />
-            </div>
+          {/* Two real photos, two doorways (behaviour in globals.css) */}
+          <div className="hero-door">
+            <Image
+              src="/portfolio/hanamakonda-tv-unit.jpg"
+              alt="Backlit TV unit with fluted panelling in a Hanamakonda home"
+              fill
+              priority
+              sizes="(min-width: 1024px) 56vw, 100vw"
+              className="object-cover"
+            />
+          </div>
+          <div className="hero-reveal">
+            <Image
+              src="/portfolio/hanamakonda-hall-arch.jpg"
+              alt="Wood-carved teak hall arch opening onto the pooja room and kitchen"
+              fill
+              sizes="100vw"
+              className="object-cover"
+            />
           </div>
           <div className="hero-scrim" aria-hidden="true" />
 

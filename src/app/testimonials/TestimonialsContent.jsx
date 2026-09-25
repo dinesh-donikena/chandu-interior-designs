@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useLanguage } from "@/components/LanguageProvider";
+import { SITE } from "@/lib/site";
 
 export default function TestimonialsContent() {
   const { t } = useLanguage();
@@ -90,28 +91,38 @@ export default function TestimonialsContent() {
         </div>
       </section>
 
-      {/* Visual CTA */}
+      {/* Visual CTA — photo shown whole beside the message; a card laid
+          over a photo hides the very work it is meant to show */}
       <section className="py-24 md:py-32 px-5 md:px-20 max-w-[1280px] mx-auto">
-        <div className="relative w-full h-[500px] md:h-[600px] overflow-hidden rounded-lg">
-          <Image
-            src="/portfolio/hanamakonda-arch-straight.jpg"
-            alt="Teak hall arch framing a backlit TV wall in a Hanamakonda home"
-            fill
-            sizes="(min-width: 1280px) 1120px, 100vw"
-            className="object-cover"
-          />
-          {/* Card sits inside the teak arch, so keep the tint light */}
-          <div className="absolute inset-0 bg-primary/5 flex items-center justify-center">
-            <div className="text-center px-7 py-9 md:p-12 bg-surface/90 backdrop-blur-md max-w-[78%] md:max-w-xl">
-              <h2 className="font-display text-2xl md:text-3xl text-primary mb-6">
-                {t.testimonials.ctaHeading}
-              </h2>
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center">
+          <div className="lg:col-span-7 relative aspect-[16/10] overflow-hidden bg-surface-high">
+            <Image
+              src="/portfolio/hanamakonda-hall-arch.jpg"
+              alt="Wood-carved teak hall arch opening onto the pooja room and kitchen"
+              fill
+              sizes="(min-width: 1024px) 60vw, 100vw"
+              className="object-cover"
+            />
+          </div>
+          <div className="lg:col-span-5 text-center lg:text-left">
+            <h2 className="font-display text-3xl md:text-5xl text-primary mb-8 leading-tight">
+              {t.testimonials.ctaHeading}
+            </h2>
+            <div className="flex flex-col sm:flex-row sm:flex-wrap gap-4 justify-center lg:justify-start">
               <Link
                 href="/contact"
-                className="inline-block bg-accent text-white px-10 py-4 text-xs font-semibold uppercase tracking-[0.1em] hover:bg-accent-dark transition-colors"
+                className="inline-flex items-center justify-center whitespace-nowrap bg-accent text-white px-8 py-4 text-xs font-semibold uppercase tracking-[0.14em] hover:bg-accent-dark transition-colors"
               >
                 {t.testimonials.ctaButton}
               </Link>
+              <a
+                href={SITE.whatsapp}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center whitespace-nowrap border border-primary/25 text-primary px-8 py-4 text-xs font-semibold uppercase tracking-[0.14em] hover:border-primary transition-colors"
+              >
+                {t.home.ctaWhatsApp}
+              </a>
             </div>
           </div>
         </div>

@@ -103,13 +103,18 @@ body {
   box-shadow: 0 4px 24px rgba(35, 33, 29, 0.06);
 }
 
-/* ── Hero: the arched doorway ──────────────────────────────────
-   A doorway stands on the floor, centred under the headline, with the
-   real walkthrough behind it. Where scroll-driven animation is
-   supported, scrolling grows the doorway — always a true arch, never a
-   squashed one — until the home fills the screen. Elsewhere, or with
-   reduced motion, it simply stays a doorway.                        */
+/* ── Hero: two doorways ────────────────────────────────────────
+   At rest a doorway stands on the floor, centred under the headline,
+   framing the TV unit. Scrolling walks you towards it: it grows, then a
+   second arch opens inside it onto the wood-carved hall arch, until the
+   hall fills the screen. Both are true arches at every step. Without
+   scroll-driven animation, or with reduced motion, it stays a doorway. */
 @property --arch-w {
+  syntax: "<length>";
+  inherits: true;
+  initial-value: 0px;
+}
+@property --inner-w {
   syntax: "<length>";
   inherits: true;
   initial-value: 0px;
@@ -122,10 +127,9 @@ body {
   /* Resting width (static) and the live width the scroll animation grows */
   --arch-w0: min(var(--arch-wmax), calc(var(--frame-h) * var(--arch-hr) / 1.4));
   --arch-w: var(--arch-w0);
-  /* At rest the footage sits lower, so the doorway frames the TV wall
-     rather than the floor; it settles back as the doorway opens. */
-  --media-y: 24%;
-  --media-x: 0%;
+  --arch-w-end: 100vw; /* how wide the TV-unit doorway gets */
+  --inner-w: 0px;
+  --arch: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 140' preserveAspectRatio='none'%3E%3Cpath d='M0 140V50A50 50 0 0 1 100 50V140Z'/%3E%3C/svg%3E");
   position: relative;
   height: var(--frame-h);
   overflow: hidden;
@@ -134,51 +138,49 @@ body {
   .hero-frame {
     --arch-hr: 0.58;
     --arch-wmax: 56vw;
-    --media-y: 15%;
-  }
-}
-/* The landscape cut is centred on the teak arch; the TV wall sits a little
-   left of that, so nudge it into the middle of the resting doorway. */
-@media (orientation: landscape) {
-  .hero-frame {
-    --media-x: 5%;
+    --arch-w-end: 86vw;
   }
 }
 @media (min-width: 1024px) {
   .hero-frame {
     --arch-hr: 0.62;
     --arch-wmax: 34vw;
-    --media-y: 20%;
+    --arch-w-end: 56vw;
   }
 }
 
-/* The arch is a mask: a true semicircle on straight sides (1 : 1.4) */
-.hero-media {
-  --arch: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 140' preserveAspectRatio='none'%3E%3Cpath d='M0 140V50A50 50 0 0 1 100 50V140Z'/%3E%3C/svg%3E");
+/* Doorway 1 — the TV unit, framed whole, growing as you approach */
+.hero-door {
   position: absolute;
-  inset: 0;
+  bottom: 0;
+  left: 50%;
+  width: var(--arch-w);
+  height: calc(var(--arch-w) * 1.4);
+  transform: translateX(-50%);
   background: #ddd5c8;
-  -webkit-mask-image: var(--arch);
-  mask-image: var(--arch);
-  -webkit-mask-repeat: no-repeat;
-  mask-repeat: no-repeat;
-  -webkit-mask-size: var(--arch-w) calc(var(--arch-w) * 1.4);
-  mask-size: var(--arch-w) calc(var(--arch-w) * 1.4);
-  /* 50% centres the mask (percentages here apply to the leftover space) */
-  -webkit-mask-position: 50% 100%;
-  mask-position: 50% 100%;
+  -webkit-mask: var(--arch) no-repeat 0 0 / 100% 100%;
+  mask: var(--arch) no-repeat 0 0 / 100% 100%;
 }
-.hero-shift {
+.hero-door img {
+  object-position: 45% 50%;
+}
+
+/* Doorway 2 — opens inside the first onto the carved hall arch.
+   (50% centres the mask: percentages apply to the leftover space.) */
+.hero-reveal {
   position: absolute;
   inset: 0;
-  transform: translate(var(--media-x), var(--media-y));
+  -webkit-mask: var(--arch) no-repeat 50% 100% / var(--inner-w)
+    calc(var(--inner-w) * 1.4);
+  mask: var(--arch) no-repeat 50% 100% / var(--inner-w)
+    calc(var(--inner-w) * 1.4);
 }
-.hero-fill {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+/* Portrait screens can't hold the whole arch — show the carved pillar
+   and the glowing pooja door instead of a slice of kitchen. */
+@media (orientation: portrait) {
+  .hero-reveal img {
+    object-position: 22% 50%;
+  }
 }
 
 /* Copy sits on the limewash above the doorway */
@@ -238,24 +240,23 @@ body {
       top: var(--nav-h);
     }
     .hero-frame,
-    .hero-shift,
+    .hero-reveal img,
     .hero-copy,
     .hero-scrim,
     .hero-caption {
       animation-fill-mode: both;
       animation-timeline: scroll(root block);
     }
-    /* Ease-in: the doorway grows slowly, then rushes past — like walking up to it */
+    /* Ease-in: slow at first, then rushing past — like walking up to a door */
     .hero-frame {
-      animation-name: arch-open;
+      animation-name: door-grow, reveal-open;
       animation-timing-function: cubic-bezier(0.45, 0, 0.8, 0.3);
-      animation-range: 0 80svh;
+      animation-range: 0 70svh, 14svh 82svh;
     }
-    /* Settles before the growing arch reaches the empty band above it */
-    .hero-shift {
-      animation-name: media-settle;
+    .hero-reveal img {
+      animation-name: reveal-settle;
       animation-timing-function: ease-out;
-      animation-range: 0 10svh;
+      animation-range: 14svh 82svh;
     }
     .hero-copy {
       animation-name: copy-out;
@@ -266,18 +267,26 @@ body {
     .hero-caption {
       animation-name: reveal;
       animation-timing-function: linear;
-      animation-range: 60svh 85svh;
+      animation-range: 62svh 85svh;
     }
+  }
+}
+@keyframes door-grow {
+  to {
+    --arch-w: var(--arch-w-end);
   }
 }
 /* 280vw: wide enough that the arch's straight sides clear even a tall
    phone screen, no wider — a smaller target keeps the opening gentle */
-@keyframes arch-open {
+@keyframes reveal-open {
   to {
-    --arch-w: 280vw;
+    --inner-w: 280vw;
   }
 }
-@keyframes media-settle {
+@keyframes reveal-settle {
+  from {
+    transform: scale(1.12);
+  }
   to {
     transform: none;
   }
