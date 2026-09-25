@@ -2,104 +2,126 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import HeroVideo from "@/components/HeroVideo";
 import { useLanguage } from "@/components/LanguageProvider";
 import { SITE } from "@/lib/site";
 
-const serviceIcons = [
-  <svg key="home" className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.2}>
-    <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 21v-4.875c0-.621.504-1.125 1.125-1.125h5.25c.621 0 1.125.504 1.125 1.125V21m0 0h4.5V3.545M12.75 21h7.5M10.5 21V9.75M3.75 21V9.75m0 0l7.5-6.75 3.75 3.375M3.75 9.75h16.5" />
-  </svg>,
-  <svg key="office" className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.2}>
-    <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 21h16.5M4.5 3h15M5.25 3v18m13.5-18v18M9 6.75h1.5m-1.5 3h1.5m-1.5 3h1.5m3-6H15m-1.5 3H15m-1.5 3H15M9 21v-3.375c0-.621.504-1.125 1.125-1.125h3.75c.621 0 1.125.504 1.125 1.125V21" />
-  </svg>,
-  <svg key="plan" className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.2}>
-    <path strokeLinecap="round" strokeLinejoin="round" d="M9.53 16.122a3 3 0 00-5.78 1.128 2.25 2.25 0 01-2.4 2.245 4.5 4.5 0 008.4-2.245c0-.399-.078-.78-.22-1.128zm0 0a15.998 15.998 0 003.388-1.62m-5.043-.025a15.994 15.994 0 011.622-3.395m3.42 3.42a15.995 15.995 0 004.764-4.648l3.876-5.814a1.151 1.151 0 00-1.597-1.597L14.146 6.32a15.996 15.996 0 00-4.649 4.763m3.42 3.42a6.776 6.776 0 00-3.42-3.42" />
-  </svg>,
-];
-
-// Real photos from the Hanamakonda renovation. Slot shape follows the
-// photo's own shape — the landscape kitchen gets the wide cell, the two
-// portrait shots get tall narrow cells — so nothing is cropped to a sliver.
-const projectImages = [
+// Real photos and video stills from the Hanamakonda home — no stock. Portrait
+// shots get arch-topped frames, echoing the carved arch the studio is known
+// for. Titles/locations come from translations by index.
+const work = [
   {
     image: "/portfolio/hanamakonda-hall-arch.jpg",
-    className: "col-span-12 aspect-[16/10] md:aspect-[16/7]",
+    className: "col-span-12",
+    frame: "aspect-[16/10] md:aspect-[16/7]",
     sizes: "(min-width: 1280px) 1120px, 100vw",
   },
   {
     image: "/portfolio/hanamakonda-kitchen.jpg",
-    className: "col-span-12 md:col-span-6 aspect-[16/10]",
+    className: "col-span-12 md:col-span-6",
+    frame: "aspect-[4/3]",
     sizes: "(min-width: 768px) 50vw, 100vw",
   },
   {
-    image: "/portfolio/hanamakonda-tv-unit.jpg",
-    className: "col-span-6 md:col-span-3 aspect-[2/3]",
+    image: "/portfolio/hanamakonda-pooja-door.jpg",
+    className: "col-span-6 md:col-span-3",
+    frame: "aspect-[2/3] rounded-t-full",
     sizes: "(min-width: 768px) 25vw, 50vw",
   },
   {
-    image: "/portfolio/hanamakonda-wash-counter.jpg",
-    className: "col-span-6 md:col-span-3 aspect-[2/3]",
+    image: "/portfolio/hanamakonda-tv-unit.jpg",
+    className: "col-span-6 md:col-span-3",
+    frame: "aspect-[2/3] rounded-t-full",
     sizes: "(min-width: 768px) 25vw, 50vw",
   },
+  {
+    image: "/portfolio/hanamakonda-bedroom-olive.jpg",
+    className: "col-span-12 md:col-span-6",
+    frame: "aspect-[16/10]",
+    sizes: "(min-width: 768px) 50vw, 100vw",
+  },
+  {
+    image: "/portfolio/hanamakonda-bedroom-white.jpg",
+    className: "col-span-12 md:col-span-6",
+    frame: "aspect-[16/10]",
+    sizes: "(min-width: 768px) 50vw, 100vw",
+  },
 ];
+
+const btnPrimary =
+  "inline-flex items-center justify-center gap-2 bg-accent text-white px-8 py-4 text-xs font-semibold uppercase tracking-[0.14em] hover:bg-accent-dark transition-colors duration-300";
 
 export default function HomeContent() {
   const { t } = useLanguage();
 
   return (
     <>
-      {/* Hero — native Indian home behind a bottom-up scrim so the heading
-          stays readable; same crop on every screen. */}
-      <section className="relative h-[88vh] min-h-[560px] flex items-end overflow-hidden">
-        <div className="absolute inset-0 z-0">
-          <Image
-            src="https://images.unsplash.com/photo-1713192704825-74a0017f585d?auto=format&fit=crop&w=1920&q=75"
-            alt="Warm Indian living room with an arched opening, marble floor and ceiling fan"
-            fill
-            className="object-cover"
-            priority
-          />
-          <div className="hero-scrim absolute inset-0" />
-        </div>
-        <div className="relative z-10 max-w-[1280px] mx-auto px-5 md:px-8 lg:px-20 w-full pb-14 md:pb-20">
-          <div className="max-w-3xl">
-            <p className="hero-eyebrow text-[11px] md:text-sm font-semibold uppercase tracking-[0.2em] text-accent-light mb-4 md:mb-5">
-              {t.home.heroEyebrow}
-            </p>
-            <h1 className="font-display text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-8 leading-[1.15] tracking-tight">
+      {/* Hero — the arched doorway (behaviour lives in globals.css) */}
+      <section className="hero-stage">
+        <div className="hero-frame">
+          <HeroVideo />
+          <div className="hero-scrim" aria-hidden="true" />
+
+          <div className="hero-copy">
+            <p className="eyebrow mb-4 md:mb-6">{t.home.heroEyebrow}</p>
+            <h1 className="font-display font-medium text-primary text-[2.1rem] leading-[1.12] md:text-5xl lg:text-[3.5rem] xl:text-[4.25rem] lg:leading-[1.06] tracking-tight">
               {t.home.heroTitle1}
               <br />
-              {t.home.heroTitle2}
+              <em className="italic text-accent">{t.home.heroTitle2}</em>
             </h1>
-            <Link
-              href="/portfolio"
-              className="inline-flex items-center gap-2 bg-accent text-white px-8 py-4 text-xs font-semibold uppercase tracking-[0.1em] hover:bg-accent-dark transition-colors duration-300 group"
-            >
-              {t.home.heroCta}
-              <svg
-                className="w-4 h-4 group-hover:translate-x-1 transition-transform"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
+
+            <div className="hidden lg:flex flex-wrap gap-4 mt-10">
+              <Link href="/portfolio" className={`${btnPrimary} group`}>
+                {t.home.heroCta}
+                <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+                </svg>
+              </Link>
+              <a
+                href={SITE.whatsapp}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center border border-primary/25 text-primary px-8 py-4 text-xs font-semibold uppercase tracking-[0.14em] hover:border-primary transition-colors duration-300"
               >
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+                {t.home.ctaWhatsApp}
+              </a>
+            </div>
+
+            <a
+              href="#intro"
+              className="mt-5 lg:mt-12 inline-flex items-center gap-2 self-start text-[11px] font-semibold uppercase tracking-[0.2em] text-on-surface-muted hover:text-accent transition-colors"
+            >
+              {t.home.heroCue}
+              <svg className="hero-cue-arrow w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M12 4.5v15m0 0l-6-6m6 6l6-6" />
               </svg>
-            </Link>
+            </a>
           </div>
+
+          <p className="hero-caption text-[10px] md:text-xs font-semibold uppercase tracking-[0.2em] text-white/90">
+            {t.home.heroCaption}
+          </p>
         </div>
       </section>
 
-      {/* Introduction — stays stacked until lg. On tablet the big heading in a
-          narrow column was colliding with the paragraph, so the split only
-          kicks in on wide screens. */}
-      <section className="py-20 md:py-28 lg:py-32 max-w-[1280px] mx-auto px-5 md:px-20">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-10 items-start">
+      {/* Introduction — the name itself is the story */}
+      <section
+        id="intro"
+        className="scroll-mt-[73px] py-24 md:py-32 max-w-[1280px] mx-auto px-5 md:px-20"
+      >
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-start">
           <div className="lg:col-span-5">
-            <h2 className="font-display text-3xl md:text-4xl lg:text-5xl text-primary mb-6 leading-tight">
-              {t.home.introHeading}
-            </h2>
+            <p lang="te" className="font-display text-6xl md:text-7xl text-accent leading-none mb-6">
+              మన ఇల్లు
+            </p>
+            <p className="text-sm text-on-surface-muted max-w-xs leading-relaxed">
+              {t.home.nameMeaning}
+            </p>
           </div>
           <div className="lg:col-span-7">
+            <h2 className="font-display text-3xl md:text-4xl lg:text-[2.6rem] text-primary mb-6 leading-tight">
+              {t.home.introHeading}
+            </h2>
             <p className="text-lg text-secondary mb-4 leading-relaxed">
               {t.home.introP1}
             </p>
@@ -109,110 +131,107 @@ export default function HomeContent() {
       </section>
 
       {/* Services */}
-      <section className="py-24 md:py-32 bg-surface-low">
-        <div className="max-w-[1280px] mx-auto px-5 md:px-20">
-          <div className="text-center mb-16">
-            <span className="text-xs font-semibold uppercase tracking-[0.2em] text-accent block mb-4">
-              {t.home.servicesLabel}
-            </span>
-            <h2 className="font-display text-3xl md:text-4xl text-primary">
-              {t.home.servicesHeading}
-            </h2>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <section className="bg-surface-low grain border-y border-outline-light/70">
+        <div className="max-w-[1280px] mx-auto px-5 md:px-20 py-24 md:py-32">
+          <p className="eyebrow mb-4">{t.home.servicesLabel}</p>
+          <h2 className="font-display text-3xl md:text-5xl text-primary mb-14 md:mb-20">
+            {t.home.servicesHeading}
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-10 lg:gap-14">
             {t.home.services.map((service, i) => (
-              <div
-                key={service.title}
-                className="p-10 bg-surface border border-outline-light/60 hover:border-accent hover:shadow-[0_6px_28px_rgba(46,42,36,0.08)] transition-all duration-500 relative group overflow-hidden"
-              >
-                <div className="relative z-10">
-                  <div className="text-accent mb-6">{serviceIcons[i]}</div>
-                  <h3 className="font-display text-2xl mb-4 text-primary">
-                    {service.title}
-                  </h3>
-                  <p className="text-base text-secondary">{service.desc}</p>
-                </div>
+              <div key={service.title} className="border-t border-primary pt-6">
+                <p className="font-display text-sm text-accent mb-8 md:mb-12">
+                  {String(i + 1).padStart(2, "0")}
+                </p>
+                <h3 className="font-display text-2xl md:text-[1.7rem] text-primary mb-4">
+                  {service.title}
+                </h3>
+                <p className="text-base text-on-surface-muted leading-relaxed">
+                  {service.desc}
+                </p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Featured Projects */}
+      {/* Work — one real home, room by room */}
       <section className="py-24 md:py-32 max-w-[1280px] mx-auto px-5 md:px-20">
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 gap-6">
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 md:mb-14 gap-6">
           <div>
-            <span className="text-xs font-semibold uppercase tracking-[0.2em] text-accent block mb-4">
-              {t.home.portfolioLabel}
-            </span>
-            <h2 className="font-display text-3xl md:text-5xl text-primary">
+            <p className="eyebrow mb-4">{t.home.portfolioLabel}</p>
+            <h2 className="font-display text-3xl md:text-5xl text-primary leading-tight">
               {t.home.portfolioHeading}
             </h2>
           </div>
           <Link
             href="/portfolio"
-            className="text-xs font-semibold uppercase tracking-[0.1em] text-accent border-b border-accent pb-1 hover:text-accent-dark hover:border-accent-dark transition-colors"
+            className="shrink-0 text-xs font-semibold uppercase tracking-[0.14em] text-primary border-b border-accent pb-1 hover:text-accent transition-colors"
           >
             {t.home.portfolioLink}
           </Link>
         </div>
-        <div className="grid grid-cols-12 gap-6 items-start">
+        <div className="grid grid-cols-12 gap-x-4 gap-y-10 md:gap-x-7 md:gap-y-12">
           {t.home.projects.map((project, i) => (
-            <div
-              key={project.title}
-              className={`${projectImages[i].className} relative group overflow-hidden bg-surface-high`}
-            >
-              <Image
-                src={projectImages[i].image}
-                alt={project.title}
-                fill
-                sizes={projectImages[i].sizes}
-                className="object-cover transition-transform duration-700 group-hover:scale-105"
-              />
-              <div className="reveal-overlay absolute inset-0 flex flex-col justify-end p-4 md:p-8">
-                <h3 className="font-display text-lg md:text-2xl text-white mb-1 leading-snug">
-                  {project.title}
-                </h3>
-                <p className="text-[10px] md:text-xs text-white/80 uppercase tracking-[0.1em] font-semibold">
-                  {project.location}
-                </p>
+            <figure key={work[i].image} className={`${work[i].className} group m-0`}>
+              <div className={`relative overflow-hidden bg-surface-high ${work[i].frame}`}>
+                <Image
+                  src={work[i].image}
+                  alt={project.title}
+                  fill
+                  sizes={work[i].sizes}
+                  className="object-cover transition-transform duration-[900ms] ease-out group-hover:scale-[1.03]"
+                />
               </div>
-            </div>
+              <figcaption className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1 mt-3 pt-3 border-t border-outline-light">
+                <span className="font-display text-base md:text-xl text-primary">
+                  {project.title}
+                </span>
+                <span className="text-[10px] font-semibold uppercase tracking-[0.18em] text-on-surface-muted">
+                  {project.location}
+                </span>
+              </figcaption>
+            </figure>
           ))}
         </div>
       </section>
 
       {/* FAQ — native <details> so it works without JS and Google can read it */}
-      <section className="py-24 md:py-32 bg-surface-low">
-        <div className="max-w-3xl mx-auto px-5 md:px-8">
-          <div className="text-center mb-14">
-            <span className="text-xs font-semibold uppercase tracking-[0.2em] text-accent block mb-4">
-              {t.home.faqLabel}
-            </span>
-            <h2 className="font-display text-3xl md:text-4xl text-primary">
+      <section className="bg-surface-low grain border-t border-outline-light/70">
+        <div className="max-w-[1280px] mx-auto px-5 md:px-20 py-24 md:py-32 grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-start">
+          <div className="lg:col-span-4 lg:sticky lg:top-28">
+            <p className="eyebrow mb-4">{t.home.faqLabel}</p>
+            <h2 className="font-display text-3xl md:text-4xl text-primary mb-5">
               {t.home.faqHeading}
             </h2>
+            <p className="text-base text-on-surface-muted leading-relaxed">
+              {t.home.faqNote}{" "}
+              <a
+                href={SITE.phoneHref}
+                className="text-primary font-semibold border-b border-accent whitespace-nowrap hover:text-accent transition-colors"
+              >
+                {SITE.phoneDisplay}
+              </a>
+            </p>
           </div>
 
-          <div className="space-y-3">
+          <div className="lg:col-span-8 border-t border-outline-light">
             {t.home.faq.map((item) => (
-              <details
-                key={item.q}
-                className="faq-item bg-surface ghost-border rounded-lg px-6 md:px-8"
-              >
-                <summary className="flex items-center justify-between gap-6 py-5 text-base md:text-lg font-semibold text-primary">
+              <details key={item.q} className="faq-item border-b border-outline-light">
+                <summary className="flex items-center justify-between gap-6 py-6 text-base md:text-lg font-semibold text-primary">
                   {item.q}
                   <svg
                     className="faq-icon w-5 h-5 shrink-0 text-accent"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
-                    strokeWidth={2}
+                    strokeWidth={1.6}
+                    aria-hidden="true"
                   >
                     <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
                   </svg>
                 </summary>
-                <p className="pb-6 -mt-1 text-base text-on-surface-muted leading-relaxed">
+                <p className="pb-7 -mt-1 pr-6 md:pr-14 text-base text-on-surface-muted leading-relaxed">
                   {item.a}
                 </p>
               </details>
@@ -222,26 +241,23 @@ export default function HomeContent() {
       </section>
 
       {/* CTA */}
-      <section className="bg-primary py-24 text-center">
+      <section className="bg-primary py-24 md:py-32 text-center">
         <div className="max-w-[1280px] mx-auto px-5 md:px-20">
           <h2 className="font-display text-3xl md:text-5xl text-white mb-8">
             {t.home.ctaHeading}
           </h2>
-          <p className="text-lg text-primary-light/80 mb-12 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-lg text-primary-light mb-12 max-w-2xl mx-auto leading-relaxed">
             {t.home.ctaText}
           </p>
-          <div className="flex flex-col md:flex-row gap-6 justify-center">
-            <Link
-              href="/contact"
-              className="bg-accent text-white px-10 py-5 text-xs font-semibold uppercase tracking-[0.1em] hover:bg-accent-dark transition-colors duration-300"
-            >
+          <div className="flex flex-col md:flex-row gap-4 justify-center">
+            <Link href="/contact" className={`${btnPrimary} px-10 py-5`}>
               {t.home.ctaButton}
             </Link>
             <a
               href={SITE.whatsapp}
               target="_blank"
               rel="noopener noreferrer"
-              className="border border-white/30 text-white px-10 py-5 text-xs font-semibold uppercase tracking-[0.1em] hover:bg-white/10 transition-colors duration-300"
+              className="border border-white/30 text-white px-10 py-5 text-xs font-semibold uppercase tracking-[0.14em] hover:bg-white/10 transition-colors duration-300"
             >
               {t.home.ctaWhatsApp}
             </a>

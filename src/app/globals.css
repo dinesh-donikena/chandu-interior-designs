@@ -1,30 +1,32 @@
 @import "tailwindcss";
 
-/* ── Warm Brass ────────────────────────────────────────────────
-   White base, warm off-white section tints, charcoal-brown ink,
-   and a brass accent that carries every primary action.        */
+/* ── Limewash & Teak ───────────────────────────────────────────
+   Neutral limewash base, stone and sand section tones, charcoal
+   ink, and an antique-brass accent. Every text/background pair
+   below clears WCAG AA (brass on sand is the tightest, 4.6:1). */
 @theme inline {
-  --color-primary: #2e2a24;
-  --color-primary-container: #3d3830;
-  --color-primary-light: #d1c5b7;
-  --color-primary-fixed: #efe3ce;
+  --color-primary: #23211d;
+  --color-primary-container: #312e29;
+  --color-primary-light: #d6cfc4;
+  --color-primary-fixed: #ebe3d5;
 
-  /* Brass accent — buttons, eyebrows, icons, hovers */
-  --color-accent: #b0894f;
-  --color-accent-dark: #96723d;
-  --color-accent-light: #d4af6a;
+  /* Antique brass — buttons, eyebrows, numerals, hovers */
+  --color-accent: #7a5c34;
+  --color-accent-dark: #634a29;
+  --color-accent-light: #c9a66b;
 
-  --color-surface: #ffffff;
-  --color-surface-dim: #ddd3c3;
-  --color-surface-container: #f5f0e8;
-  --color-surface-low: #faf7f2;
-  --color-surface-high: #ede5d8;
+  --color-surface: #f4f1eb;
+  --color-surface-dim: #d9d1c4;
+  --color-surface-container: #e4ddd1;
+  --color-surface-low: #ebe6dd;
+  --color-surface-high: #ddd5c8;
+  --color-card: #fbf9f6;
 
-  --color-on-surface: #1f1b16;
-  --color-on-surface-muted: #6b6257;
-  --color-secondary: #6b6257;
-  --color-outline: #8a8072;
-  --color-outline-light: #e0d7c8;
+  --color-on-surface: #1f1d1a;
+  --color-on-surface-muted: #665f56;
+  --color-secondary: #665f56;
+  --color-outline: #71695e;
+  --color-outline-light: #d8d0c3;
   --color-tertiary: #223026;
   --color-error: #ba1a1a;
 
@@ -33,9 +35,15 @@
   --font-body: var(--font-montserrat), var(--font-noto-sans-telugu), sans-serif;
 }
 
+:root {
+  --nav-h: 73px; /* 72px bar + 1px border */
+  /* Barely-there limewash grain, so flat tones read as plaster, not screen */
+  --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .2 0 0 0 0 .17 0 0 0 0 .13 0 0 0 .05 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
 ::selection {
-  background-color: #efe3ce;
-  color: #2e2a24;
+  background-color: #ebe3d5;
+  color: #23211d;
 }
 
 html {
@@ -44,8 +52,13 @@ html {
 
 body {
   font-family: var(--font-montserrat), var(--font-noto-sans-telugu), sans-serif;
-  background-color: #ffffff;
-  color: #1f1b16;
+  background-color: #f4f1eb;
+  background-image: var(--grain);
+  color: #1f1d1a;
+}
+
+.grain {
+  background-image: var(--grain);
 }
 
 /* Telugu script is taller than Latin — give headings a bit more breathing room */
@@ -54,59 +67,198 @@ body {
 :lang(te) h3 {
   line-height: 1.35;
 }
+/* Telugu has no true italic — a slanted fake reads as broken type */
+:lang(te) em {
+  font-style: normal;
+}
+
+/* Small section label above headings */
+.eyebrow {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+}
+/* Wide tracking pulls Telugu conjuncts apart — keep it tight and a touch
+   larger so the label reads as words, not scattered glyphs. */
+:lang(te) .eyebrow {
+  letter-spacing: 0.02em;
+  font-size: 0.875rem;
+}
 
 /* Ghost border utility */
 .ghost-border {
-  border: 1px solid rgba(46, 42, 36, 0.1);
+  border: 1px solid rgba(35, 33, 29, 0.1);
 }
 
-/* Soft card shadow */
+/* Soft card — a shade lighter than the limewash, like paper on plaster */
 .card-soft {
-  background: #ffffff;
-  box-shadow: 0 4px 24px rgba(46, 42, 36, 0.07);
+  background: #fbf9f6;
+  box-shadow: 0 4px 24px rgba(35, 33, 29, 0.06);
 }
 
-/* Hero scrim — dark only where the text sits, so the top of the
-   photo stays bright instead of dimming the whole image. */
-.hero-scrim {
-  background: linear-gradient(
-    to top,
-    rgba(25, 20, 14, 0.88) 0%,
-    rgba(25, 20, 14, 0.5) 32%,
-    rgba(25, 20, 14, 0.08) 68%,
-    rgba(25, 20, 14, 0) 100%
-  );
+/* ── Hero: the arched doorway ──────────────────────────────────
+   The walkthrough video sits behind the page, seen through an arch
+   standing on the floor — the carved arch is the studio's signature.
+   Where scroll-driven animation is supported, scrolling opens the
+   arch until the home fills the screen. Elsewhere, or with reduced
+   motion, it simply stays a doorway.                               */
+.hero-frame {
+  --arch-t: 44%;
+  --arch-x: 7vw;
+  --arch-l: var(--arch-x);
+  --arch-r: var(--arch-x);
+  --arch-round: 100vw;
+  position: relative;
+  height: calc(100svh - var(--nav-h));
+  min-height: 560px;
+  overflow: hidden;
 }
-
-/* Eyebrow sits higher on the photo than the heading, where the scrim is
-   lighter — a soft shadow keeps it legible over bright ceilings. */
-.hero-eyebrow {
-  text-shadow: 0 1px 12px rgba(25, 20, 14, 0.6);
-}
-/* Wide tracking pulls Telugu conjuncts apart — keep it tight and a touch
-   larger so the line reads as words, not scattered glyphs. */
-:lang(te) .hero-eyebrow {
-  letter-spacing: 0.02em;
-  font-size: 0.95rem;
-}
-
-/* Caption overlay for project photos. Touch screens have no hover, so the
-   caption stays visible there; with a real pointer it fades in on hover. */
-.reveal-overlay {
-  background: linear-gradient(
-    to top,
-    rgba(25, 20, 14, 0.85) 0%,
-    rgba(25, 20, 14, 0) 55%
-  );
-  transition: opacity 0.5s ease;
-}
-@media (hover: hover) {
-  .reveal-overlay {
-    opacity: 0;
+@media (min-width: 768px) {
+  .hero-frame {
+    --arch-t: 40%;
+    --arch-x: 16vw;
   }
-  .group:hover .reveal-overlay {
+}
+@media (min-width: 1024px) {
+  .hero-frame {
+    --arch-t: 9%;
+    --arch-l: 52%;
+    --arch-r: max(5vw, calc((100vw - 1280px) / 2 + 5rem));
+    --arch-round: 60vw;
+  }
+}
+
+.hero-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  background: #ddd5c8;
+  clip-path: inset(
+    var(--arch-t) var(--arch-r) 0 var(--arch-l) round var(--arch-round)
+      var(--arch-round) 0 0
+  );
+}
+
+/* Copy sits on the limewash above the arch (phones) or beside it */
+.hero-copy {
+  position: absolute;
+  inset: 0 0 calc(100% - var(--arch-t)) 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 20px;
+}
+@media (min-width: 768px) {
+  .hero-copy {
+    padding: 0 16vw;
+  }
+}
+@media (min-width: 1024px) {
+  .hero-copy {
+    inset: 0 calc(100% - var(--arch-l) + 3vw) 0 0;
+    padding: 0 0 0 max(5rem, calc((100vw - 1280px) / 2 + 5rem));
+  }
+}
+
+/* Revealed only once the arch has opened */
+.hero-scrim,
+.hero-caption {
+  opacity: 0;
+}
+.hero-caption {
+  position: absolute;
+  bottom: 24px;
+  left: 20px;
+}
+@media (min-width: 768px) {
+  .hero-caption {
+    left: 32px;
+  }
+}
+@media (min-width: 1024px) {
+  .hero-caption {
+    left: max(5rem, calc((100vw - 1280px) / 2 + 5rem));
+    bottom: 36px;
+  }
+}
+.hero-scrim {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    to top,
+    rgba(25, 22, 18, 0.55) 0%,
+    rgba(25, 22, 18, 0) 38%
+  );
+}
+
+@supports (animation-timeline: scroll()) {
+  @media (prefers-reduced-motion: no-preference) {
+    /* One extra screen of scroll drives the opening */
+    .hero-stage {
+      height: calc(200svh - var(--nav-h));
+    }
+    .hero-frame {
+      position: sticky;
+      top: var(--nav-h);
+    }
+    .hero-video,
+    .hero-copy,
+    .hero-scrim,
+    .hero-caption {
+      animation-timing-function: linear;
+      animation-fill-mode: both;
+      animation-timeline: scroll(root block);
+    }
+    .hero-video {
+      animation-name: arch-open;
+      animation-range: 0 75svh;
+    }
+    .hero-copy {
+      animation-name: copy-out;
+      animation-range: 0 32svh;
+    }
+    .hero-scrim,
+    .hero-caption {
+      animation-name: reveal;
+      animation-range: 50svh 80svh;
+    }
+  }
+}
+@keyframes arch-open {
+  to {
+    clip-path: inset(0 0 0 0 round 0 0 0 0);
+  }
+}
+@keyframes copy-out {
+  to {
+    opacity: 0;
+    transform: translateY(-28px);
+    visibility: hidden;
+  }
+}
+@keyframes reveal {
+  to {
     opacity: 1;
   }
+}
+
+/* Scroll cue — a slow drift down, nothing louder */
+@keyframes cue {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(4px);
+  }
+}
+.hero-cue-arrow {
+  animation: cue 2.4s ease-in-out infinite;
 }
 
 /* Page transition — runs on every route change */
@@ -151,7 +303,8 @@ body {
 @media (prefers-reduced-motion: reduce) {
   .page-enter,
   .drawer-panel,
-  .drawer-backdrop {
+  .drawer-backdrop,
+  .hero-cue-arrow {
     animation: none;
   }
   html {
@@ -162,7 +315,7 @@ body {
 /* Masonry grid */
 .masonry-grid {
   column-count: 1;
-  column-gap: 24px;
+  column-gap: 28px;
 }
 @media (min-width: 768px) {
   .masonry-grid {
@@ -176,7 +329,7 @@ body {
 }
 .masonry-item {
   break-inside: avoid;
-  margin-bottom: 24px;
+  margin-bottom: 40px;
 }
 
 /* Custom scrollbar */
@@ -184,10 +337,10 @@ body {
   width: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #ffffff;
+  background: #f4f1eb;
 }
 ::-webkit-scrollbar-thumb {
-  background: #b0894f;
+  background: #7a5c34;
 }
 
 /* Form focus styles */

@@ -54,7 +54,7 @@ export default function TestimonialsContent() {
       </section>
 
       {/* Design Process */}
-      <section className="bg-surface-container py-24 md:py-32">
+      <section className="bg-surface-low grain py-24 md:py-32">
         <div className="px-5 md:px-20 max-w-[1280px] mx-auto">
           <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
             <div className="max-w-xl">
@@ -94,9 +94,10 @@ export default function TestimonialsContent() {
       <section className="py-24 md:py-32 px-5 md:px-20 max-w-[1280px] mx-auto">
         <div className="relative w-full h-[500px] md:h-[600px] overflow-hidden rounded-lg">
           <Image
-            src="https://images.unsplash.com/photo-1682662046610-fbdb3db4bd74?auto=format&fit=crop&w=1600&q=75"
-            alt="Furnished hall of a completed home"
+            src="/portfolio/hanamakonda-bedroom-olive.jpg"
+            alt="Bedroom with glossy olive wardrobe in a Hanamakonda home"
             fill
+            sizes="(min-width: 1280px) 1120px, 100vw"
             className="object-cover"
           />
           <div className="absolute inset-0 bg-primary/20 flex items-center justify-center">

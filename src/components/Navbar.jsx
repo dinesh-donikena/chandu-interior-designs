@@ -72,7 +72,7 @@ export default function Navbar() {
   return (
     <>
       <nav className="bg-surface/90 backdrop-blur-md sticky top-0 z-50 border-b border-outline-light/50">
-        <div className="flex justify-between items-center w-full px-5 md:px-8 lg:px-20 py-4 max-w-[1280px] mx-auto gap-3 md:gap-4">
+        <div className="flex justify-between items-center w-full h-[72px] px-5 md:px-8 lg:px-20 max-w-[1280px] mx-auto gap-3 md:gap-4">
           <Link href="/" className="shrink-0">
             <Logo />
           </Link>

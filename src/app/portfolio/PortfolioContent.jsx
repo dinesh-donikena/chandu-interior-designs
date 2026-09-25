@@ -5,37 +5,19 @@ import Link from "next/link";
 import { useState } from "react";
 import { useLanguage } from "@/components/LanguageProvider";
 
-// Static project data (images + categories); titles/locations come from
-// translations by index. Real photos from the Hanamakonda renovation are
-// marked below; the rest remain Unsplash samples until real bedroom and
-// second-kitchen photos come in. Width/height are each photo's real
-// proportions, so the masonry reserves the right space before images load.
+// Every photo is the studio's own work from the Hanamakonda home (the two
+// bedrooms and the pooja panel are stills from the 4K walkthrough video).
+// Titles/locations come from translations by index. Width/height are each
+// photo's real proportions, so the masonry reserves the right space before
+// images load.
 const projectData = [
-  { category: "hall", image: "/portfolio/hanamakonda-tv-unit.jpg", w: 2000, h: 3000 }, // real
-  { category: "kitchen", image: "/portfolio/hanamakonda-kitchen.jpg", w: 2000, h: 1125 }, // real
-  {
-    category: "bedroom",
-    image:
-      "https://images.unsplash.com/photo-1771327811766-5f4149190b3d?auto=format&fit=crop&w=900&q=75",
-    w: 900,
-    h: 600,
-  },
-  { category: "hall", image: "/portfolio/hanamakonda-hall-arch.jpg", w: 2600, h: 1625 }, // real
-  {
-    category: "kitchen",
-    image:
-      "https://images.unsplash.com/photo-1682662045815-9016c6225dd3?auto=format&fit=crop&w=900&q=75",
-    w: 900,
-    h: 600,
-  },
-  {
-    category: "bedroom",
-    image:
-      "https://images.unsplash.com/photo-1771328756144-02bde5549a9a?auto=format&fit=crop&w=900&q=75",
-    w: 900,
-    h: 600,
-  },
-  { category: "hall", image: "/portfolio/hanamakonda-wash-counter.jpg", w: 2000, h: 3000 }, // real
+  { category: "hall", image: "/portfolio/hanamakonda-tv-unit.jpg", w: 2000, h: 3000 },
+  { category: "kitchen", image: "/portfolio/hanamakonda-kitchen.jpg", w: 2000, h: 1125 },
+  { category: "bedroom", image: "/portfolio/hanamakonda-bedroom-olive.jpg", w: 2000, h: 1125 },
+  { category: "hall", image: "/portfolio/hanamakonda-hall-arch.jpg", w: 2600, h: 1625 },
+  { category: "pooja", image: "/portfolio/hanamakonda-pooja-door.jpg", w: 1200, h: 1800 },
+  { category: "bedroom", image: "/portfolio/hanamakonda-bedroom-white.jpg", w: 2000, h: 1125 },
+  { category: "hall", image: "/portfolio/hanamakonda-wash-counter.jpg", w: 2000, h: 3000 },
 ];
 
 export default function PortfolioContent() {
@@ -47,6 +29,7 @@ export default function PortfolioContent() {
     { key: "hall", label: t.portfolio.filters.hall },
     { key: "kitchen", label: t.portfolio.filters.kitchen },
     { key: "bedroom", label: t.portfolio.filters.bedroom },
+    { key: "pooja", label: t.portfolio.filters.pooja },
   ];
 
   const projects = projectData.map((p, i) => ({
@@ -93,33 +76,32 @@ export default function PortfolioContent() {
       <section className="pb-24 md:pb-32 px-5 md:px-20 max-w-[1280px] mx-auto">
         <div className="masonry-grid">
           {filtered.map((project) => (
-            <div
-              key={project.image}
-              className="masonry-item group relative overflow-hidden bg-surface-high"
-            >
-              <Image
-                src={project.image}
-                alt={project.title}
-                width={project.w}
-                height={project.h}
-                sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
-                className="w-full h-auto object-cover transition-transform duration-700 group-hover:scale-105"
-              />
-              <div className="reveal-overlay absolute inset-0 flex flex-col justify-end p-6 md:p-8">
-                <h3 className="font-display text-xl md:text-2xl text-white mb-1">
+            <figure key={project.image} className="masonry-item group m-0">
+              <div className="overflow-hidden bg-surface-high">
+                <Image
+                  src={project.image}
+                  alt={project.title}
+                  width={project.w}
+                  height={project.h}
+                  sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
+                  className="w-full h-auto object-cover transition-transform duration-[900ms] ease-out group-hover:scale-[1.03]"
+                />
+              </div>
+              <figcaption className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1 mt-3 pt-3 border-t border-outline-light">
+                <h3 className="font-display text-lg md:text-xl text-primary">
                   {project.title}
                 </h3>
-                <p className="text-xs text-white/80 uppercase tracking-[0.1em] font-semibold">
+                <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-on-surface-muted">
                   {project.location}
                 </p>
-              </div>
-            </div>
+              </figcaption>
+            </figure>
           ))}
         </div>
       </section>
 
       {/* CTA */}
-      <section className="py-24 md:py-32 bg-surface-low border-y border-outline-light/20">
+      <section className="py-24 md:py-32 bg-surface-low grain border-y border-outline-light/70">
         <div className="px-5 md:px-20 max-w-[1280px] mx-auto text-center">
           <h2 className="font-display text-3xl md:text-5xl text-primary mb-8">
             {t.portfolio.ctaHeading}
