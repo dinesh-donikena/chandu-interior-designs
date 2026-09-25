@@ -58,28 +58,18 @@ export default function HomeContent() {
       {/* Hero — the arched doorway (behaviour lives in globals.css) */}
       <section className="hero-stage">
         <div className="hero-frame">
-          {/* Two real photos, two doorways — the second only on landscape
-              screens (behaviour in globals.css) */}
+          {/* The TV unit in a doorway that grows as you scroll (globals.css) */}
           <div className="hero-door">
             <Image
               src="/portfolio/hanamakonda-tv-unit.jpg"
               alt="Backlit TV unit with fluted panelling in a Hanamakonda home"
               fill
               priority
-              sizes="(min-width: 1024px) 56vw, 100vw"
+              sizes="(min-width: 1024px) 45vw, 100vw"
               className="object-cover"
             />
+            <div className="hero-scrim" aria-hidden="true" />
           </div>
-          <div className="hero-reveal">
-            <Image
-              src="/portfolio/hanamakonda-hall-arch.jpg"
-              alt="Wood-carved teak hall arch opening onto the pooja room and kitchen"
-              fill
-              sizes="100vw"
-              className="object-cover"
-            />
-          </div>
-          <div className="hero-scrim" aria-hidden="true" />
 
           <div className="hero-copy">
             <p className="eyebrow mb-3 md:mb-5">{t.home.heroEyebrow}</p>
@@ -116,11 +106,8 @@ export default function HomeContent() {
             </a>
           </div>
 
-          <p className="hero-caption hero-caption-land text-[10px] md:text-xs font-semibold uppercase tracking-[0.2em] text-white/90">
+          <p className="hero-caption text-[10px] md:text-xs font-semibold uppercase tracking-[0.2em] text-white/90">
             {t.home.heroCaption}
-          </p>
-          <p className="hero-caption hero-caption-port text-[10px] md:text-xs font-semibold uppercase tracking-[0.2em] text-white/90">
-            {t.home.heroCaptionTv}
           </p>
         </div>
       </section>

@@ -103,21 +103,14 @@ body {
   box-shadow: 0 4px 24px rgba(35, 33, 29, 0.06);
 }
 
-/* ── Hero: two doorways ────────────────────────────────────────
+/* ── Hero: the doorway ─────────────────────────────────────────
    At rest a doorway stands on the floor, centred under the headline,
-   framing the TV unit. Scrolling walks you towards it and it grows.
-   Landscape screens: a second arch then opens inside it onto the
-   wood-carved hall arch (a landscape photo) until the hall fills the
-   screen. Portrait screens can't hold that photo uncropped, so there the
-   TV unit itself grows — full width on phones (whole unit, nothing cut),
-   full screen on tablets. Both are true arches at every step. Without
-   scroll-driven animation, or with reduced motion, it stays a doorway. */
+   framing the TV unit. Scrolling walks you towards it and it grows —
+   always a true arch — to the biggest size that shows the whole unit
+   uncropped: full width on phones, full height on laptops, full screen
+   on portrait tablets (only ceiling/floor trimmed). Without scroll-driven
+   animation, or with reduced motion, it simply stays a doorway. */
 @property --arch-w {
-  syntax: "<length>";
-  inherits: true;
-  initial-value: 0px;
-}
-@property --inner-w {
   syntax: "<length>";
   inherits: true;
   initial-value: 0px;
@@ -130,8 +123,9 @@ body {
   /* Resting width (static) and the live width the scroll animation grows */
   --arch-w0: min(var(--arch-wmax), calc(var(--frame-h) * var(--arch-hr) / 1.4));
   --arch-w: var(--arch-w0);
-  --arch-w-end: 100vw; /* how wide the TV-unit doorway gets */
-  --inner-w: 0px;
+  /* Largest doorway that still fits the screen: width-bound on phones,
+     height-bound on laptops */
+  --arch-w-end: min(100vw, calc(var(--frame-h) / 1.4));
   --arch: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 140' preserveAspectRatio='none'%3E%3Cpath d='M0 140V50A50 50 0 0 1 100 50V140Z'/%3E%3C/svg%3E");
   position: relative;
   height: var(--frame-h);
@@ -141,7 +135,6 @@ body {
   .hero-frame {
     --arch-hr: 0.58;
     --arch-wmax: 56vw;
-    --arch-w-end: 86vw;
   }
 }
 /* Portrait tablets: wide enough that the arch's straight sides clear the
@@ -155,14 +148,14 @@ body {
   .hero-frame {
     --arch-hr: 0.62;
     --arch-wmax: 34vw;
-    --arch-w-end: 56vw;
   }
 }
 
-/* Doorway 1 — the TV unit, framed whole, growing as you approach. The
-   photo's box follows the arch but never outgrows the screen, so once the
-   arch passes the edges the photo settles at a plain full-screen fit
-   instead of zooming in; the arch mask itself keeps growing freely. */
+/* The TV unit, framed whole. The photo's box follows the arch but never
+   outgrows the screen, so where the arch passes the edges (tablets) the
+   photo settles at a plain full-screen fit instead of zooming in; the
+   arch mask itself keeps growing freely. (50% centres the mask:
+   percentages there apply to the leftover space.) */
 .hero-door {
   position: absolute;
   bottom: 0;
@@ -180,29 +173,6 @@ body {
   object-position: 45% 50%;
 }
 
-/* Doorway 2 — opens inside the first onto the carved hall arch.
-   (50% centres the mask: percentages apply to the leftover space.) */
-.hero-reveal {
-  position: absolute;
-  inset: 0;
-  -webkit-mask: var(--arch) no-repeat 50% 100% / var(--inner-w)
-    calc(var(--inner-w) * 1.4);
-  mask: var(--arch) no-repeat 50% 100% / var(--inner-w)
-    calc(var(--inner-w) * 1.4);
-}
-/* The hall-arch reveal and its caption are for landscape screens only */
-@media (orientation: portrait) {
-  .hero-reveal,
-  .hero-caption-land {
-    display: none;
-  }
-}
-@media (orientation: landscape) {
-  .hero-caption-port {
-    display: none;
-  }
-}
-
 /* Copy sits on the limewash above the doorway */
 .hero-copy {
   position: absolute;
@@ -215,7 +185,8 @@ body {
   padding: 0 20px;
 }
 
-/* Revealed only once the doorway has opened */
+/* Revealed once the doorway has grown. The scrim lives inside the doorway
+   so it only darkens the photo, never the limewash beside it. */
 .hero-scrim,
 .hero-caption {
   opacity: 0;
@@ -251,87 +222,44 @@ body {
 
 @supports (animation-timeline: scroll()) {
   @media (prefers-reduced-motion: no-preference) {
-    /* One extra screen of scroll drives the opening */
+    /* A short pinned stretch drives the growth — long enough to feel,
+       short enough not to feel stuck */
     .hero-stage {
-      height: calc(100svh - var(--nav-h) + 100svh);
+      height: calc(100svh - var(--nav-h) + 55svh);
     }
     .hero-frame {
       position: sticky;
       top: var(--nav-h);
     }
     .hero-frame,
-    .hero-reveal img,
     .hero-copy,
     .hero-scrim,
     .hero-caption {
       animation-fill-mode: both;
       animation-timeline: scroll(root block);
     }
-    /* Ease-in: slow at first, then rushing past — like walking up to a door */
+    /* Ease-in: slow at first, then quicker — like walking up to a door */
     .hero-frame {
-      animation-name: door-grow, reveal-open;
+      animation-name: door-grow;
       animation-timing-function: cubic-bezier(0.45, 0, 0.8, 0.3);
-      animation-range: 0 70svh, 14svh 82svh;
-    }
-    .hero-reveal img {
-      animation-name: reveal-settle;
-      animation-timing-function: ease-out;
-      animation-range: 14svh 82svh;
+      animation-range: 0 42svh;
     }
     .hero-copy {
       animation-name: copy-out;
       animation-timing-function: linear;
-      animation-range: 0 26svh;
+      animation-range: 0 20svh;
     }
     .hero-scrim,
     .hero-caption {
       animation-name: reveal;
       animation-timing-function: linear;
-      animation-range: 62svh 85svh;
-    }
-    @media (orientation: portrait) {
-      .hero-frame {
-        animation-name: door-grow;
-        animation-range: 0 70svh;
-      }
-    }
-    /* Phones: the doorway only grows to full width, so a shorter pinned
-       stretch keeps it from feeling stuck */
-    @media (orientation: portrait) and (max-width: 767px) {
-      .hero-stage {
-        height: calc(100svh - var(--nav-h) + 55svh);
-      }
-      .hero-frame {
-        animation-range: 0 42svh;
-      }
-      .hero-copy {
-        animation-range: 0 20svh;
-      }
-      .hero-scrim,
-      .hero-caption {
-        animation-range: 28svh 46svh;
-      }
+      animation-range: 28svh 46svh;
     }
   }
 }
 @keyframes door-grow {
   to {
     --arch-w: var(--arch-w-end);
-  }
-}
-/* 280vw: wide enough that the arch's straight sides clear even a tall
-   phone screen, no wider — a smaller target keeps the opening gentle */
-@keyframes reveal-open {
-  to {
-    --inner-w: 280vw;
-  }
-}
-@keyframes reveal-settle {
-  from {
-    transform: scale(1.12);
-  }
-  to {
-    transform: none;
   }
 }
 @keyframes copy-out {
