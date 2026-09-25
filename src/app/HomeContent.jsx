@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import HeroScrollFallback from "@/components/HeroScrollFallback";
 import { useLanguage } from "@/components/LanguageProvider";
 import { SITE } from "@/lib/site";
 
@@ -57,6 +58,7 @@ export default function HomeContent() {
     <>
       {/* Hero — the arched doorway (behaviour lives in globals.css) */}
       <section className="hero-stage">
+        <HeroScrollFallback />
         <div className="hero-frame">
           {/* The TV unit in a doorway that grows as you scroll (globals.css) */}
           <div className="hero-door">

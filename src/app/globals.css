@@ -115,6 +115,17 @@ body {
   inherits: true;
   initial-value: 0px;
 }
+/* Registered so they compute to px — the scroll fallback script reads them */
+@property --arch-w0 {
+  syntax: "<length>";
+  inherits: true;
+  initial-value: 0px;
+}
+@property --arch-w-end {
+  syntax: "<length>";
+  inherits: true;
+  initial-value: 0px;
+}
 
 .hero-frame {
   --frame-h: max(calc(100svh - var(--nav-h)), 560px);
@@ -257,6 +268,18 @@ body {
     }
   }
 }
+/* Browsers without scroll-driven animations (Safari/iOS before support
+   landed — which includes Chrome on iPhone — and Firefox): the
+   HeroScrollFallback script adds .hero-js and drives the same values from
+   a scroll listener, so the doorway still grows instead of scrolling away */
+.hero-stage.hero-js {
+  height: calc(100svh - var(--nav-h) + 55svh);
+}
+.hero-js .hero-frame {
+  position: sticky;
+  top: var(--nav-h);
+}
+
 @keyframes door-grow {
   to {
     --arch-w: var(--arch-w-end);
