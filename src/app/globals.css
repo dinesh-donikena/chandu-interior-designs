@@ -110,33 +110,15 @@ body {
    full-height rectangle — the whole unit, uncropped, like a framed photo
    on wide screens; full screen on phones. HeroScroll drives it; with
    reduced motion (or no JS) it stays a doorway. */
-@property --arch-w {
-  syntax: "<length>";
-  inherits: true;
-  initial-value: 0px;
-}
-/* Registered so they compute to px — the HeroScroll script reads them */
-@property --arch-w0 {
-  syntax: "<length>";
-  inherits: true;
-  initial-value: 0px;
-}
-@property --arch-w-end {
-  syntax: "<length>";
-  inherits: true;
-  initial-value: 0px;
-}
-
 .hero-frame {
   --frame-h: max(calc(100svh - var(--nav-h)), 560px);
   --arch-hr: 0.56; /* share of the frame height the doorway stands */
   --arch-wmax: 78vw;
-  /* Resting width (static) and the live width the scroll animation grows */
+  /* Resting width; HeroScroll overrides --arch-w inline as you scroll.
+     (Plain custom properties on purpose — no @property — so every engine
+     treats them the same; the script measures rendered sizes itself.) */
   --arch-w0: min(var(--arch-wmax), calc(var(--frame-h) * var(--arch-hr) / 1.4));
   --arch-w: var(--arch-w0);
-  /* Wide enough that the arch's straight sides (0.9 × its width tall)
-     clear the whole frame, so the doorway ends as a full rectangle */
-  --arch-w-end: max(110vw, calc(var(--frame-h) / 0.85));
   --arch: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 140' preserveAspectRatio='none'%3E%3Cpath d='M0 140V50A50 50 0 0 1 100 50V140Z'/%3E%3C/svg%3E");
   position: relative;
   height: var(--frame-h);
