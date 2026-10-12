@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import HeroScroll from "@/components/HeroScroll";
+import Tick from "@/components/Tick";
 import { useLanguage } from "@/components/LanguageProvider";
 import { SITE } from "@/lib/site";
 
@@ -114,19 +115,27 @@ export default function HomeContent() {
         </div>
       </section>
 
-      {/* Introduction — the name itself is the story */}
+      {/* Introduction — the name, and the promise behind it */}
       <section
         id="intro"
         className="scroll-mt-[73px] py-24 md:py-32 max-w-[1280px] mx-auto px-5 md:px-20"
       >
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-start">
           <div className="lg:col-span-5">
-            <p lang="te" className="font-display text-6xl md:text-7xl text-accent leading-none mb-6">
-              మన ఇల్లు
+            <p lang="te" className="font-display text-6xl md:text-7xl text-accent leading-none mb-8">
+              సుమ శ్రీ
             </p>
-            <p className="text-sm text-on-surface-muted max-w-xs leading-relaxed">
-              {t.home.nameMeaning}
-            </p>
+            <ul className="space-y-3">
+              {t.home.promise.map((item) => (
+                <li
+                  key={item}
+                  className="flex items-center gap-3 text-xs md:text-sm font-semibold uppercase tracking-[0.16em] text-primary"
+                >
+                  <span className="w-6 h-px bg-accent shrink-0" aria-hidden="true" />
+                  {item}
+                </li>
+              ))}
+            </ul>
           </div>
           <div className="lg:col-span-7">
             <h2 className="font-display text-3xl md:text-4xl lg:text-[2.6rem] text-primary mb-6 leading-tight">
@@ -140,7 +149,7 @@ export default function HomeContent() {
         </div>
       </section>
 
-      {/* Services */}
+      {/* Services — the three things we do, with a taste of each list */}
       <section className="bg-surface-low grain border-y border-outline-light/70">
         <div className="max-w-[1280px] mx-auto px-5 md:px-20 py-24 md:py-32">
           <p className="eyebrow mb-4">{t.home.servicesLabel}</p>
@@ -148,19 +157,38 @@ export default function HomeContent() {
             {t.home.servicesHeading}
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-10 lg:gap-14">
-            {t.home.services.map((service, i) => (
-              <div key={service.title} className="border-t border-primary pt-6">
-                <p className="font-display text-sm text-accent mb-8 md:mb-12">
+            {t.services.categories.map((cat, i) => (
+              <div key={cat.key} className="border-t border-primary pt-6">
+                <p className="font-display text-sm text-accent mb-8 md:mb-10">
                   {String(i + 1).padStart(2, "0")}
                 </p>
-                <h3 className="font-display text-2xl md:text-[1.7rem] text-primary mb-4">
-                  {service.title}
+                <h3 className="font-display text-2xl md:text-[1.7rem] text-primary mb-3">
+                  {cat.title}
                 </h3>
-                <p className="text-base text-on-surface-muted leading-relaxed">
-                  {service.desc}
+                <p className="text-base text-on-surface-muted leading-relaxed mb-6">
+                  {cat.tagline}
                 </p>
+                <ul className="space-y-2.5">
+                  {cat.items.slice(0, 6).map((item) => (
+                    <li key={item} className="flex gap-3 text-[15px] text-primary leading-snug">
+                      <Tick />
+                      {item}
+                    </li>
+                  ))}
+                  <li className="pl-7 text-[15px] text-on-surface-muted">
+                    {t.home.servicesAndMore}…
+                  </li>
+                </ul>
               </div>
             ))}
+          </div>
+          <div className="mt-14 md:mt-16">
+            <Link href="/services" className={`${btnPrimary} group`}>
+              {t.home.servicesMore}
+              <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+              </svg>
+            </Link>
           </div>
         </div>
       </section>

@@ -4,7 +4,7 @@ import { useLanguage } from "@/components/LanguageProvider";
 
 // Two-line lockup — the full name is too long for one line beside the menu
 // on a phone, so the name carries the brand and the trade sits beneath.
-// Follows the language toggle: మన ఇల్లు in Telugu, Mana Illu in English.
+// Follows the language toggle: సుమ శ్రీ in Telugu, Suma Sri in English.
 export default function Logo({ large = false }) {
   const { lang, t } = useLanguage();
   const te = lang === "te";

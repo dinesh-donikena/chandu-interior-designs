@@ -6,6 +6,12 @@ export default function sitemap() {
   return [
     { url: SITE.url, lastModified, changeFrequency: "monthly", priority: 1 },
     {
+      url: `${SITE.url}/services`,
+      lastModified,
+      changeFrequency: "monthly",
+      priority: 0.9,
+    },
+    {
       url: `${SITE.url}/portfolio`,
       lastModified,
       changeFrequency: "monthly",

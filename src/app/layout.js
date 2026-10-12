@@ -46,11 +46,11 @@ const notoSansTelugu = Noto_Sans_Telugu({
 export const metadata = {
   metadataBase: new URL(SITE.url),
   title: {
-    default: "Mana Illu Interiors and Constructions | Warangal",
-    template: "%s | Mana Illu Interiors and Constructions",
+    default: `${SITE.name} | Warangal`,
+    template: `%s | ${SITE.name}`,
   },
   description:
-    "House construction and interior design from Warangal — serving all of Telangana & Andhra Pradesh. Planning, construction and complete home interiors, end to end.",
+    "House construction, renovation and interiors from Warangal — serving all of Telangana & Andhra Pradesh. Plans, construction and complete home interiors, end to end.",
   keywords: [
     "house construction Warangal",
     "interior design Warangal",
@@ -58,14 +58,15 @@ export const metadata = {
     "home interiors Telangana",
     "house plans Warangal",
     "modular kitchen Warangal",
-    "Mana Illu Interiors",
-    "మన ఇల్లు ఇంటీరియర్స్",
+    "home renovation Telangana",
+    "Suma Sri Interiors",
+    "సుమ శ్రీ ఇంటీరియర్స్",
     "ఇంటి నిర్మాణం వరంగల్",
   ],
   openGraph: {
-    title: "Mana Illu Interiors and Constructions | Warangal",
+    title: `${SITE.name} | Warangal`,
     description:
-      "House construction and interior design from Warangal — serving all of Telangana & Andhra Pradesh. Planning, construction and complete home interiors.",
+      "House construction, renovation and interiors from Warangal — serving all of Telangana & Andhra Pradesh.",
     locale: "en_IN",
     type: "website",
   },
@@ -80,11 +81,9 @@ const localBusinessSchema = {
   "@context": "https://schema.org",
   "@type": "HomeAndConstructionBusiness",
   name: SITE.name,
-  // Earlier trading name (and current Instagram) — helps Google connect
-  // people searching the old name to this site.
-  alternateName: "Chandu Homely Interiors",
+  alternateName: "సుమ శ్రీ ఇంటీరియర్స్ & కన్‌స్ట్రక్షన్స్",
   description:
-    "House construction and interior design from Warangal, serving Telangana and Andhra Pradesh.",
+    "House construction, renovation and interior design from Warangal, serving Telangana and Andhra Pradesh.",
   url: SITE.url,
   telephone: SITE.phoneDisplay,
   image: `${SITE.url}/portfolio/hanamakonda-hall-arch.jpg`,
@@ -96,7 +95,7 @@ const localBusinessSchema = {
     addressCountry: SITE.address.country,
   },
   areaServed: SITE.areasServed.map((name) => ({ "@type": "Place", name })),
-  sameAs: [SITE.instagram],
+  sameAs: SITE.instagram ? [SITE.instagram] : undefined,
   openingHoursSpecification: {
     "@type": "OpeningHoursSpecification",
     dayOfWeek: [

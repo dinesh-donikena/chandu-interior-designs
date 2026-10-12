@@ -1,14 +1,15 @@
 // Central place for business identity & links — edit once, updates everywhere.
 export const SITE = {
-  name: "Mana Illu Interiors and Constructions",
+  name: "Suma Sri Interiors and Constructions",
   whatsapp: "https://wa.me/919133509293",
-  // Still the old Chandu Homely page — swap for the new Mana Illu handle
-  // once it is live (it feeds the footer, Contact page and Google schema).
-  instagram: "https://www.instagram.com/chandu__homely_interiors/",
+  // No Suma Sri Instagram yet (the old link was the sister company Chandu
+  // Homely Interiors' page), so Instagram is hidden everywhere. Set the new
+  // handle's URL here and it appears in the footer, Contact page and schema.
+  instagram: null,
   phoneDisplay: "+91 91335 09293",
   phoneHref: "tel:+919133509293",
   // No business inbox yet, so email is hidden everywhere. Set a real address
-  // (e.g. "hello@manailluinteriors.com") and it appears on Contact + footer.
+  // (e.g. "hello@sumasriinteriors.com") and it appears on Contact + footer.
   email: null,
 
   // Swap for the Google Business Profile link / exact street address once
@@ -20,8 +21,8 @@ export const SITE = {
 
   // The site's own address — canonical links, sitemap.xml, robots.txt,
   // share previews and structured data all use it. Free Vercel address for
-  // now; switch to https://manailluinteriors.com once it's bought and
-  // connected (or set NEXT_PUBLIC_SITE_URL in Vercel).
+  // now (switch to the Suma Sri address once it's added in Vercel, then to
+  // the custom domain once bought — or set NEXT_PUBLIC_SITE_URL in Vercel).
   url: process.env.NEXT_PUBLIC_SITE_URL || "https://manailluinteriors.vercel.app",
 
   // Address is partial on purpose — owner will supply the street line.
@@ -31,5 +32,9 @@ export const SITE = {
     postalCode: "506001",
     country: "IN",
   },
-  areasServed: ["Warangal", "Hanamakonda", "Kazipet", "Telangana", "Andhra Pradesh"],
+  areasServed: [
+    "Hyderabad", "Warangal", "Hanamakonda", "Khammam", "Karimnagar", "Adilabad",
+    "Vijayawada", "Visakhapatnam", "Rajahmundry", "Guntur", "Ongole",
+    "Telangana", "Andhra Pradesh",
+  ],
 };
