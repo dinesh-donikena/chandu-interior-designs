@@ -21,9 +21,9 @@ export const SITE = {
 
   // The site's own address — canonical links, sitemap.xml, robots.txt,
   // share previews and structured data all use it. Free Vercel address for
-  // now (switch to the Suma Sri address once it's added in Vercel, then to
-  // the custom domain once bought — or set NEXT_PUBLIC_SITE_URL in Vercel).
-  url: process.env.NEXT_PUBLIC_SITE_URL || "https://manailluinteriors.vercel.app",
+  // now (manailluinteriors.vercel.app redirects here); switch to the custom
+  // domain once it's bought and connected, or set NEXT_PUBLIC_SITE_URL.
+  url: process.env.NEXT_PUBLIC_SITE_URL || "https://sumasriinteriors.vercel.app",
 
   // Address is partial on purpose — owner will supply the street line.
   address: {
