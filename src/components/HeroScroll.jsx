@@ -13,7 +13,6 @@ import { useEffect, useRef } from "react";
 // Sizes are measured from what is actually on screen, not read back from
 // CSS variables, so every engine gets the same numbers. Visitors who ask
 // for reduced motion keep the still doorway.
-// Add ?debug=hero to the address to see what the browser reports.
 const GROW = 45;
 const COPY_OUT = 22;
 const CAPTION_FROM = 35;
@@ -26,17 +25,10 @@ export default function HeroScroll() {
   const ref = useRef(null);
 
   useEffect(() => {
-    const debug =
-      new URLSearchParams(window.location.search).get("debug") === "hero"
-        ? makeDebugPanel()
-        : null;
     const reducedMotion = window.matchMedia(
       "(prefers-reduced-motion: reduce)"
     ).matches;
-    if (reducedMotion) {
-      debug?.show({ status: "still doorway: phone/computer has Reduce Motion ON" });
-      return () => debug?.remove();
-    }
+    if (reducedMotion) return;
 
     const stage = ref.current.closest(".hero-stage");
     const frame = stage.querySelector(".hero-frame");
@@ -76,7 +68,6 @@ export default function HeroScroll() {
       copy.style.visibility = out >= 1 ? "hidden" : "";
       const shown = clamp((y - CAPTION_FROM * svh) / ((CAPTION_TO - CAPTION_FROM) * svh));
       fades.forEach((el) => (el.style.opacity = String(shown)));
-      debug?.show({ status: "active", svh, w0, wEnd, scrollY: y, archNow: w });
     };
     const onScroll = () => {
       if (!raf) raf = requestAnimationFrame(update);
@@ -89,9 +80,8 @@ export default function HeroScroll() {
     measure();
     // Sizes unreadable (very old browser): leave the still doorway
     if (!(w0 > 0 && wEnd > 0 && svh > 0)) {
-      debug?.show({ status: "still doorway: sizes unreadable", svh, w0, wEnd });
       probe.remove();
-      return () => debug?.remove();
+      return;
     }
     stage.classList.add("hero-js");
     update();
@@ -102,7 +92,6 @@ export default function HeroScroll() {
       window.removeEventListener("resize", onResize);
       cancelAnimationFrame(raf);
       probe.remove();
-      debug?.remove();
       stage.classList.remove("hero-js");
       frame.style.removeProperty("--arch-w");
       copy.removeAttribute("style");
@@ -111,35 +100,4 @@ export default function HeroScroll() {
   }, []);
 
   return <span ref={ref} hidden />;
-}
-
-// Small on-screen readout for checking a real phone (?debug=hero)
-function makeDebugPanel() {
-  const el = document.createElement("div");
-  el.style.cssText =
-    "position:fixed;left:8px;top:80px;z-index:9999;max-width:calc(100vw - 16px);padding:8px 10px;background:rgba(0,0,0,.8);color:#fff;font:11px/1.45 ui-monospace,Menlo,monospace;border-radius:6px;pointer-events:none;white-space:pre-wrap";
-  document.body.appendChild(el);
-  const ua = navigator.userAgent;
-  const engine = /CriOS/.test(ua)
-    ? "Chrome on iPhone (WebKit)"
-    : /iPhone|iPad/.test(ua)
-      ? "Safari on iPhone (WebKit)"
-      : /Chrome/.test(ua)
-        ? "Chrome"
-        : /Safari/.test(ua)
-          ? "Safari"
-          : "other";
-  const round = (v) => (typeof v === "number" ? Math.round(v) : v);
-  return {
-    show(data) {
-      el.textContent = [
-        `hero script v4 · ${engine}`,
-        `screen ${window.innerWidth}×${window.innerHeight}`,
-        ...Object.entries(data).map(([k, v]) => `${k}: ${round(v)}`),
-      ].join("\n");
-    },
-    remove() {
-      el.remove();
-    },
-  };
 }
