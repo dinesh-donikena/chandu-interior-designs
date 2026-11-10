@@ -1,31 +1,27 @@
 "use client";
 
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useMemo } from "react";
 import { translations } from "@/lib/translations";
+import { localePath } from "@/lib/i18n";
 
 const LanguageContext = createContext(null);
 
-export function LanguageProvider({ children }) {
-  const [lang, setLangState] = useState("en");
-
-  useEffect(() => {
-    const saved = localStorage.getItem("lang");
-    if (saved === "te" || saved === "en") {
-      setLangState(saved);
-      document.documentElement.lang = saved;
-    }
-  }, []);
-
-  function setLang(next) {
-    setLangState(next);
-    localStorage.setItem("lang", next);
-    document.documentElement.lang = next;
-  }
+// The language comes from the address (/… is English, /te/… is Telugu), set
+// by each language's layout — so the server sends the page already in the
+// right language. `path` turns a plain link ("/contact") into the one for
+// the current language.
+export function LanguageProvider({ lang, children }) {
+  const value = useMemo(
+    () => ({
+      lang,
+      t: translations[lang],
+      path: (to) => localePath(lang, to),
+    }),
+    [lang]
+  );
 
   return (
-    <LanguageContext.Provider value={{ lang, setLang, t: translations[lang] }}>
-      {children}
-    </LanguageContext.Provider>
+    <LanguageContext.Provider value={value}>{children}</LanguageContext.Provider>
   );
 }
 

@@ -4,9 +4,25 @@
     {
       "name": "chandu-dev",
       "runtimeExecutable": "npm",
-      "runtimeArgs": ["run", "dev"],
+      "runtimeArgs": [
+        "run",
+        "dev"
+      ],
       "cwd": "/Users/dineshdonikena/Downloads/chandu-interior-designs",
       "port": 3000
+    },
+    {
+      "name": "chandu-prod",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": [
+        "run",
+        "start",
+        "--",
+        "-p",
+        "3100"
+      ],
+      "cwd": "/Users/dineshdonikena/Downloads/chandu-interior-designs",
+      "port": 3100
     }
   ]
 }

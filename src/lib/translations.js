@@ -6,6 +6,9 @@
 // loanwords (ప్లానింగ్, బడ్జెట్, కిచెన్) and a friendly, direct tone.
 // The two languages carry the same meaning but each reads like it was
 // written in that language first.
+//
+// Each language has its own addresses (English at /, Telugu under /te), so
+// the two blocks must keep exactly the same keys.
 
 export const translations = {
   en: {
@@ -303,6 +306,18 @@ export const translations = {
       city: "Warangal",
       rights: "All rights reserved.",
     },
+    // Labels read out by screen readers for the floating buttons
+    common: {
+      whatsappLabel: "Message us on WhatsApp",
+      callLabel: "Call us",
+    },
+    notFound: {
+      label: "Page not found",
+      title: "This door doesn't open.",
+      text: "The link may be old, or the address mistyped. Everything else is one step away.",
+      home: "Back to Home",
+      work: "See Our Work",
+    },
   },
 
   te: {
@@ -598,6 +613,17 @@ export const translations = {
       address: "హనుమకొండ,\nవరంగల్, తెలంగాణ - 506001",
       city: "వరంగల్",
       rights: "అన్ని హక్కులూ మావే.",
+    },
+    common: {
+      whatsappLabel: "WhatsApp లో మెసేజ్ చేయండి",
+      callLabel: "కాల్ చేయండి",
+    },
+    notFound: {
+      label: "పేజీ దొరకలేదు",
+      title: "ఈ తలుపు తెరుచుకోవడం లేదు.",
+      text: "లింక్ పాతదై ఉండొచ్చు, లేదా అడ్రస్ తప్పుగా టైప్ అయి ఉండొచ్చు. మిగతావన్నీ ఇక్కడే ఉన్నాయి.",
+      home: "హోమ్‌కి వెళ్లండి",
+      work: "మా పనులు చూడండి",
     },
   },
 };

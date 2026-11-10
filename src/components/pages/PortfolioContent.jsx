@@ -21,7 +21,7 @@ const projectData = [
 ];
 
 export default function PortfolioContent() {
-  const { t } = useLanguage();
+  const { t, path } = useLanguage();
   const [filter, setFilter] = useState("all");
 
   const categories = [
@@ -75,22 +75,26 @@ export default function PortfolioContent() {
       {/* Gallery */}
       <section className="pb-24 md:pb-32 px-5 md:px-20 max-w-[1280px] mx-auto">
         <div className="masonry-grid">
-          {filtered.map((project) => (
+          {filtered.map((project, i) => (
             <figure key={project.image} className="masonry-item group m-0">
               <div className="overflow-hidden bg-surface-high">
+                {/* The first photo is the biggest thing on screen when the
+                    page opens, so it loads straight away, not lazily. */}
                 <Image
                   src={project.image}
                   alt={project.title}
                   width={project.w}
                   height={project.h}
+                  loading={i === 0 ? "eager" : "lazy"}
+                  fetchPriority={i === 0 ? "high" : "auto"}
                   sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
                   className="w-full h-auto object-cover transition-transform duration-[900ms] ease-out group-hover:scale-[1.03]"
                 />
               </div>
               <figcaption className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1 mt-3 pt-3 border-t border-outline-light">
-                <h3 className="font-display text-lg md:text-xl text-primary">
+                <h2 className="font-display text-lg md:text-xl text-primary">
                   {project.title}
-                </h3>
+                </h2>
                 <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-on-surface-muted">
                   {project.location}
                 </p>
@@ -107,7 +111,7 @@ export default function PortfolioContent() {
             {t.portfolio.ctaHeading}
           </h2>
           <Link
-            href="/contact"
+            href={path("/contact")}
             className="inline-block bg-accent text-white px-10 py-4 text-xs font-semibold uppercase tracking-[0.1em] hover:bg-accent-dark transition-colors duration-300"
           >
             {t.portfolio.ctaButton}

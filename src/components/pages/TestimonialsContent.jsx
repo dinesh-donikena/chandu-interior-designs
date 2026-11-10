@@ -6,7 +6,7 @@ import { useLanguage } from "@/components/LanguageProvider";
 import { SITE } from "@/lib/site";
 
 export default function TestimonialsContent() {
-  const { t } = useLanguage();
+  const { t, path } = useLanguage();
 
   return (
     <>
@@ -44,7 +44,7 @@ export default function TestimonialsContent() {
                 </p>
               </div>
               <div className="mt-8 border-t border-outline-light/30 pt-6">
-                <h4 className="font-semibold text-primary">{item.name}</h4>
+                <p className="font-semibold text-primary">{item.name}</p>
                 <p className="text-xs font-semibold text-secondary uppercase tracking-[0.1em] mt-1">
                   {item.project}
                 </p>
@@ -110,7 +110,7 @@ export default function TestimonialsContent() {
             </h2>
             <div className="flex flex-col sm:flex-row sm:flex-wrap gap-4 justify-center lg:justify-start">
               <Link
-                href="/contact"
+                href={path("/contact")}
                 className="inline-flex items-center justify-center whitespace-nowrap bg-accent text-white px-8 py-4 text-xs font-semibold uppercase tracking-[0.14em] hover:bg-accent-dark transition-colors"
               >
                 {t.testimonials.ctaButton}

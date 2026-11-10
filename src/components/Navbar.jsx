@@ -5,19 +5,31 @@ import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useLanguage } from "@/components/LanguageProvider";
 import Logo from "@/components/Logo";
+import { localePath, stripLocale } from "@/lib/i18n";
 
 export default function Navbar() {
   const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
-  const { lang, setLang, t } = useLanguage();
+  const { lang, t, path } = useLanguage();
 
   const navLinks = [
-    { href: "/", label: t.nav.home },
-    { href: "/services", label: t.nav.services },
-    { href: "/portfolio", label: t.nav.portfolio },
-    { href: "/testimonials", label: t.nav.testimonials },
-    { href: "/contact", label: t.nav.contact },
+    { href: path("/"), label: t.nav.home },
+    { href: path("/services"), label: t.nav.services },
+    { href: path("/portfolio"), label: t.nav.portfolio },
+    { href: path("/testimonials"), label: t.nav.testimonials },
+    { href: path("/contact"), label: t.nav.contact },
   ];
+
+  // The same page in the other language. Plain links (not a button that
+  // swaps text in place), so each language is a real address that can be
+  // shared and found on Google. The choice is remembered for next time —
+  // see REMEMBER_TELUGU in SiteDocument.
+  const page = stripLocale(pathname);
+  const rememberLang = (key) => {
+    try {
+      localStorage.setItem("lang", key);
+    } catch {}
+  };
 
   // Close the drawer on navigation (incl. browser back/forward) — adjusted
   // during render rather than in an effect, per React's guidance.
@@ -50,13 +62,16 @@ export default function Navbar() {
         { key: "en", label: "English" },
         { key: "te", label: "తెలుగు" },
       ].map((opt) => (
-        <button
+        <a
           key={opt.key}
-          onClick={() => setLang(opt.key)}
-          aria-pressed={lang === opt.key}
+          href={localePath(opt.key, page)}
+          hrefLang={opt.key}
+          lang={opt.key}
+          onClick={() => rememberLang(opt.key)}
+          aria-current={lang === opt.key ? "true" : undefined}
           className={`${
             variant === "drawer"
-              ? "flex-1 py-2.5 text-sm"
+              ? "flex-1 py-2.5 text-sm text-center"
               : "px-2.5 lg:px-3 py-1.5 text-[11px] lg:text-xs"
           } font-semibold transition-colors duration-300 ${
             lang === opt.key
@@ -64,8 +79,15 @@ export default function Navbar() {
               : "text-secondary hover:text-primary"
           }`}
         >
-          {variant === "drawer" ? opt.label : opt.key === "en" ? "EN" : opt.label}
-        </button>
+          {opt.key === "en" ? (
+            variant === "drawer" ? opt.label : "EN"
+          ) : (
+            // The phone's own Telugu font, not the site's: this one word is
+            // the only Telugu on most English pages, and it should not cost
+            // them a 120 KB font download.
+            <span className="[font-family:sans-serif]">{opt.label}</span>
+          )}
+        </a>
       ))}
     </div>
   );
@@ -74,7 +96,7 @@ export default function Navbar() {
     <>
       <nav className="bg-surface/90 backdrop-blur-md sticky top-0 z-50 border-b border-outline-light/50">
         <div className="flex justify-between items-center w-full h-[72px] px-5 md:px-8 lg:px-20 max-w-[1280px] mx-auto gap-3 md:gap-4">
-          <Link href="/" className="shrink-0">
+          <Link href={path("/")} className="shrink-0">
             <Logo />
           </Link>
 
@@ -103,7 +125,7 @@ export default function Navbar() {
             {/* Same destination as the Contact link, so it only joins the
                 bar once there is room for both (xl). */}
             <Link
-              href="/contact"
+              href={path("/contact")}
               className="hidden xl:block bg-accent text-white px-6 py-2 text-xs font-semibold uppercase tracking-[0.1em] whitespace-nowrap hover:bg-accent-dark transition-colors"
             >
               {t.nav.consultation}
@@ -200,7 +222,7 @@ export default function Navbar() {
 
             <div className="px-6 py-6 border-t border-outline-light/60">
               <Link
-                href="/contact"
+                href={path("/contact")}
                 onClick={() => setMenuOpen(false)}
                 className="block text-center bg-accent text-white px-6 py-4 text-xs font-semibold uppercase tracking-[0.1em] hover:bg-accent-dark transition-colors"
               >

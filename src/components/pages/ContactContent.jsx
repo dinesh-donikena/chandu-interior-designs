@@ -1,5 +1,6 @@
 "use client";
 
+import { track } from "@vercel/analytics";
 import { useLanguage } from "@/components/LanguageProvider";
 import { SITE } from "@/lib/site";
 
@@ -27,6 +28,10 @@ export default function ContactContent() {
     if (services) lines.push(`${f.waNeed}: ${services}`);
     if (location) lines.push(`${f.waSite}: ${location}`);
     lines.push("", form.message.value.trim());
+
+    // Counted without any of the visitor's details — only that the form
+    // was used, and on which page.
+    track("enquiry_form", { page: window.location.pathname });
 
     window.open(
       `${SITE.whatsapp}?text=${encodeURIComponent(lines.join("\n"))}`,

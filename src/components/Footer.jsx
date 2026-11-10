@@ -6,7 +6,7 @@ import Logo from "@/components/Logo";
 import { SITE } from "@/lib/site";
 
 export default function Footer() {
-  const { t } = useLanguage();
+  const { t, path } = useLanguage();
 
   return (
     <footer className="bg-surface-container">
@@ -26,19 +26,19 @@ export default function Footer() {
               {t.footer.pages}
             </span>
             <Link
-              href="/portfolio"
+              href={path("/portfolio")}
               className="text-on-surface-muted hover:text-primary transition-colors text-base"
             >
               {t.nav.portfolio}
             </Link>
             <Link
-              href="/services"
+              href={path("/services")}
               className="text-on-surface-muted hover:text-primary transition-colors text-base"
             >
               {t.nav.services}
             </Link>
             <Link
-              href="/testimonials"
+              href={path("/testimonials")}
               className="text-on-surface-muted hover:text-primary transition-colors text-base"
             >
               {t.nav.testimonials}
@@ -49,7 +49,7 @@ export default function Footer() {
               {t.footer.connect}
             </span>
             <Link
-              href="/contact"
+              href={path("/contact")}
               className="text-on-surface-muted hover:text-primary transition-colors text-base"
             >
               {t.footer.contactUs}

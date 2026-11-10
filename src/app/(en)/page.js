@@ -1,17 +1,14 @@
-import HomeContent from "./HomeContent";
+import HomeContent from "@/components/pages/HomeContent";
 import { translations } from "@/lib/translations";
+import { pageMetadata } from "@/lib/seo";
 
-// The site answers on more than one vercel.app address — canonical tells
-// Google which one to rank so they don't compete as duplicates.
-export const metadata = {
-  alternates: { canonical: "/" },
-};
+export const metadata = pageMetadata("en", "home");
 
-// FAQ rich results are indexed from the English copy — the language toggle is
-// client-side, so English is what crawlers see.
+// Lets Google show these questions and answers under the search result.
 const faqSchema = {
   "@context": "https://schema.org",
   "@type": "FAQPage",
+  inLanguage: "en",
   mainEntity: translations.en.home.faq.map((item) => ({
     "@type": "Question",
     name: item.q,
