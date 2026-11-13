@@ -17,17 +17,14 @@ import { translations } from "@/lib/translations";
 // get just the words they show as props, so the full English + Telugu text
 // file never has to be downloaded by a phone.
 
-// Tells Google this is a local business in Hanamakonda, which is what
-// surfaces the phone number and map pin in local search results.
+// Tells Google this is a local business — office in Hanamakonda, work across
+// Telangana and Andhra Pradesh — which is what surfaces the phone number
+// and map pin in local search results.
 const localBusinessSchema = {
   "@context": "https://schema.org",
   "@type": "HomeAndConstructionBusiness",
   name: SITE.name,
-  // The Telugu name, and the earlier English spelling, so a search for
-  // either still finds the business
-  alternateName: ["సుమ శ్రీ ఇంటీరియర్స్ & కన్‌స్ట్రక్షన్స్", "Suma Sri Interiors and Constructions"],
-  description:
-    "House construction, renovation and interior design from Warangal, serving Telangana and Andhra Pradesh.",
+  description: "Interior design and construction across Telangana and Andhra Pradesh.",
   url: SITE.url,
   telephone: SITE.phoneDisplay,
   image: `${SITE.url}/portfolio/hanamakonda-hall-arch.jpg`,
@@ -38,7 +35,7 @@ const localBusinessSchema = {
     postalCode: SITE.address.postalCode,
     addressCountry: SITE.address.country,
   },
-  areaServed: SITE.areasServed.map((name) => ({ "@type": "Place", name })),
+  areaServed: SITE.areasServed.map((name) => ({ "@type": "State", name })),
   sameAs: SITE.instagram ? [SITE.instagram] : undefined,
   openingHoursSpecification: {
     "@type": "OpeningHoursSpecification",

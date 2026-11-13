@@ -35,9 +35,8 @@ export const translations = {
       promise: ["Quality materials", "Stunning designs", "Experienced workmanship"],
       introHeading: "Construction, renovation, interiors — we do it all.",
       introP1:
-        "Suma Sree Interiors and Constructions is a house construction and interior design company from Warangal. Whether you're building a new house or renovating the one you live in, we take care of everything — planning, construction, renovation and interiors — under one roof.",
-      introP2:
-        "We work across Telangana and Andhra Pradesh.",
+        "Suma Sree Interiors and Constructions is a house construction and interior design company. Whether you're building a new house or renovating the one you live in, we take care of everything — planning, construction, renovation and interiors — under one roof.",
+      introP2: "Interior design and construction across Telangana and Andhra Pradesh.",
       servicesLabel: "Our Services",
       servicesHeading: "What We Do",
       servicesMore: "See all services",
@@ -163,7 +162,8 @@ export const translations = {
         "Schools",
       ],
       areasHeading: "Where we work",
-      areasText: "All of Telangana and Andhra Pradesh, including",
+      areasText:
+        "Interior design and construction across Telangana and Andhra Pradesh, including",
       areas: [
         "Hyderabad",
         "Warangal",
@@ -302,7 +302,7 @@ export const translations = {
     },
     footer: {
       tagline:
-        "House construction & interiors — from Warangal, serving all of Telangana & Andhra Pradesh.",
+        "Interior design and construction across Telangana and Andhra Pradesh.",
       pages: "Pages",
       connect: "Connect",
       office: "Office",
@@ -349,9 +349,8 @@ export const translations = {
       promise: ["నాణ్యమైన మెటీరియల్స్", "అద్భుతమైన డిజైన్లు", "అనుభవజ్ఞులైన వర్క్"],
       introHeading: "కన్‌స్ట్రక్షన్, రెనోవేషన్, ఇంటీరియర్స్ — అన్నీ మేమే చూసుకుంటాం.",
       introP1:
-        "సుమ శ్రీ ఇంటీరియర్స్ & కన్‌స్ట్రక్షన్స్ — వరంగల్‌కి చెందిన హౌస్ కన్‌స్ట్రక్షన్ & ఇంటీరియర్ డిజైన్ కంపెనీ. కొత్త ఇల్లు కట్టడమైనా, ఉన్న ఇంటిని రెనోవేట్ చేయడమైనా — ప్లానింగ్, కన్‌స్ట్రక్షన్, రెనోవేషన్, ఇంటీరియర్స్ అన్నీ ఒకే దగ్గర.",
-      introP2:
-        "మేము తెలంగాణ, ఆంధ్రప్రదేశ్ అంతటా పని చేస్తాం.",
+        "సుమ శ్రీ ఇంటీరియర్స్ & కన్‌స్ట్రక్షన్స్ — హౌస్ కన్‌స్ట్రక్షన్ & ఇంటీరియర్ డిజైన్ కంపెనీ. కొత్త ఇల్లు కట్టడమైనా, ఉన్న ఇంటిని రెనోవేట్ చేయడమైనా — ప్లానింగ్, కన్‌స్ట్రక్షన్, రెనోవేషన్, ఇంటీరియర్స్ అన్నీ ఒకే దగ్గర.",
+      introP2: "తెలంగాణ, ఆంధ్రప్రదేశ్ అంతటా ఇంటీరియర్ డిజైన్ & కన్‌స్ట్రక్షన్.",
       servicesLabel: "మా సర్వీసులు",
       servicesHeading: "మేము చేసే పనులు",
       servicesMore: "అన్ని సర్వీసులు చూడండి",
@@ -477,7 +476,8 @@ export const translations = {
         "స్కూళ్లు",
       ],
       areasHeading: "మేము పని చేసే ప్రాంతాలు",
-      areasText: "తెలంగాణ, ఆంధ్రప్రదేశ్ అంతటా — ముఖ్యంగా",
+      areasText:
+        "తెలంగాణ, ఆంధ్రప్రదేశ్ అంతటా ఇంటీరియర్స్ & కన్‌స్ట్రక్షన్ — ముఖ్యంగా",
       areas: [
         "హైదరాబాద్",
         "వరంగల్",
@@ -614,7 +614,7 @@ export const translations = {
     },
     footer: {
       tagline:
-        "ఇంటి నిర్మాణం & ఇంటీరియర్స్ — వరంగల్ నుంచి తెలంగాణ, ఆంధ్రప్రదేశ్ అంతటా.",
+        "తెలంగాణ, ఆంధ్రప్రదేశ్ అంతటా ఇంటీరియర్ డిజైన్ & కన్‌స్ట్రక్షన్.",
       pages: "పేజీలు",
       connect: "కనెక్ట్",
       office: "ఆఫీస్",
