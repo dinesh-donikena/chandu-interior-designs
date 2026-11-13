@@ -1,13 +1,14 @@
 import Link from "next/link";
 import Logo from "@/components/Logo";
+import { WhatsAppIcon } from "@/components/icons";
 import { localePath } from "@/lib/i18n";
 import { SITE } from "@/lib/site";
 import { translations } from "@/lib/translations";
-import { wrap } from "@/lib/ui";
+import { btnWhatsApp, wrap } from "@/lib/ui";
 
-const heading = "block text-xs font-semibold uppercase tracking-[0.12em] text-accent mb-5";
+const heading = "type-small block text-accent mb-5";
 const link =
-  "inline-flex items-center min-h-11 text-on-surface-muted hover:text-primary transition-colors text-base";
+  "inline-flex items-center min-h-12 text-on-surface-muted hover:text-primary transition-colors type-body";
 
 export default function Footer({ lang }) {
   const t = translations[lang];
@@ -41,8 +42,15 @@ export default function Footer({ lang }) {
 
         <div className="lg:col-span-2 flex flex-col">
           <span className={heading}>{t.footer.connect}</span>
-          <a href={SITE.phoneHref} className={`${link} whitespace-nowrap`}>
-            {SITE.phoneDisplay}
+          <a
+            href={SITE.whatsapp}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={btnWhatsApp}
+            aria-label={t.common.whatsappLabel}
+          >
+            <WhatsAppIcon className="w-5 h-5" />
+            WhatsApp
           </a>
           {SITE.instagram && (
             <a

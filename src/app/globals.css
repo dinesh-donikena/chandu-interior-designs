@@ -32,8 +32,8 @@
   --color-error: #ba1a1a;
 
   /* Telugu Noto fonts as fallbacks — Latin fonts carry no Telugu glyphs */
-  --font-display: var(--font-playfair), var(--font-noto-serif-telugu), serif;
-  --font-body: var(--font-montserrat), var(--font-noto-sans-telugu), sans-serif;
+  --font-display: var(--font-fraunces), var(--font-noto-serif-telugu), serif;
+  --font-body: var(--font-dm-sans), var(--font-noto-sans-telugu), sans-serif;
 }
 
 :root {
@@ -163,7 +163,11 @@ html {
 }
 
 body {
-  font-family: var(--font-montserrat), var(--font-noto-sans-telugu), sans-serif;
+  font-family: var(--font-body);
+  font-size: var(--text-body-size);
+  font-weight: var(--text-body-weight);
+  line-height: var(--text-body-lh);
+  letter-spacing: var(--text-body-track);
   background-color: #f4f1eb;
   background-image: var(--grain);
   color: #1f1d1a;
@@ -175,12 +179,220 @@ body {
 :root {
   --float-stack: calc(44px + 12px + 44px + 20px + env(safe-area-inset-bottom, 0px));
 }
+/* The last line sits just above the page edge. Text rows keep a right
+   inset so the floating buttons land on empty footer, not on words. */
 footer {
-  padding-bottom: var(--float-stack);
+  padding-bottom: 1.25rem;
 }
-@media (max-width: 767px) {
+.dock-safe {
+  padding-inline-end: 4.75rem;
+}
+@media (min-width: 1100px) {
   .dock-safe {
-    padding-right: 3.25rem;
+    padding-inline-end: 0;
+  }
+}
+
+/* One type scale. Mobile first; desktop sizes from 800px. */
+:root {
+  --text-h1-size: 2.5rem;
+  --text-h1-weight: 500;
+  --text-h1-lh: 1.1;
+  --text-h1-track: -0.02em;
+  --text-h2-size: 1.875rem;
+  --text-h2-weight: 500;
+  --text-h2-lh: 1.15;
+  --text-h2-track: -0.015em;
+  --text-h3-size: 1.375rem;
+  --text-h3-weight: 500;
+  --text-h3-lh: 1.3;
+  --text-h3-track: 0em;
+  --text-body-size: 1.0625rem;
+  --text-body-weight: 400;
+  --text-body-lh: 1.7;
+  --text-body-track: 0em;
+  --text-small-size: 0.8125rem;
+  --text-small-weight: 500;
+  --text-small-lh: 1.45;
+  --text-small-track: 0.04em;
+  --text-button-size: 0.8125rem;
+  --text-button-weight: 600;
+  --text-button-lh: 1;
+  --text-button-track: 0.08em;
+}
+@media (min-width: 800px) {
+  :root {
+    --text-h1-size: 4.25rem;
+    --text-h2-size: 2.625rem;
+    --text-h3-size: 1.625rem;
+    --text-body-size: 1.125rem;
+  }
+}
+.type-h1,
+.type-display {
+  font-family: var(--font-display);
+  font-weight: var(--text-h1-weight);
+  font-size: var(--text-h1-size);
+  line-height: var(--text-h1-lh);
+  letter-spacing: var(--text-h1-track);
+  max-width: 26ch;
+}
+.type-h2 {
+  font-family: var(--font-display);
+  font-weight: var(--text-h2-weight);
+  font-size: var(--text-h2-size);
+  line-height: var(--text-h2-lh);
+  letter-spacing: var(--text-h2-track);
+  max-width: 28ch;
+}
+.type-h3 {
+  font-family: var(--font-display);
+  font-weight: var(--text-h3-weight);
+  font-size: var(--text-h3-size);
+  line-height: var(--text-h3-lh);
+  letter-spacing: var(--text-h3-track);
+}
+.type-body {
+  font-size: var(--text-body-size);
+  font-weight: var(--text-body-weight);
+  line-height: var(--text-body-lh);
+  letter-spacing: var(--text-body-track);
+  max-width: 65ch;
+}
+.type-small {
+  font-size: var(--text-small-size);
+  font-weight: var(--text-small-weight);
+  line-height: var(--text-small-lh);
+  letter-spacing: var(--text-small-track);
+}
+:lang(te) .type-h1,
+:lang(te) .type-display,
+:lang(te) .type-h2,
+:lang(te) .type-h3 {
+  line-height: 1.35;
+}
+
+/* Three buttons. Same height, padding, radius and type. */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  min-height: 48px;
+  padding: 0.7rem 1.4rem;
+  border-radius: 999px;
+  border: 1.5px solid transparent;
+  font-family: var(--font-body);
+  font-size: var(--text-button-size);
+  font-weight: var(--text-button-weight);
+  line-height: var(--text-button-lh);
+  letter-spacing: var(--text-button-track);
+  text-transform: uppercase;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease, transform 0.12s ease;
+}
+.btn:focus-visible {
+  outline: 2px solid var(--color-accent-light);
+  outline-offset: 3px;
+}
+.btn:active {
+  transform: translateY(1px);
+}
+.btn-primary {
+  background: var(--color-accent);
+  color: #fff;
+}
+.btn-primary:hover {
+  background: var(--color-accent-dark);
+}
+.btn-secondary {
+  background: transparent;
+  color: var(--color-primary);
+  border-color: var(--color-primary);
+}
+.btn-secondary:hover {
+  background: var(--color-primary);
+  color: #fff;
+}
+.btn-on-dark.btn-secondary {
+  color: #fff;
+  border-color: #fff;
+}
+.btn-on-dark.btn-secondary:hover {
+  background: #fff;
+  color: var(--color-primary);
+}
+.btn-whatsapp {
+  background: #146c43;
+  color: #fff;
+}
+.btn-whatsapp:hover {
+  background: #0e5a38;
+}
+.btn-icon {
+  width: 48px;
+  height: 48px;
+  min-width: 48px;
+  padding: 0;
+}
+
+.process-steps {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 2.75rem;
+}
+.process-num {
+  display: block;
+  font-family: var(--font-display), serif;
+  font-size: clamp(3.25rem, 7vw, 4.75rem);
+  line-height: 0.85;
+  color: var(--color-accent);
+  margin-bottom: 1rem;
+}
+@media (min-width: 800px) {
+  .process-steps {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 2rem;
+  }
+}
+
+.editorial-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem 1rem;
+}
+.editorial-grid .span-2 {
+  grid-column: span 2;
+}
+.crop-wide {
+  aspect-ratio: 3 / 2;
+}
+.crop-tall {
+  aspect-ratio: 4 / 5;
+}
+.gallery-snap {
+  display: flex;
+  gap: 1rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-padding-inline: 1.25rem;
+  padding-bottom: 0.5rem;
+}
+.gallery-snap > li {
+  flex: 0 0 82%;
+  scroll-snap-align: center;
+}
+@media (min-width: 800px) {
+  .gallery-snap > li {
+    flex-basis: 46%;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .gallery-snap {
+    scroll-snap-type: none;
   }
 }
 
@@ -640,4 +852,30 @@ html:has(dialog[open]) {
 }
 .faq-item[open] summary .faq-icon {
   transform: rotate(45deg);
+}
+
+/* The doorway is the first screen, not the whole story. */
+@media (max-width: 767px) {
+  .hero-frame {
+    --frame-h: 68svh;
+    height: 68svh;
+  }
+  /* No extra scroll runway on a phone, so the overview follows the doorway. */
+  .hero-stage.hero-js {
+    height: auto;
+  }
+  .hero-js .hero-frame {
+    position: relative;
+    top: auto;
+  }
+}
+
+/* The header action is for wide screens. .btn would otherwise force it visible. */
+.nav-talk {
+  display: none;
+}
+@media (min-width: 1280px) {
+  .nav-talk.btn {
+    display: inline-flex;
+  }
 }

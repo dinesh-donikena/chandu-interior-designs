@@ -1,144 +1,101 @@
-import Image from "next/image";
 import ClosingCta from "@/components/ClosingCta";
 import PageHeader from "@/components/PageHeader";
+import ProcessSteps from "@/components/ProcessSteps";
+import ServiceGallery from "@/components/ServiceGallery";
 import { Tick } from "@/components/icons";
+import { curatedPhotos } from "@/lib/curated-photos";
 import { localePath } from "@/lib/i18n";
 import { translations } from "@/lib/translations";
-import { numeral, wrap } from "@/lib/ui";
+import { wrap } from "@/lib/ui";
 
-// Real rooms from the Hanamakonda renovation, one beside each service.
-// Alt text is the title already written for that photo.
-const SERVICE_PHOTOS = {
-  construction: { src: "/portfolio/hanamakonda-hall-arch.jpg", project: 3 },
-  renovation: { src: "/portfolio/hanamakonda-kitchen.jpg", project: 1 },
-  interiors: { src: "/portfolio/hanamakonda-tv-unit.jpg", project: 0 },
-};
-
-const chip =
-  "inline-block px-4 py-2 rounded-full border border-outline-light bg-card text-sm text-primary";
-
+// Services owns the work we do and the one way that work proceeds.
+// Photos of finished rooms live on Portfolio; this page shows a short
+// curated set so the lists are not only words.
 export default function ServicesContent({ lang }) {
   const t = translations[lang];
   const sv = t.services;
+  const steps = sv.process.map((title, i) => ({
+    title,
+    desc: t.testimonials.steps[i].desc,
+  }));
+  const photos = curatedPhotos(t.portfolio.projects);
 
   return (
     <>
-      <PageHeader
-        eyebrow={sv.categories.map((cat) => cat.title).join(" · ")}
-        title={sv.title}
-        intro={sv.intro}
+      <PageHeader title={sv.title} intro={sv.intro} align="left" />
+
+      <section className={`${wrap} pb-16 md:pb-24 flex flex-col gap-14 md:gap-20`}>
+        {sv.categories.map((cat, i) => (
+          <article key={cat.key} id={cat.key} className="border-t border-primary pt-6">
+            <p className="type-small text-accent mb-3">{String(i + 1).padStart(2, "0")}</p>
+            <h2 className="type-h2 text-primary mb-3">{cat.title}</h2>
+            <p className="type-body text-on-surface-muted mb-6">{cat.tagline}</p>
+            <ul className="dock-safe grid grid-cols-2 gap-x-6 gap-y-2">
+              {cat.items.map((item) => (
+                <li key={item} className="flex gap-3 type-body text-primary">
+                  <Tick />
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </article>
+        ))}
+      </section>
+
+      <ProcessSteps
+        label={sv.processLabel}
+        heading={t.testimonials.processHeading}
+        text={t.testimonials.processText}
+        steps={steps}
       />
 
-      {/* The three services, each with its full list */}
-      <section className={`${wrap} pb-24 md:pb-36 flex flex-col gap-16 md:gap-24`}>
-        {sv.categories.map((cat, i) => {
-          const photo = SERVICE_PHOTOS[cat.key];
-          return (
-            <article
-              key={cat.key}
-              id={cat.key}
-              data-reveal
-              style={{ "--reveal-delay": `${i * 90}ms` }}
-              className="service-card scroll-mt-24 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-center"
-            >
-              <div
-                data-door
-                className={`relative aspect-[4/3] lg:col-span-5 ${i % 2 ? "lg:order-2" : ""}`}
-              >
-                <div className="service-photo absolute inset-0 overflow-hidden bg-surface-high">
-                  <Image
-                    src={photo.src}
-                    alt={t.portfolio.projects[photo.project].title}
-                    fill
-                    sizes="(min-width: 1024px) 40vw, 100vw"
-                    className="object-cover"
-                  />
-                </div>
-              </div>
-              <div className={`lg:col-span-7 ${i % 2 ? "lg:order-1" : ""}`}>
-                <p className="font-display italic text-5xl md:text-6xl leading-none text-accent mb-5">
-                  {numeral(i)}
-                </p>
-                <h2 className="font-display text-3xl md:text-4xl text-primary mb-3">{cat.title}</h2>
-                <p className="text-base text-on-surface-muted leading-relaxed max-w-md mb-8">{cat.tagline}</p>
-                <ul className="dock-safe grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-3">
-                  {cat.items.map((item) => (
-                    <li key={item} className="flex gap-3 text-base text-primary leading-snug">
-                      <Tick />
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </article>
-          );
-        })}
+      <section className={`${wrap} py-16 md:py-24`}>
+        <ServiceGallery photos={photos} labels={t.portfolio.viewer} />
       </section>
 
-      {/* What we build + where */}
       <section className="bg-surface-low grain border-y border-outline-light/70">
-        <div className={`${wrap} py-20 md:py-28 grid grid-cols-1 lg:grid-cols-2 gap-14 lg:gap-20`}>
-          <div data-reveal>
-            <h2 className="font-display text-3xl md:text-4xl text-primary mb-8">{sv.buildHeading}</h2>
-            <div className="dock-safe flex flex-wrap gap-2.5">
+        <div className={`${wrap} py-14 md:py-20 grid grid-cols-1 lg:grid-cols-2 gap-12`}>
+          <div>
+            <h2 className="type-h2 text-primary mb-6">{sv.buildHeading}</h2>
+            <ul className="dock-safe flex flex-wrap gap-2">
               {sv.buildTypes.map((type) => (
-                <span key={type} className={chip}>
+                <li key={type} className="type-small px-3 py-2 rounded-full border border-outline-light bg-card text-primary">
                   {type}
-                </span>
+                </li>
               ))}
-            </div>
+            </ul>
           </div>
-          <div data-reveal style={{ "--reveal-delay": "120ms" }}>
-            <h2 className="font-display text-3xl md:text-4xl text-primary mb-4">{sv.areasHeading}</h2>
-            <p className="text-base text-on-surface-muted mb-6">{sv.areasText}:</p>
-            <div className="dock-safe flex flex-wrap gap-2.5">
+          <div>
+            <h2 className="type-h2 text-primary mb-3">{sv.areasHeading}</h2>
+            <p className="type-body text-on-surface-muted mb-5">{sv.areasText}</p>
+            <ul className="dock-safe flex flex-wrap gap-2">
               {sv.areas.map((area) => (
-                <span key={area} className={chip}>
+                <li key={area} className="type-small px-3 py-2 rounded-full border border-outline-light bg-card text-primary">
                   {area}
-                </span>
+                </li>
               ))}
-            </div>
+            </ul>
           </div>
         </div>
       </section>
 
-      {/* Materials & brands */}
-      <section className={`${wrap} dock-safe py-24 md:py-36`}>
-        <div data-reveal>
-          <h2 className="font-display text-3xl md:text-5xl text-primary mb-4">{sv.materialsHeading}</h2>
-          <p className="text-base text-on-surface-muted mb-12 max-w-2xl">{sv.materialsNote}</p>
-        </div>
-        <div
-          data-reveal
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-px bg-outline-light border border-outline-light"
-        >
-          {sv.materials.map((m, i) => (
-            <div
-              key={m.name}
-              data-reveal
-              style={{ "--reveal-delay": `${i * 50}ms` }}
-              className="bg-card p-6"
-            >
-              <p className="font-display italic text-xl text-accent mb-3">{numeral(i)}</p>
-              <h3 className="text-sm font-semibold uppercase tracking-[0.12em] text-primary mb-2">{m.name}</h3>
-              <p className="text-[15px] text-on-surface-muted leading-relaxed">{m.brands}</p>
+      <section className={`${wrap} dock-safe py-14 md:py-20`}>
+        <h2 className="type-h2 text-primary mb-3">{sv.materialsHeading}</h2>
+        <p className="type-body text-on-surface-muted mb-8">{sv.materialsNote}</p>
+        <dl className="grid grid-cols-1 sm:grid-cols-2 gap-x-10 gap-y-5">
+          {sv.materials.map((m) => (
+            <div key={m.name} className="border-t border-outline-light pt-3">
+              <dt className="type-h3 text-primary">{m.name}</dt>
+              <dd className="type-small text-on-surface-muted mt-1">{m.brands}</dd>
             </div>
           ))}
-        </div>
-      </section>
-
-      <section className={`${wrap} pb-4 md:pb-8`}>
-        <ol data-door className="process-strip dock-safe" aria-label={sv.processLabel}>
-          {sv.process.map((step) => (
-            <li key={step}>{step}</li>
-          ))}
-        </ol>
+        </dl>
       </section>
 
       <ClosingCta
         heading={sv.ctaHeading}
-        button={sv.ctaButton}
-        href={localePath(lang, "/contact")}
+        button={t.nav.portfolio}
+        href={localePath(lang, "/portfolio")}
       />
     </>
   );

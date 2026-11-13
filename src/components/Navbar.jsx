@@ -143,7 +143,7 @@ export default function Navbar({ lang, nav }) {
                 bar once there is room for both (xl). */}
             <Link
               href={localePath(lang, "/contact")}
-              className="hidden xl:block bg-accent text-white px-6 py-2 text-xs font-semibold uppercase tracking-[0.1em] whitespace-nowrap hover:bg-accent-dark transition-colors"
+              className="nav-talk btn btn-primary"
             >
               {nav.talk}
             </Link>
@@ -152,7 +152,7 @@ export default function Navbar({ lang, nav }) {
             <button
               type="button"
               onClick={() => setMenuOpen(true)}
-              className="lg:hidden inline-flex items-center justify-center min-h-11 min-w-11 text-primary"
+              className="lg:hidden btn btn-secondary btn-icon"
               aria-label={nav.openMenu}
               aria-expanded={menuOpen}
             >
@@ -176,7 +176,7 @@ export default function Navbar({ lang, nav }) {
               <button
                 type="button"
                 onClick={() => setMenuOpen(false)}
-                className="inline-flex items-center justify-center min-h-11 min-w-11 text-primary"
+                className="btn btn-secondary btn-icon"
                 aria-label={nav.closeMenu}
               >
                 <Close />
@@ -194,7 +194,7 @@ export default function Navbar({ lang, nav }) {
                     href={link.href}
                     onClick={() => setMenuOpen(false)}
                     aria-current={current ? "page" : undefined}
-                    className={`flex items-center justify-between py-4 font-display text-2xl border-b border-outline-light/50 transition-colors ${
+                    className={`flex items-center justify-between py-4 type-h3 border-b border-outline-light/50 transition-colors ${
                       current ? "text-accent" : "text-primary hover:text-accent"
                     }`}
                   >
@@ -209,7 +209,7 @@ export default function Navbar({ lang, nav }) {
               <Link
                 href={localePath(lang, "/contact")}
                 onClick={() => setMenuOpen(false)}
-                className="block text-center bg-accent text-white px-6 py-4 text-xs font-semibold uppercase tracking-[0.12em] hover:bg-accent-dark transition-colors"
+                className="btn btn-primary w-full"
               >
                 {nav.talk}
               </Link>

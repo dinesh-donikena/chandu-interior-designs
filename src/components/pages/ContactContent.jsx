@@ -1,6 +1,8 @@
+import ClosingCta from "@/components/ClosingCta";
 import EnquiryForm from "@/components/EnquiryForm";
 import PageHeader from "@/components/PageHeader";
-import { InstagramIcon, MailIcon, PhoneIcon, PinIcon } from "@/components/icons";
+import { InstagramIcon, MailIcon, PinIcon, WhatsAppIcon } from "@/components/icons";
+import { localePath } from "@/lib/i18n";
 import { SITE } from "@/lib/site";
 import { translations } from "@/lib/translations";
 import { wrap } from "@/lib/ui";
@@ -47,8 +49,14 @@ export default function ContactContent({ lang }) {
             <div>
               <h2 className={heading}>{c.infoHeading}</h2>
               <div className="space-y-5">
-                <Channel href={SITE.phoneHref} icon={<PhoneIcon />} note={c.hours}>
-                  {SITE.phoneDisplay}
+                <Channel
+                  href={SITE.whatsapp}
+                  icon={<WhatsAppIcon />}
+                  note={c.hours}
+                  external
+                  label={t.common.whatsappLabel}
+                >
+                  {t.common.whatsappLabel}
                 </Channel>
                 {SITE.email && (
                   <Channel href={`mailto:${SITE.email}`} icon={<MailIcon />}>
@@ -98,6 +106,8 @@ export default function ContactContent({ lang }) {
           </div>
         </div>
       </section>
+
+      <ClosingCta heading={t.portfolio.ctaHeading} button={t.nav.portfolio} href={localePath(lang, "/portfolio")} />
     </>
   );
 }

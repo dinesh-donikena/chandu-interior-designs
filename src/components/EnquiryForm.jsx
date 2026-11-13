@@ -4,7 +4,7 @@ import { useState } from "react";
 import { track } from "@vercel/analytics";
 import { WhatsAppIcon } from "@/components/icons";
 import { SITE } from "@/lib/site";
-import { btnPrimary } from "@/lib/ui";
+import { btnWhatsApp } from "@/lib/ui";
 
 const labelClass = "block text-xs font-semibold uppercase tracking-[0.12em] text-primary mb-2";
 const inputClass =
@@ -127,7 +127,7 @@ export default function EnquiryForm({ f, services }) {
       </div>
 
       <div className="pt-1 space-y-4">
-        <button type="submit" className={btnPrimary}>
+        <button type="submit" className={btnWhatsApp}>
           <WhatsAppIcon className="w-5 h-5" />
           {f.send}
         </button>

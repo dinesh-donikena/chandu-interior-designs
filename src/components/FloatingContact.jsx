@@ -1,8 +1,6 @@
 import { PhoneIcon, WhatsAppIcon } from "@/components/icons";
 import { SITE } from "@/lib/site";
-
-const button =
-  "w-11 h-11 flex items-center justify-center rounded-full text-white shadow-lg shadow-black/20";
+import { btnPrimary, btnWhatsApp } from "@/lib/ui";
 
 // Floats over the corner. The footer can scroll clear of the stack, and
 // pill rows and the closing button keep a right inset on a phone.
@@ -14,11 +12,11 @@ export default function FloatingContact({ labels }) {
         target="_blank"
         rel="noopener noreferrer"
         aria-label={labels.whatsappLabel}
-        className={`${button} bg-[#25D366]`}
+        className={`${btnWhatsApp} btn-icon shadow-lg shadow-black/20`}
       >
         <WhatsAppIcon className="w-6 h-6" />
       </a>
-      <a href={SITE.phoneHref} aria-label={`${labels.callLabel}: ${SITE.phoneDisplay}`} className={`${button} bg-accent`}>
+      <a href={SITE.phoneHref} aria-label={`${labels.callLabel}: ${SITE.phoneDisplay}`} className={`${btnPrimary} btn-icon shadow-lg shadow-black/20`}>
         <PhoneIcon className="w-6 h-6" />
       </a>
     </div>

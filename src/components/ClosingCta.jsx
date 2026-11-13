@@ -9,12 +9,12 @@ export default function ClosingCta({ heading, text, button, href }) {
   return (
     <section className="relative overflow-hidden bg-primary text-center">
       <div className="cta-arch" aria-hidden="true" />
-      <div className={`${wrap} relative pt-36 pb-24 sm:pt-48 md:pt-60 md:pb-32`}>
-        <h2 data-reveal className="font-display text-[2rem] leading-tight md:text-5xl max-w-[38rem] mx-auto text-white mb-6">
+      <div className={`${wrap} relative py-16 md:py-24`}>
+        <h2 className="type-h2 text-white mx-auto mb-6">
           {heading}
         </h2>
         {text && (
-          <p data-reveal className="text-base md:text-lg text-primary-light max-w-xl mx-auto leading-relaxed mb-10">
+          <p className="type-body text-primary-light mx-auto mb-8">
             {text}
           </p>
         )}

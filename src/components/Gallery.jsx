@@ -68,7 +68,7 @@ export default function Gallery({ projects, filters, labels }) {
               </span>
             </button>
             <figcaption className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1 mt-3 pt-3 border-t border-outline-light">
-              <h2 className="font-display text-lg md:text-xl text-primary">{project.title}</h2>
+              <h2 className="type-h3 text-primary">{project.title}</h2>
               <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-on-surface-muted">
                 {project.location}
               </p>
