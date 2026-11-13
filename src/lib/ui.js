@@ -3,9 +3,7 @@
 
 // The page column: 1280px wide at most, with the side margins the whole
 // site uses.
-// On a phone the floating WhatsApp and call buttons occupy the lower right.
-// The extra right padding keeps lines and buttons out from under them.
-export const wrap = "max-w-[1280px] mx-auto pl-5 pr-[5.75rem] md:px-20";
+export const wrap = "max-w-[1280px] mx-auto px-5 md:px-20";
 
 const btn =
   "inline-flex items-center justify-center gap-2.5 px-8 py-4 text-xs font-semibold uppercase tracking-[0.14em] whitespace-nowrap transition-colors duration-300";

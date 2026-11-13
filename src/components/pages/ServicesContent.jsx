@@ -60,13 +60,8 @@ export default function ServicesContent({ lang }) {
                 <h2 className="font-display text-3xl md:text-4xl text-primary mb-3">{cat.title}</h2>
                 <p className="text-base text-on-surface-muted leading-relaxed max-w-md mb-8">{cat.tagline}</p>
                 <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-3">
-                  {cat.items.map((item, n) => (
-                    <li
-                      key={item}
-                      data-reveal
-                      style={{ "--reveal-delay": `${180 + n * 40}ms` }}
-                      className="flex gap-3 text-base text-primary leading-snug"
-                    >
+                  {cat.items.map((item) => (
+                    <li key={item} className="flex gap-3 text-base text-primary leading-snug">
                       <Tick />
                       {item}
                     </li>

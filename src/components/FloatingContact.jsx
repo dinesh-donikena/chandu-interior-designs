@@ -2,13 +2,13 @@ import { PhoneIcon, WhatsAppIcon } from "@/components/icons";
 import { SITE } from "@/lib/site";
 
 const button =
-  "w-[52px] h-[52px] flex items-center justify-center rounded-full text-white shadow-lg shadow-black/25 hover:scale-105 active:scale-95 transition-transform";
+  "w-11 h-11 flex items-center justify-center rounded-full text-white shadow-lg shadow-black/20";
 
-// Most enquiries for a local builder arrive by phone or WhatsApp, so both
-// stay within thumb reach on every page.
+// The pair sits in a strip under the scrolling page on a phone, so a photo,
+// a pill or a line of text can never slide underneath it.
 export default function FloatingContact({ labels }) {
   return (
-    <div className="fixed bottom-5 right-5 z-40 flex flex-col gap-3">
+    <div className="float-dock fixed z-40 flex flex-col gap-2 right-3 bottom-[max(0.6rem,env(safe-area-inset-bottom))] md:bottom-5 md:right-5 md:gap-3">
       <a
         href={SITE.whatsapp}
         target="_blank"

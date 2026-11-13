@@ -83,12 +83,12 @@
    itself is the existing scroll observer. */
 /* The photo opens from a narrow doorway in the centre, like the Gadapa mark.
    Only clip-path moves. It stays fully open if motion is reduced or JS is off. */
-.service-photo[data-door="closed"] {
-  clip-path: inset(8% 46% 0 46%);
+html.motion-ok .service-photo[data-door="closed"] {
+  clip-path: inset(10% 46% 0 46%);
 }
-.service-photo[data-door="open"] {
+html.motion-ok .service-photo[data-door="open"] {
   clip-path: inset(0 0 0 0);
-  transition: clip-path 1.25s cubic-bezier(0.22, 0.61, 0.36, 1);
+  transition: clip-path 1.35s cubic-bezier(0.22, 0.61, 0.36, 1);
 }
 
 /* Four names and a line that draws across. No times, no prices. */
@@ -112,12 +112,12 @@
   transform: scaleX(1);
   transform-origin: left center;
 }
-.process-strip[data-door="closed"]::before {
+html.motion-ok .process-strip[data-door="closed"]::before {
   transform: scaleX(0);
 }
-.process-strip[data-door="open"]::before {
+html.motion-ok .process-strip[data-door="open"]::before {
   transform: scaleX(1);
-  transition: transform 1.1s cubic-bezier(0.22, 0.61, 0.36, 1);
+  transition: transform 1.15s cubic-bezier(0.22, 0.61, 0.36, 1);
 }
 .process-strip li {
   position: relative;
@@ -144,15 +144,6 @@
   text-transform: none;
   font-size: 0.8125rem;
 }
-@media (max-width: 639px) {
-  .process-strip {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    row-gap: 1.15rem;
-  }
-  .process-strip::before {
-    display: none;
-  }
-}
 
 ::selection {
   background-color: #ebe3d5;
@@ -168,8 +159,21 @@ body {
   background-color: #f4f1eb;
   background-image: var(--grain);
   color: #1f1d1a;
-  /* Room to scroll the last line and the footer clear of the floating buttons. */
-  padding-bottom: calc(8.75rem + env(safe-area-inset-bottom, 0px));
+}
+
+/* WhatsApp and call sit in a strip under the page, so content keeps its
+   full width and nothing scrolls underneath the buttons. */
+:root {
+  --float-stack: calc(44px + 12px + 44px + 20px + env(safe-area-inset-bottom, 0px));
+}
+body {
+  height: 100dvh;
+  overflow: hidden;
+}
+.page-scroll {
+  height: calc(100dvh - var(--float-stack));
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 
 .grain {
@@ -491,29 +495,8 @@ summary:focus-visible {
   animation-delay: 0.34s;
 }
 
-/* Reveal on scroll (RevealOnScroll marks what is still below the screen).
-   Words fade up; photos open out from a slightly smaller frame, echoing the
-   doorway in the hero. --reveal-delay staggers items in the same row. */
-[data-reveal-state] {
-  transition-property: opacity, transform, clip-path;
-  transition-duration: 0.9s;
-  transition-timing-function: cubic-bezier(0.2, 0.7, 0.2, 1);
-  transition-delay: var(--reveal-delay, 0ms);
-}
-[data-reveal-state="waiting"] {
-  opacity: 0;
-  transform: translateY(22px);
-}
-[data-reveal="photo"][data-reveal-state] {
-  transition-duration: 1.3s;
-}
-[data-reveal="photo"][data-reveal-state="waiting"] {
-  transform: none;
-  clip-path: inset(7% 7% 7% 7%);
-}
-[data-reveal="photo"][data-reveal-state="shown"] {
-  clip-path: inset(0 0 0 0);
-}
+/* Text is always fully visible. Scroll motion is the door clip and the
+   process line, and those rules apply only under html.motion-ok. */
 
 /* Drawer slide-in */
 @keyframes drawerIn {
