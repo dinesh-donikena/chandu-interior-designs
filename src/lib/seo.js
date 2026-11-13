@@ -10,7 +10,10 @@ const SITE_NAME = {
   te: "సుమ శ్రీ ఇంటీరియర్స్ & కన్‌స్ట్రక్షన్స్",
 };
 
-const CITY = { en: "Warangal", te: "వరంగల్" };
+const AREA = {
+  en: "Telangana & Andhra Pradesh",
+  te: "తెలంగాణ & ఆంధ్రప్రదేశ్",
+};
 
 // The picture WhatsApp / Facebook show beside a shared link — a real project
 // photo (public/og-image.jpg, 1200×630).
@@ -24,11 +27,11 @@ const PAGES = {
     path: "/",
     en: {
       description:
-        "House construction, renovation and interiors from Warangal — serving all of Telangana & Andhra Pradesh. Plans, construction and complete home interiors, end to end.",
+        "Interior design and construction across Telangana and Andhra Pradesh. Plans, construction, renovation and complete home interiors, end to end.",
     },
     te: {
       description:
-        "వరంగల్ నుంచి ఇంటి నిర్మాణం, రెనోవేషన్, ఇంటీరియర్స్ — తెలంగాణ, ఆంధ్రప్రదేశ్ అంతటా. ప్లాన్ నుంచి ఇంటీరియర్స్ దాకా అన్నీ ఒకే దగ్గర.",
+        "తెలంగాణ, ఆంధ్రప్రదేశ్ అంతటా ఇంటీరియర్ డిజైన్ & కన్‌స్ట్రక్షన్. ప్లాన్ నుంచి ఇంటీరియర్స్ దాకా అన్నీ ఒకే దగ్గర.",
     },
   },
   services: {
@@ -36,7 +39,7 @@ const PAGES = {
     en: {
       title: "Services",
       description:
-        "Construction, renovation and interiors by Suma Sree Interiors and Constructions — 2D & 3D plans, civil works, modular kitchens, wardrobes, false ceilings and more, across Telangana & Andhra Pradesh.",
+        "Construction, renovation and interiors by Suma Sree Interiors and Constructions — 2D & 3D plans, civil works, modular kitchens, wardrobes, false ceilings and more, across Telangana and Andhra Pradesh.",
     },
     te: {
       title: "సర్వీసులు",
@@ -49,12 +52,12 @@ const PAGES = {
     en: {
       title: "Our Work",
       description:
-        "Our own work, in photos — hall, kitchen, bedroom and pooja room interiors from a home in Hanamakonda, Warangal.",
+        "Our own work, in photos — hall, kitchen, bedroom and pooja room interiors. Interior design and construction across Telangana and Andhra Pradesh.",
     },
     te: {
       title: "మా పనులు",
       description:
-        "మా సొంత పనుల ఫోటోలు — హనుమకొండలోని ఒక ఇంట్లో చేసిన హాల్, కిచెన్, బెడ్‌రూమ్, పూజ గది ఇంటీరియర్స్.",
+        "మా సొంత పనుల ఫోటోలు — హాల్, కిచెన్, బెడ్‌రూమ్, పూజ గది. తెలంగాణ, ఆంధ్రప్రదేశ్ అంతటా ఇంటీరియర్స్ & కన్‌స్ట్రక్షన్.",
     },
   },
   testimonials: {
@@ -62,12 +65,12 @@ const PAGES = {
     en: {
       title: "Testimonials",
       description:
-        "What families say about building with Suma Sree Interiors and Constructions, and how our simple 4-step process works.",
+        "What families say about building with Suma Sree Interiors and Constructions across Telangana and Andhra Pradesh, and how our simple 4-step process works.",
     },
     te: {
       title: "కస్టమర్ల మాటలు",
       description:
-        "సుమ శ్రీతో పని చేయించుకున్న కుటుంబాలు ఏమంటున్నాయో, మా పని నాలుగు స్టెప్స్‌లో ఎలా జరుగుతుందో చూడండి.",
+        "తెలంగాణ, ఆంధ్రప్రదేశ్ అంతటా సుమ శ్రీతో పని చేయించుకున్న కుటుంబాలు ఏమంటున్నాయో, మా పని నాలుగు స్టెప్స్‌లో ఎలా జరుగుతుందో చూడండి.",
     },
   },
   contact: {
@@ -75,12 +78,12 @@ const PAGES = {
     en: {
       title: "Contact",
       description:
-        "Contact Suma Sree Interiors and Constructions in Hanamakonda, Warangal — call, WhatsApp or send a message to start your house project.",
+        "Contact Suma Sree Interiors and Constructions for interior design and construction across Telangana and Andhra Pradesh. Office in Hanamakonda, Warangal — call, WhatsApp or send a message.",
     },
     te: {
       title: "కాంటాక్ట్",
       description:
-        "హనుమకొండ, వరంగల్‌లోని సుమ శ్రీ ఇంటీరియర్స్ & కన్‌స్ట్రక్షన్స్ — కాల్ చేయండి, WhatsApp చేయండి, లేదా మెసేజ్ పంపండి.",
+        "తెలంగాణ, ఆంధ్రప్రదేశ్ అంతటా ఇంటీరియర్స్ & కన్‌స్ట్రక్షన్ కోసం సుమ శ్రీని కాంటాక్ట్ చేయండి. ఆఫీస్ హనుమకొండ, వరంగల్ — కాల్, WhatsApp లేదా మెసేజ్.",
     },
   },
 };
@@ -92,20 +95,23 @@ export function siteMetadata(lang) {
   return {
     metadataBase: new URL(SITE.url),
     title: {
-      default: `${SITE_NAME[lang]} | ${CITY[lang]}`,
+      default: `${SITE_NAME[lang]} | ${AREA[lang]}`,
       template: `%s | ${SITE_NAME[lang]}`,
     },
     keywords: [
-      "house construction Warangal",
-      "interior design Warangal",
-      "interior designers Hanamakonda",
-      "home interiors Telangana",
-      "house plans Warangal",
-      "modular kitchen Warangal",
+      "interior design Telangana",
+      "interior design Andhra Pradesh",
+      "house construction Telangana",
+      "house construction Andhra Pradesh",
+      "home interiors Telangana and Andhra Pradesh",
       "home renovation Telangana",
+      "home renovation Andhra Pradesh",
+      "modular kitchen Telangana",
+      "house plans Andhra Pradesh",
       "Suma Sree Interiors",
       "సుమ శ్రీ ఇంటీరియర్స్",
-      "ఇంటి నిర్మాణం వరంగల్",
+      "ఇంటి నిర్మాణం తెలంగాణ",
+      "ఇంటీరియర్స్ ఆంధ్రప్రదేశ్",
     ],
     // The large card makes the share image fill the WhatsApp / Facebook
     // link preview.
@@ -125,7 +131,7 @@ export function pageMetadata(lang, key) {
   const url = localePath(lang, page.path);
   const fullTitle = copy.title
     ? `${copy.title} | ${SITE_NAME[lang]}`
-    : `${SITE_NAME[lang]} | ${CITY[lang]}`;
+    : `${SITE_NAME[lang]} | ${AREA[lang]}`;
 
   return {
     ...(copy.title ? { title: copy.title } : {}),
