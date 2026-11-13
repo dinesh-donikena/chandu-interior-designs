@@ -3,13 +3,19 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import FloatingContact from "@/components/FloatingContact";
 import PageTransition from "@/components/PageTransition";
+import RevealOnScroll from "@/components/RevealOnScroll";
 import ContactClickTracking from "@/components/ContactClickTracking";
-import { LanguageProvider } from "@/components/LanguageProvider";
 import { SITE } from "@/lib/site";
+import { translations } from "@/lib/translations";
 
 // The whole page frame — <html>, fonts, navbar, footer — shared by the
 // English layout (app/(en)) and the Telugu one (app/te). Each passes its
 // language and the font classes from lib/fonts.js.
+//
+// Pages are rendered on the server, in their language, and only the parts
+// that respond to taps (menu, gallery, form, hero) run in the browser. Those
+// get just the words they show as props, so the full English + Telugu text
+// file never has to be downloaded by a phone.
 
 // Tells Google this is a local business in Hanamakonda, which is what
 // surfaces the phone number and map pin in local search results.
@@ -55,8 +61,14 @@ const localBusinessSchema = {
 const REMEMBER_TELUGU = `try{if(localStorage.getItem("lang")==="te"){document.documentElement.style.visibility="hidden";var l=location;l.replace("/te"+(l.pathname==="/"?"":l.pathname)+l.search+l.hash)}}catch(e){}`;
 
 export default function SiteDocument({ lang, fontClasses, children }) {
+  const t = translations[lang];
+
   return (
-    <html lang={lang} className={`${fontClasses} antialiased`}>
+    // data-scroll-behavior: the smooth scrolling in globals.css is for the
+    // "Step inside" link; this tells Next.js to switch it off while moving to
+    // another page, so a new page opens at the top instead of gliding up
+    // through the whole of the last one.
+    <html lang={lang} className={`${fontClasses} antialiased`} data-scroll-behavior="smooth">
       <body className="min-h-screen flex flex-col">
         {lang === "en" && (
           <script dangerouslySetInnerHTML={{ __html: REMEMBER_TELUGU }} />
@@ -67,14 +79,13 @@ export default function SiteDocument({ lang, fontClasses, children }) {
             __html: JSON.stringify(localBusinessSchema),
           }}
         />
-        <LanguageProvider lang={lang}>
-          <Navbar />
-          <main className="flex-1">
-            <PageTransition>{children}</PageTransition>
-          </main>
-          <Footer />
-          <FloatingContact />
-        </LanguageProvider>
+        <Navbar lang={lang} nav={t.nav} brand={t.brand} />
+        <main className="flex-1">
+          <PageTransition>{children}</PageTransition>
+        </main>
+        <Footer lang={lang} />
+        <FloatingContact labels={t.common} />
+        <RevealOnScroll />
         <ContactClickTracking />
         <Analytics />
       </body>

@@ -1,101 +1,80 @@
-"use client";
-
 import Image from "next/image";
 import Link from "next/link";
-import { useLanguage } from "@/components/LanguageProvider";
+import PageHeader from "@/components/PageHeader";
+import { localePath } from "@/lib/i18n";
 import { SITE } from "@/lib/site";
+import { translations } from "@/lib/translations";
+import { btnOutline, btnPrimary, numeral, wrap } from "@/lib/ui";
 
-export default function TestimonialsContent() {
-  const { t, path } = useLanguage();
+export default function TestimonialsContent({ lang }) {
+  const t = translations[lang];
+  const ts = t.testimonials;
 
   return (
     <>
-      {/* Header */}
-      <header className="pt-24 pb-12 px-5 md:px-20 max-w-[1280px] mx-auto text-center">
-        <span className="text-xs font-semibold uppercase tracking-[0.1em] text-accent block mb-4">
-          {t.testimonials.label}
-        </span>
-        <h1 className="font-display text-4xl md:text-6xl text-primary mb-6">
-          {t.testimonials.title}
-        </h1>
-        <p className="text-lg text-on-surface-muted max-w-2xl mx-auto leading-relaxed">
-          {t.testimonials.intro}
-        </p>
-      </header>
+      <PageHeader eyebrow={ts.label} title={ts.title} intro={ts.intro} />
 
-      {/* Testimonials */}
-      <section className="py-24 md:py-32 px-5 md:px-20 max-w-[1280px] mx-auto">
+      {/* What families say — each quote set like a printed page, the
+          brass quotation mark above the words rather than behind them */}
+      <section className={`${wrap} pb-24 md:pb-36`}>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {t.testimonials.items.map((item) => (
-            <div
+          {ts.items.map((item, i) => (
+            <figure
               key={item.name}
-              className="card-soft ghost-border rounded-lg p-10 relative flex flex-col justify-between min-h-[360px]"
+              data-reveal
+              style={{ "--reveal-delay": `${i * 120}ms` }}
+              className="bg-card border border-outline-light/80 p-8 md:p-10 m-0 flex flex-col"
             >
-              <svg
-                className="absolute top-6 right-8 w-20 h-20 opacity-20 text-accent pointer-events-none"
-                fill="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
-              </svg>
-              <div className="space-y-6 pt-4">
-                <p className="text-lg text-on-surface leading-relaxed">
-                  &ldquo;{item.quote}&rdquo;
+              <span aria-hidden="true" className="font-display text-7xl leading-[0.6] h-8 text-accent">
+                &ldquo;
+              </span>
+              <blockquote className="flex-1 mt-5">
+                <p className="testimonial-quote font-display text-xl leading-relaxed text-primary">
+                  {item.quote}
                 </p>
-              </div>
-              <div className="mt-8 border-t border-outline-light/30 pt-6">
+              </blockquote>
+              <figcaption className="mt-8 pt-6 border-t border-outline-light">
                 <p className="font-semibold text-primary">{item.name}</p>
-                <p className="text-xs font-semibold text-secondary uppercase tracking-[0.1em] mt-1">
+                <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-on-surface-muted mt-1.5">
                   {item.project}
                 </p>
-              </div>
-            </div>
+              </figcaption>
+            </figure>
           ))}
         </div>
       </section>
 
-      {/* Design Process */}
-      <section className="bg-surface-low grain py-24 md:py-32">
-        <div className="px-5 md:px-20 max-w-[1280px] mx-auto">
-          <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
+      {/* How it works — four steps, each marked by a small arched doorway */}
+      <section className="bg-surface-low grain border-y border-outline-light/70 py-24 md:py-36">
+        <div className={wrap}>
+          <div data-reveal className="flex flex-col md:flex-row justify-between md:items-end mb-16 gap-6">
             <div className="max-w-xl">
-              <span className="text-xs font-semibold uppercase tracking-[0.1em] text-accent block mb-4">
-                {t.testimonials.processLabel}
-              </span>
-              <h2 className="font-display text-3xl md:text-5xl text-primary">
-                {t.testimonials.processHeading}
-              </h2>
+              <p className="eyebrow mb-4">{ts.processLabel}</p>
+              <h2 className="font-display text-3xl md:text-5xl text-primary">{ts.processHeading}</h2>
             </div>
-            <p className="text-base text-on-surface-muted md:max-w-sm">
-              {t.testimonials.processText}
-            </p>
+            <p className="text-base text-on-surface-muted md:max-w-sm">{ts.processText}</p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-6 relative">
-            {/* Progress line */}
-            <div className="hidden md:block absolute top-[40px] left-0 w-full h-[1px] bg-outline-light/50" />
-
-            {t.testimonials.steps.map((step, i) => (
-              <div key={step.title} className="group relative z-10">
-                <div className="w-20 h-20 bg-surface ghost-border rounded-full flex items-center justify-center mb-8 text-primary transition-all duration-300 group-hover:bg-accent group-hover:text-white group-hover:border-accent">
-                  <span className="font-display text-2xl">
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
+          <ol className="grid grid-cols-1 md:grid-cols-4 gap-10 md:gap-6 relative">
+            {/* The line the four doorways stand on */}
+            <span aria-hidden="true" className="hidden md:block absolute top-20 left-0 w-full h-px bg-outline-light" />
+            {ts.steps.map((step, i) => (
+              <li key={step.title} data-reveal style={{ "--reveal-delay": `${i * 120}ms` }} className="relative">
+                <div className="w-16 h-20 mb-8 rounded-t-full border border-b-0 border-accent/60 bg-surface-low flex items-end justify-center pb-3">
+                  <span className="font-display italic text-2xl text-accent">{numeral(i)}</span>
                 </div>
-                <h3 className="font-display text-2xl text-primary mb-4">
-                  {step.title}
-                </h3>
-                <p className="text-base text-on-surface-muted">{step.desc}</p>
-              </div>
+                <h3 className="font-display text-2xl text-primary mb-3">{step.title}</h3>
+                <p className="text-base text-on-surface-muted leading-relaxed">{step.desc}</p>
+              </li>
             ))}
-          </div>
+          </ol>
         </div>
       </section>
 
-      {/* Visual CTA — photo shown whole beside the message; a card laid
+      {/* Closing — the photo shown whole beside the message; a card laid
           over a photo hides the very work it is meant to show */}
-      <section className="py-24 md:py-32 px-5 md:px-20 max-w-[1280px] mx-auto">
+      <section className={`${wrap} py-24 md:py-36`}>
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center">
-          <div className="lg:col-span-7 relative aspect-[16/10] overflow-hidden bg-surface-high">
+          <div data-reveal="photo" className="lg:col-span-7 relative aspect-[16/10] overflow-hidden bg-surface-high">
             <Image
               src="/portfolio/hanamakonda-hall-arch.jpg"
               alt="Wood-carved teak hall arch opening onto the pooja room and kitchen"
@@ -104,23 +83,13 @@ export default function TestimonialsContent() {
               className="object-cover"
             />
           </div>
-          <div className="lg:col-span-5 text-center lg:text-left">
-            <h2 className="font-display text-3xl md:text-5xl text-primary mb-8 leading-tight">
-              {t.testimonials.ctaHeading}
-            </h2>
+          <div data-reveal style={{ "--reveal-delay": "120ms" }} className="lg:col-span-5 text-center lg:text-left">
+            <h2 className="font-display text-3xl md:text-5xl text-primary mb-8 leading-tight">{ts.ctaHeading}</h2>
             <div className="flex flex-col sm:flex-row sm:flex-wrap gap-4 justify-center lg:justify-start">
-              <Link
-                href={path("/contact")}
-                className="inline-flex items-center justify-center whitespace-nowrap bg-accent text-white px-8 py-4 text-xs font-semibold uppercase tracking-[0.14em] hover:bg-accent-dark transition-colors"
-              >
-                {t.testimonials.ctaButton}
+              <Link href={localePath(lang, "/contact")} className={btnPrimary}>
+                {ts.ctaButton}
               </Link>
-              <a
-                href={SITE.whatsapp}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center justify-center whitespace-nowrap border border-primary/25 text-primary px-8 py-4 text-xs font-semibold uppercase tracking-[0.14em] hover:border-primary transition-colors"
-              >
+              <a href={SITE.whatsapp} target="_blank" rel="noopener noreferrer" className={btnOutline}>
                 {t.home.ctaWhatsApp}
               </a>
             </div>

@@ -23,9 +23,7 @@ export const translations = {
       portfolio: "Our Work",
       testimonials: "Testimonials",
       contact: "Contact",
-      consultation: "Talk to Us",
-      bookConsultation: "Talk to Us",
-      toggleLabel: "తెలుగు",
+      talk: "Talk to Us",
     },
     home: {
       heroEyebrow: "House Construction & Interiors",
@@ -216,6 +214,13 @@ export const translations = {
         { title: "Pooja Room", location: "Hanamakonda" },
         { title: "Wash Counter", location: "Hanamakonda" },
       ],
+      // The full-screen photo viewer (read out by screen readers)
+      viewer: {
+        view: "View larger",
+        close: "Close",
+        prev: "Previous photo",
+        next: "Next photo",
+      },
       ctaHeading: "Your house could be next.",
       ctaButton: "Start Your Project",
     },
@@ -332,9 +337,7 @@ export const translations = {
       portfolio: "మా పనులు",
       testimonials: "కస్టమర్ల మాటలు",
       contact: "కాంటాక్ట్",
-      consultation: "కాంటాక్ట్ చేయండి",
-      bookConsultation: "కాంటాక్ట్ చేయండి",
-      toggleLabel: "English",
+      talk: "కాంటాక్ట్ చేయండి",
     },
     home: {
       heroEyebrow: "ఇంటి నిర్మాణం & ఇంటీరియర్స్",
@@ -525,6 +528,12 @@ export const translations = {
         { title: "పూజ గది", location: "హనుమకొండ" },
         { title: "వాష్ కౌంటర్", location: "హనుమకొండ" },
       ],
+      viewer: {
+        view: "పెద్దగా చూడండి",
+        close: "మూసివేయండి",
+        prev: "మునుపటి ఫోటో",
+        next: "తర్వాతి ఫోటో",
+      },
       ctaHeading: "తర్వాత మీ ఇల్లే.",
       ctaButton: "ఇప్పుడే మొదలుపెట్టండి",
     },

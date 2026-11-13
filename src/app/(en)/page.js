@@ -23,7 +23,7 @@ export default function Home() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />
-      <HomeContent />
+      <HomeContent lang="en" />
     </>
   );
 }

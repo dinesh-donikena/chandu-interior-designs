@@ -1,22 +1,19 @@
-"use client";
-
 import Image from "next/image";
 import Link from "next/link";
+import ClosingCta from "@/components/ClosingCta";
 import HeroScroll from "@/components/HeroScroll";
-import Tick from "@/components/Tick";
-import { useLanguage } from "@/components/LanguageProvider";
+import { ArrowDown, ArrowRight, Plus, Tick } from "@/components/icons";
+import { localePath } from "@/lib/i18n";
 import { SITE } from "@/lib/site";
+import { translations } from "@/lib/translations";
+import { btnOutline, btnPrimary, numeral, textLink, wrap } from "@/lib/ui";
 
-// Real photos of the Hanamakonda home — no stock. Titles/locations come from
-// translations by index. Frames stay rectangular: an arch top would clip the
-// carved symbols in the corners of the pooja panel.
-const work = [
-  {
-    image: "/portfolio/hanamakonda-hall-arch.jpg",
-    className: "col-span-12",
-    frame: "aspect-[16/10] md:aspect-[16/7]",
-    sizes: "(min-width: 1280px) 1120px, 100vw",
-  },
+// Real photos of the Hanamakonda home — no stock. Titles come from
+// translations (home.projects) by index. The hall arch opens the section
+// edge to edge; the rest follow in a grid. Frames stay rectangular: an arch
+// top would clip the carved symbols in the corners of the pooja panel.
+const FEATURE = "/portfolio/hanamakonda-hall-arch.jpg";
+const GRID = [
   {
     image: "/portfolio/hanamakonda-kitchen.jpg",
     className: "col-span-12 md:col-span-6",
@@ -48,20 +45,32 @@ const work = [
     sizes: "(min-width: 768px) 33vw, 100vw",
   },
 ];
+// Photos in the same row arrive one after another
+const DELAYS = [0, 120, 240, 0, 120];
 
-const btnPrimary =
-  "inline-flex items-center justify-center gap-2 bg-accent text-white px-8 py-4 text-xs font-semibold uppercase tracking-[0.14em] hover:bg-accent-dark transition-colors duration-300";
+function Caption({ title, location }) {
+  return (
+    <figcaption className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1 mt-3 pt-3 border-t border-outline-light">
+      <span className="font-display text-base md:text-xl text-primary">{title}</span>
+      <span className="text-[10px] font-semibold uppercase tracking-[0.18em] text-on-surface-muted">
+        {location}
+      </span>
+    </figcaption>
+  );
+}
 
-export default function HomeContent() {
-  const { t, path } = useLanguage();
+export default function HomeContent({ lang }) {
+  const t = translations[lang];
+  const path = (to) => localePath(lang, to);
+  const [feature, ...rest] = t.home.projects;
 
   return (
     <>
-      {/* Hero — the arched doorway (behaviour lives in globals.css) */}
+      {/* Hero — the TV unit in an arched doorway that grows into a full
+          frame as you scroll (HeroScroll + .hero-* in globals.css) */}
       <section className="hero-stage">
         <HeroScroll />
         <div className="hero-frame">
-          {/* The TV unit in a doorway that grows as you scroll (globals.css) */}
           <div className="hero-door">
             <Image
               src="/portfolio/hanamakonda-tv-unit.jpg"
@@ -75,7 +84,7 @@ export default function HomeContent() {
           </div>
 
           <div className="hero-copy">
-            <p className="eyebrow mb-3 md:mb-5">{t.home.heroEyebrow}</p>
+            <p className="eyebrow eyebrow-centred mb-3 md:mb-5">{t.home.heroEyebrow}</p>
             <h1 className="font-display font-medium text-primary text-[2.05rem] leading-[1.12] md:text-5xl lg:text-[3.3rem] xl:text-[3.8rem] lg:leading-[1.08] tracking-tight">
               {t.home.heroTitle1} <br className="lg:hidden" />
               <em className="italic text-accent">{t.home.heroTitle2}</em>
@@ -84,16 +93,9 @@ export default function HomeContent() {
             <div className="hidden md:flex flex-wrap justify-center gap-4 mt-7 lg:mt-8">
               <Link href={path("/portfolio")} className={`${btnPrimary} group`}>
                 {t.home.heroCta}
-                <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
-                </svg>
+                <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
               </Link>
-              <a
-                href={SITE.whatsapp}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center border border-primary/25 text-primary px-8 py-4 text-xs font-semibold uppercase tracking-[0.14em] hover:border-primary transition-colors duration-300"
-              >
+              <a href={SITE.whatsapp} target="_blank" rel="noopener noreferrer" className={btnOutline}>
                 {t.home.ctaWhatsApp}
               </a>
             </div>
@@ -103,9 +105,7 @@ export default function HomeContent() {
               className="mt-4 md:mt-6 inline-flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.2em] text-on-surface-muted hover:text-accent transition-colors"
             >
               {t.home.heroCue}
-              <svg className="hero-cue-arrow w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M12 4.5v15m0 0l-6-6m6 6l6-6" />
-              </svg>
+              <ArrowDown className="hero-cue-arrow w-4 h-4" />
             </a>
           </div>
 
@@ -116,13 +116,10 @@ export default function HomeContent() {
       </section>
 
       {/* Introduction — the name, and the promise behind it */}
-      <section
-        id="intro"
-        className="scroll-mt-[73px] py-24 md:py-32 max-w-[1280px] mx-auto px-5 md:px-20"
-      >
+      <section id="intro" className={`${wrap} scroll-mt-(--nav-h) py-24 md:py-36`}>
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-start">
-          <div className="lg:col-span-5">
-            <p lang="te" className="font-display text-6xl md:text-7xl text-accent leading-none mb-8">
+          <div data-reveal className="lg:col-span-5">
+            <p lang="te" className="font-display text-6xl md:text-7xl lg:text-8xl text-accent leading-none mb-8">
               సుమ శ్రీ
             </p>
             <ul className="space-y-3">
@@ -137,56 +134,68 @@ export default function HomeContent() {
               ))}
             </ul>
           </div>
-          <div className="lg:col-span-7">
+          <div data-reveal style={{ "--reveal-delay": "120ms" }} className="lg:col-span-7">
             <h2 className="font-display text-3xl md:text-4xl lg:text-[2.6rem] text-primary mb-6 leading-tight">
               {t.home.introHeading}
             </h2>
-            <p className="text-lg text-secondary mb-4 leading-relaxed">
-              {t.home.introP1}
-            </p>
+            <p className="text-lg text-secondary mb-4 leading-relaxed">{t.home.introP1}</p>
             <p className="text-base text-on-surface-muted">{t.home.introP2}</p>
           </div>
         </div>
       </section>
 
-      {/* Work — one real home, room by room. Sits straight after the intro,
-          ahead of the service lists: the photos speak first. (No top padding:
-          the intro's bottom padding already makes the gap.) */}
-      <section className="pb-24 md:pb-32 max-w-[1280px] mx-auto px-5 md:px-20">
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 md:mb-14 gap-6">
-          <div>
+      {/* Work — one real home, room by room, ahead of the service lists:
+          the photos speak first. (No top padding: the intro's bottom
+          padding already makes the gap.) */}
+      <section className="pb-24 md:pb-36">
+        <div className={`${wrap} flex flex-col md:flex-row justify-between items-start md:items-end mb-12 md:mb-14 gap-6`}>
+          <div data-reveal>
             <p className="eyebrow mb-4">{t.home.portfolioLabel}</p>
             <h2 className="font-display text-3xl md:text-5xl text-primary leading-tight">
               {t.home.portfolioHeading}
             </h2>
           </div>
-          <Link
-            href={path("/portfolio")}
-            className="shrink-0 text-xs font-semibold uppercase tracking-[0.14em] text-primary border-b border-accent pb-1 hover:text-accent transition-colors"
-          >
+          <Link href={path("/portfolio")} className={`${textLink} shrink-0`}>
             {t.home.portfolioLink}
           </Link>
         </div>
-        <div className="grid grid-cols-12 gap-x-4 gap-y-10 md:gap-x-7 md:gap-y-12">
-          {t.home.projects.map((project, i) => (
-            <figure key={work[i].image} className={`${work[i].className} group m-0`}>
-              <div className={`relative overflow-hidden bg-surface-high ${work[i].frame}`}>
+
+        {/* The hall arch, edge to edge */}
+        <figure className="group m-0">
+          <div
+            data-reveal="photo"
+            className="relative w-full aspect-[16/10] md:aspect-[16/7] max-h-[85svh] overflow-hidden bg-surface-high"
+          >
+            <Image
+              src={FEATURE}
+              alt={feature.title}
+              fill
+              sizes="100vw"
+              className="object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-[1.02]"
+            />
+          </div>
+          <div className={wrap}>
+            <Caption {...feature} />
+          </div>
+        </figure>
+
+        <div className={`${wrap} grid grid-cols-12 gap-x-4 gap-y-10 md:gap-x-7 md:gap-y-14 mt-12 md:mt-16`}>
+          {rest.map((project, i) => (
+            <figure key={GRID[i].image} className={`${GRID[i].className} group m-0`}>
+              <div
+                data-reveal="photo"
+                style={{ "--reveal-delay": `${DELAYS[i]}ms` }}
+                className={`relative overflow-hidden bg-surface-high ${GRID[i].frame}`}
+              >
                 <Image
-                  src={work[i].image}
+                  src={GRID[i].image}
                   alt={project.title}
                   fill
-                  sizes={work[i].sizes}
+                  sizes={GRID[i].sizes}
                   className="object-cover transition-transform duration-[900ms] ease-out group-hover:scale-[1.03]"
                 />
               </div>
-              <figcaption className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1 mt-3 pt-3 border-t border-outline-light">
-                <span className="font-display text-base md:text-xl text-primary">
-                  {project.title}
-                </span>
-                <span className="text-[10px] font-semibold uppercase tracking-[0.18em] text-on-surface-muted">
-                  {project.location}
-                </span>
-              </figcaption>
+              <Caption {...project} />
             </figure>
           ))}
         </div>
@@ -194,23 +203,26 @@ export default function HomeContent() {
 
       {/* Services — the three things we do, with a taste of each list */}
       <section className="bg-surface-low grain border-y border-outline-light/70">
-        <div className="max-w-[1280px] mx-auto px-5 md:px-20 py-24 md:py-32">
-          <p className="eyebrow mb-4">{t.home.servicesLabel}</p>
-          <h2 className="font-display text-3xl md:text-5xl text-primary mb-14 md:mb-20">
-            {t.home.servicesHeading}
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-10 lg:gap-14">
+        <div className={`${wrap} py-24 md:py-36`}>
+          <div data-reveal>
+            <p className="eyebrow mb-4">{t.home.servicesLabel}</p>
+            <h2 className="font-display text-3xl md:text-5xl text-primary mb-14 md:mb-20">
+              {t.home.servicesHeading}
+            </h2>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-14 md:gap-10 lg:gap-14">
             {t.services.categories.map((cat, i) => (
-              <div key={cat.key} className="border-t border-primary pt-6">
-                <p className="font-display text-sm text-accent mb-8 md:mb-10">
-                  {String(i + 1).padStart(2, "0")}
+              <div
+                key={cat.key}
+                data-reveal
+                style={{ "--reveal-delay": `${i * 120}ms` }}
+                className="border-t border-primary pt-5"
+              >
+                <p className="font-display italic text-4xl md:text-[2.75rem] leading-none text-accent mb-7">
+                  {numeral(i)}
                 </p>
-                <h3 className="font-display text-2xl md:text-[1.7rem] text-primary mb-3">
-                  {cat.title}
-                </h3>
-                <p className="text-base text-on-surface-muted leading-relaxed mb-6">
-                  {cat.tagline}
-                </p>
+                <h3 className="font-display text-2xl md:text-[1.7rem] text-primary mb-3">{cat.title}</h3>
+                <p className="text-base text-on-surface-muted leading-relaxed mb-6">{cat.tagline}</p>
                 <ul className="space-y-2.5">
                   {cat.items.slice(0, 6).map((item) => (
                     <li key={item} className="flex gap-3 text-[15px] text-primary leading-snug">
@@ -218,19 +230,15 @@ export default function HomeContent() {
                       {item}
                     </li>
                   ))}
-                  <li className="pl-7 text-[15px] text-on-surface-muted">
-                    {t.home.servicesAndMore}…
-                  </li>
+                  <li className="pl-7 text-[15px] text-on-surface-muted">{t.home.servicesAndMore}…</li>
                 </ul>
               </div>
             ))}
           </div>
-          <div className="mt-14 md:mt-16">
+          <div className="mt-14 md:mt-20">
             <Link href={path("/services")} className={`${btnPrimary} group`}>
               {t.home.servicesMore}
-              <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
-              </svg>
+              <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
             </Link>
           </div>
         </div>
@@ -238,12 +246,10 @@ export default function HomeContent() {
 
       {/* FAQ — native <details> so it works without JS and Google can read it */}
       <section>
-        <div className="max-w-[1280px] mx-auto px-5 md:px-20 py-24 md:py-32 grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-start">
-          <div className="lg:col-span-4 lg:sticky lg:top-28">
+        <div className={`${wrap} py-24 md:py-36 grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-start`}>
+          <div data-reveal className="lg:col-span-4 lg:sticky lg:top-28">
             <p className="eyebrow mb-4">{t.home.faqLabel}</p>
-            <h2 className="font-display text-3xl md:text-4xl text-primary mb-5">
-              {t.home.faqHeading}
-            </h2>
+            <h2 className="font-display text-3xl md:text-4xl text-primary mb-5">{t.home.faqHeading}</h2>
             <p className="text-base text-on-surface-muted leading-relaxed">
               {t.home.faqNote}{" "}
               <a
@@ -255,21 +261,12 @@ export default function HomeContent() {
             </p>
           </div>
 
-          <div className="lg:col-span-8 border-t border-outline-light">
+          <div data-reveal style={{ "--reveal-delay": "120ms" }} className="lg:col-span-8 border-t border-outline-light">
             {t.home.faq.map((item) => (
               <details key={item.q} className="faq-item border-b border-outline-light">
-                <summary className="flex items-center justify-between gap-6 py-6 text-base md:text-lg font-semibold text-primary">
+                <summary className="flex items-center justify-between gap-6 py-6 text-base md:text-lg font-semibold text-primary hover:text-accent transition-colors">
                   {item.q}
-                  <svg
-                    className="faq-icon w-5 h-5 shrink-0 text-accent"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                    strokeWidth={1.6}
-                    aria-hidden="true"
-                  >
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
-                  </svg>
+                  <Plus className="faq-icon w-5 h-5 shrink-0 text-accent" />
                 </summary>
                 <p className="pb-7 -mt-1 pr-6 md:pr-14 text-base text-on-surface-muted leading-relaxed">
                   {item.a}
@@ -280,30 +277,13 @@ export default function HomeContent() {
         </div>
       </section>
 
-      {/* CTA */}
-      <section className="bg-primary py-24 md:py-32 text-center">
-        <div className="max-w-[1280px] mx-auto px-5 md:px-20">
-          <h2 className="font-display text-3xl md:text-5xl text-white mb-8">
-            {t.home.ctaHeading}
-          </h2>
-          <p className="text-lg text-primary-light mb-12 max-w-2xl mx-auto leading-relaxed">
-            {t.home.ctaText}
-          </p>
-          <div className="flex flex-col md:flex-row gap-4 justify-center">
-            <Link href={path("/contact")} className={`${btnPrimary} px-10 py-5`}>
-              {t.home.ctaButton}
-            </Link>
-            <a
-              href={SITE.whatsapp}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="border border-white/30 text-white px-10 py-5 text-xs font-semibold uppercase tracking-[0.14em] hover:bg-white/10 transition-colors duration-300"
-            >
-              {t.home.ctaWhatsApp}
-            </a>
-          </div>
-        </div>
-      </section>
+      <ClosingCta
+        heading={t.home.ctaHeading}
+        text={t.home.ctaText}
+        button={t.home.ctaButton}
+        href={path("/contact")}
+        whatsapp={t.home.ctaWhatsApp}
+      />
     </>
   );
 }

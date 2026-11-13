@@ -4,5 +4,5 @@ import { pageMetadata } from "@/lib/seo";
 export const metadata = pageMetadata("te", "testimonials");
 
 export default function Testimonials() {
-  return <TestimonialsContent />;
+  return <TestimonialsContent lang="te" />;
 }

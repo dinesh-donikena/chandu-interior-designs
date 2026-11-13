@@ -61,6 +61,27 @@ body {
   background-image: var(--grain);
 }
 
+/* Headings break into even lines; paragraphs avoid a lone last word */
+h1,
+h2,
+h3 {
+  text-wrap: balance;
+}
+p,
+li,
+blockquote {
+  text-wrap: pretty;
+}
+
+/* A brass ring for keyboard users, on every link and button (form fields
+   show focus with their own brass underline) */
+a:focus-visible,
+button:focus-visible,
+summary:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
+}
+
 /* Telugu script is taller than Latin — give headings a bit more breathing room */
 :lang(te) h1,
 :lang(te) h2,
@@ -77,13 +98,36 @@ body {
   font-style: normal;
 }
 
-/* Small section label above headings */
+/* Small section label above headings, led in by a short brass rule (and
+   closed by one when centred) */
 .eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
   font-size: 0.6875rem;
   font-weight: 600;
   letter-spacing: 0.22em;
   text-transform: uppercase;
   color: var(--color-accent);
+}
+.eyebrow::before,
+.eyebrow-centred::after {
+  content: "";
+  width: 1.75rem;
+  height: 1px;
+  background: currentColor;
+  opacity: 0.7;
+  flex-shrink: 0;
+}
+.eyebrow-centred {
+  justify-content: center;
+}
+/* Phones: centred labels lose their rules, so they stay on one line */
+@media (max-width: 639px) {
+  .eyebrow-centred::before,
+  .eyebrow-centred::after {
+    display: none;
+  }
 }
 /* Wide tracking pulls Telugu conjuncts apart — keep it tight and a touch
    larger so the label reads as words, not scattered glyphs. */
@@ -92,15 +136,70 @@ body {
   font-size: 0.875rem;
 }
 
-/* Ghost border utility */
-.ghost-border {
-  border: 1px solid rgba(35, 33, 29, 0.1);
+/* Testimonials are set in the serif in English; Telugu's serif is only
+   loaded in its heavier weights, too dark for a paragraph, so Telugu
+   quotes use the body face. */
+:lang(te) .testimonial-quote {
+  font-family: var(--font-body);
+  font-size: 1.125rem;
 }
 
-/* Soft card — a shade lighter than the limewash, like paper on plaster */
-.card-soft {
-  background: #fbf9f6;
-  box-shadow: 0 4px 24px rgba(35, 33, 29, 0.06);
+/* Menu links: a brass line draws out from the centre on hover, and stays
+   under the page you are on */
+.nav-link {
+  position: relative;
+}
+.nav-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -3px;
+  height: 1.5px;
+  background: var(--color-accent);
+  transform: scaleX(0);
+  transition: transform 0.4s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+.nav-link:hover::after,
+.nav-link[aria-current="page"]::after {
+  transform: scaleX(1);
+}
+
+/* An empty doorway outline (the 404 page) */
+.doorway {
+  border: 1px solid color-mix(in srgb, var(--color-accent) 60%, transparent);
+  border-bottom: 0;
+  border-radius: 999px 999px 0 0;
+}
+
+/* The arch behind the closing invitation: two hairlines like a carved door
+   frame, standing on the bottom of the band. Wider than the text column at
+   every size (on phones it runs past the screen edges, leaving just the
+   curve above the heading), so no words ever cross a line. */
+.cta-arch,
+.cta-arch::after {
+  position: absolute;
+  border: 1px solid rgba(201, 166, 107, 0.3);
+  border-bottom: 0;
+  border-radius: 999px 999px 0 0;
+  pointer-events: none;
+}
+.cta-arch {
+  left: 50%;
+  top: 2.5rem;
+  bottom: 0;
+  width: min(56rem, 125vw);
+  transform: translateX(-50%);
+}
+.cta-arch::after {
+  content: "";
+  inset: 14px 14px 0;
+  border-color: rgba(201, 166, 107, 0.16);
+}
+@media (min-width: 768px) {
+  .cta-arch {
+    top: 3.5rem;
+  }
 }
 
 /* ── Hero: the doorway ─────────────────────────────────────────
@@ -252,6 +351,55 @@ body {
   animation: pageEnter 0.45s cubic-bezier(0.22, 0.61, 0.36, 1);
 }
 
+/* The home page opening: label, headline, buttons and cue rise into place
+   one after another. (Only the words — the photo is there at once.) */
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.hero-copy > * {
+  animation: rise 1s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+.hero-copy > :nth-child(2) {
+  animation-delay: 0.1s;
+}
+.hero-copy > :nth-child(3) {
+  animation-delay: 0.22s;
+}
+.hero-copy > :nth-child(4) {
+  animation-delay: 0.34s;
+}
+
+/* Reveal on scroll (RevealOnScroll marks what is still below the screen).
+   Words fade up; photos open out from a slightly smaller frame, echoing the
+   doorway in the hero. --reveal-delay staggers items in the same row. */
+[data-reveal-state] {
+  transition-property: opacity, transform, clip-path;
+  transition-duration: 0.9s;
+  transition-timing-function: cubic-bezier(0.2, 0.7, 0.2, 1);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+[data-reveal-state="waiting"] {
+  opacity: 0;
+  transform: translateY(22px);
+}
+[data-reveal="photo"][data-reveal-state] {
+  transition-duration: 1.3s;
+}
+[data-reveal="photo"][data-reveal-state="waiting"] {
+  transform: none;
+  clip-path: inset(7% 7% 7% 7%);
+}
+[data-reveal="photo"][data-reveal-state="shown"] {
+  clip-path: inset(0 0 0 0);
+}
+
 /* Drawer slide-in */
 @keyframes drawerIn {
   from {
@@ -280,12 +428,56 @@ body {
   .page-enter,
   .drawer-panel,
   .drawer-backdrop,
-  .hero-cue-arrow {
+  .hero-cue-arrow,
+  .hero-copy > *,
+  .lightbox-photo {
     animation: none;
   }
   html {
     scroll-behavior: auto;
   }
+}
+
+/* Full-screen photo viewer (Gallery) — the browser's own modal <dialog> */
+.lightbox {
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  max-height: none;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  overscroll-behavior: contain;
+}
+.lightbox::backdrop {
+  background: #161411;
+}
+.lightbox[open] {
+  animation: fadeIn 0.3s ease;
+}
+.lightbox-photo {
+  animation: fadeIn 0.45s ease;
+}
+.lightbox-step {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  flex-shrink: 0;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  color: rgba(255, 255, 255, 0.85);
+  transition: border-color 0.3s, color 0.3s;
+}
+.lightbox-step:hover {
+  border-color: #fff;
+  color: #fff;
+}
+/* The page behind stays put while the viewer is open */
+html:has(dialog[open]) {
+  overflow: hidden;
 }
 
 /* Masonry grid */
@@ -317,12 +509,6 @@ body {
 }
 ::-webkit-scrollbar-thumb {
   background: #7a5c34;
-}
-
-/* Form focus styles */
-input:focus,
-textarea:focus {
-  outline: none;
 }
 
 /* FAQ accordion */

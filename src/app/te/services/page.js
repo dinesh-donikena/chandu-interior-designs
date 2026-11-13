@@ -4,5 +4,5 @@ import { pageMetadata } from "@/lib/seo";
 export const metadata = pageMetadata("te", "services");
 
 export default function Services() {
-  return <ServicesContent />;
+  return <ServicesContent lang="te" />;
 }

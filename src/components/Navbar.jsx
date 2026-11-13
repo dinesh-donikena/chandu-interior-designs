@@ -3,22 +3,24 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
-import { useLanguage } from "@/components/LanguageProvider";
 import Logo from "@/components/Logo";
+import { Chevron, Close, Menu } from "@/components/icons";
 import { localePath, stripLocale } from "@/lib/i18n";
 
-export default function Navbar() {
+const PAGES = [
+  ["/", "home"],
+  ["/services", "services"],
+  ["/portfolio", "portfolio"],
+  ["/testimonials", "testimonials"],
+  ["/contact", "contact"],
+];
+
+export default function Navbar({ lang, nav, brand }) {
   const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
-  const { lang, t, path } = useLanguage();
+  const [scrolled, setScrolled] = useState(false);
 
-  const navLinks = [
-    { href: path("/"), label: t.nav.home },
-    { href: path("/services"), label: t.nav.services },
-    { href: path("/portfolio"), label: t.nav.portfolio },
-    { href: path("/testimonials"), label: t.nav.testimonials },
-    { href: path("/contact"), label: t.nav.contact },
-  ];
+  const links = PAGES.map(([to, key]) => ({ href: localePath(lang, to), label: nav[key] }));
 
   // The same page in the other language. Plain links (not a button that
   // swaps text in place), so each language is a real address that can be
@@ -38,6 +40,15 @@ export default function Navbar() {
     setPrevPath(pathname);
     setMenuOpen(false);
   }
+
+  // At the very top the bar melts into the page; once you scroll, a hairline
+  // separates it from what passes beneath.
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 8);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   // Lock page scrolling while the drawer is open.
   useEffect(() => {
@@ -70,13 +81,9 @@ export default function Navbar() {
           onClick={() => rememberLang(opt.key)}
           aria-current={lang === opt.key ? "true" : undefined}
           className={`${
-            variant === "drawer"
-              ? "flex-1 py-2.5 text-sm text-center"
-              : "px-2.5 lg:px-3 py-1.5 text-[11px] lg:text-xs"
+            variant === "drawer" ? "flex-1 py-2.5 text-sm text-center" : "px-2.5 lg:px-3 py-1.5 text-[11px] lg:text-xs"
           } font-semibold transition-colors duration-300 ${
-            lang === opt.key
-              ? "bg-primary text-white"
-              : "text-secondary hover:text-primary"
+            lang === opt.key ? "bg-primary text-white" : "text-secondary hover:text-primary"
           }`}
         >
           {opt.key === "en" ? (
@@ -94,28 +101,34 @@ export default function Navbar() {
 
   return (
     <>
-      <nav className="bg-surface/90 backdrop-blur-md sticky top-0 z-50 border-b border-outline-light/50">
+      <nav
+        className={`bg-surface/90 backdrop-blur-md sticky top-0 z-50 border-b transition-colors duration-500 ${
+          scrolled || menuOpen ? "border-outline-light/70" : "border-transparent"
+        }`}
+      >
         <div className="flex justify-between items-center w-full h-[72px] px-5 md:px-8 lg:px-20 max-w-[1280px] mx-auto gap-3 md:gap-4">
-          <Link href={path("/")} className="shrink-0">
-            <Logo />
+          <Link href={localePath(lang, "/")} className="shrink-0" aria-label={brand.full}>
+            <Logo brand={brand} lang={lang} />
           </Link>
 
           {/* Laptop nav — links stay visible from lg up. Spacing tightens
               below xl so the bar fits at 1024px, Telugu labels included. */}
           <div className="hidden lg:flex items-center gap-6 xl:gap-8">
-            {navLinks.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className={`text-xs font-semibold uppercase tracking-[0.1em] whitespace-nowrap transition-colors duration-300 ${
-                  pathname === link.href
-                    ? "text-primary font-bold border-b-2 border-accent pb-1"
-                    : "text-on-surface-muted hover:text-accent"
-                }`}
-              >
-                {link.label}
-              </Link>
-            ))}
+            {links.map((link) => {
+              const current = pathname === link.href;
+              return (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  aria-current={current ? "page" : undefined}
+                  className={`nav-link text-xs font-semibold uppercase tracking-[0.1em] whitespace-nowrap py-1 transition-colors duration-300 ${
+                    current ? "text-primary" : "text-on-surface-muted hover:text-primary"
+                  }`}
+                >
+                  {link.label}
+                </Link>
+              );
+            })}
           </div>
 
           {/* Right group — kept clearly apart from the menu links */}
@@ -125,32 +138,21 @@ export default function Navbar() {
             {/* Same destination as the Contact link, so it only joins the
                 bar once there is room for both (xl). */}
             <Link
-              href={path("/contact")}
+              href={localePath(lang, "/contact")}
               className="hidden xl:block bg-accent text-white px-6 py-2 text-xs font-semibold uppercase tracking-[0.1em] whitespace-nowrap hover:bg-accent-dark transition-colors"
             >
-              {t.nav.consultation}
+              {nav.talk}
             </Link>
 
             {/* Drawer trigger — tablet and below */}
             <button
+              type="button"
               onClick={() => setMenuOpen(true)}
               className="lg:hidden text-primary p-1"
               aria-label="Open menu"
               aria-expanded={menuOpen}
             >
-              <svg
-                className="w-6 h-6"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M4 6h16M4 12h16M4 18h16"
-                />
-              </svg>
+              <Menu />
             </button>
           </div>
         </div>
@@ -164,69 +166,48 @@ export default function Navbar() {
             className="drawer-backdrop absolute inset-0 bg-primary/40 backdrop-blur-sm"
             onClick={() => setMenuOpen(false)}
           />
-          <div className="drawer-panel absolute top-0 right-0 h-full w-[82%] max-w-sm bg-surface shadow-2xl flex flex-col">
-            <div className="flex items-center justify-between px-6 py-5 border-b border-outline-light/60">
-              <Logo />
+          <div className="drawer-panel absolute top-0 right-0 h-full w-[84%] max-w-sm bg-surface grain shadow-2xl flex flex-col">
+            <div className="flex items-center justify-between px-6 h-[72px] border-b border-outline-light/60">
+              <Logo brand={brand} lang={lang} />
               <button
+                type="button"
                 onClick={() => setMenuOpen(false)}
                 className="text-primary p-1"
                 aria-label="Close menu"
               >
-                <svg
-                  className="w-6 h-6"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M6 18L18 6M6 6l12 12"
-                  />
-                </svg>
+                <Close />
               </button>
             </div>
 
-            <div className="flex-1 overflow-y-auto px-6 py-4">
-              <div className="pb-5">{langSwitch("drawer")}</div>
+            <div className="flex-1 overflow-y-auto px-6 py-5">
+              <div className="pb-4">{langSwitch("drawer")}</div>
 
-              {navLinks.map((link) => (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  onClick={() => setMenuOpen(false)}
-                  className={`flex items-center justify-between py-4 text-sm font-semibold uppercase tracking-[0.1em] border-b border-outline-light/40 transition-colors ${
-                    pathname === link.href
-                      ? "text-accent"
-                      : "text-on-surface-muted hover:text-primary"
-                  }`}
-                >
-                  {link.label}
-                  <svg
-                    className="w-4 h-4 opacity-40"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
+              {links.map((link) => {
+                const current = pathname === link.href;
+                return (
+                  <Link
+                    key={link.href}
+                    href={link.href}
+                    onClick={() => setMenuOpen(false)}
+                    aria-current={current ? "page" : undefined}
+                    className={`flex items-center justify-between py-4 font-display text-2xl border-b border-outline-light/50 transition-colors ${
+                      current ? "text-accent" : "text-primary hover:text-accent"
+                    }`}
                   >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M9 5l7 7-7 7"
-                    />
-                  </svg>
-                </Link>
-              ))}
+                    {link.label}
+                    <Chevron className="w-4 h-4 opacity-40" />
+                  </Link>
+                );
+              })}
             </div>
 
             <div className="px-6 py-6 border-t border-outline-light/60">
               <Link
-                href={path("/contact")}
+                href={localePath(lang, "/contact")}
                 onClick={() => setMenuOpen(false)}
-                className="block text-center bg-accent text-white px-6 py-4 text-xs font-semibold uppercase tracking-[0.1em] hover:bg-accent-dark transition-colors"
+                className="block text-center bg-accent text-white px-6 py-4 text-xs font-semibold uppercase tracking-[0.12em] hover:bg-accent-dark transition-colors"
               >
-                {t.nav.bookConsultation}
+                {nav.talk}
               </Link>
             </div>
           </div>
