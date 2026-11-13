@@ -61,7 +61,7 @@ export default function ServicesContent({ lang }) {
                 </p>
                 <h2 className="font-display text-3xl md:text-4xl text-primary mb-3">{cat.title}</h2>
                 <p className="text-base text-on-surface-muted leading-relaxed max-w-md mb-8">{cat.tagline}</p>
-                <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-3">
+                <ul className="dock-safe grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-3">
                   {cat.items.map((item) => (
                     <li key={item} className="flex gap-3 text-base text-primary leading-snug">
                       <Tick />
@@ -103,7 +103,7 @@ export default function ServicesContent({ lang }) {
       </section>
 
       {/* Materials & brands */}
-      <section className={`${wrap} py-24 md:py-36`}>
+      <section className={`${wrap} dock-safe py-24 md:py-36`}>
         <div data-reveal>
           <h2 className="font-display text-3xl md:text-5xl text-primary mb-4">{sv.materialsHeading}</h2>
           <p className="text-base text-on-surface-muted mb-12 max-w-2xl">{sv.materialsNote}</p>
