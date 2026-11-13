@@ -78,13 +78,11 @@ export default function SiteDocument({ lang, fontClasses, children }) {
             __html: JSON.stringify(localBusinessSchema),
           }}
         />
-        <div className="page-scroll">
-          <Navbar lang={lang} nav={t.nav} />
-          <main className="flex-1">
-            <PageTransition>{children}</PageTransition>
-          </main>
-          <Footer lang={lang} />
-        </div>
+        <Navbar lang={lang} nav={t.nav} />
+        <main className="flex-1">
+          <PageTransition>{children}</PageTransition>
+        </main>
+        <Footer lang={lang} />
         <FloatingContact labels={t.common} />
         <RevealOnScroll />
         <ContactClickTracking />

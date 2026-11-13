@@ -54,14 +54,11 @@ export default function HeroScroll() {
       svh = probe.offsetHeight / 100;
     };
 
-    const scroller = document.querySelector(".page-scroll");
-    const usesInnerScroll = () =>
-      scroller && scroller.scrollHeight > scroller.clientHeight + 2;
     let raf = 0;
     let w = 0;
     const update = () => {
       raf = 0;
-      const y = usesInnerScroll() ? scroller.scrollTop : window.scrollY;
+      const y = window.scrollY;
       const grow = easeInOut(clamp(y / (GROW * svh)));
       w = w0 + (wEnd - w0) * grow;
       frame.style.setProperty("--arch-w", `${w}px`);
@@ -88,11 +85,9 @@ export default function HeroScroll() {
     }
     stage.classList.add("hero-js");
     update();
-    scroller?.addEventListener("scroll", onScroll, { passive: true });
     window.addEventListener("scroll", onScroll, { passive: true });
     window.addEventListener("resize", onResize);
     return () => {
-      scroller?.removeEventListener("scroll", onScroll);
       window.removeEventListener("scroll", onScroll);
       window.removeEventListener("resize", onResize);
       cancelAnimationFrame(raf);

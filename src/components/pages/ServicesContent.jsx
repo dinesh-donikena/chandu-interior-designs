@@ -43,15 +43,17 @@ export default function ServicesContent({ lang }) {
             >
               <div
                 data-door
-                className={`service-photo relative aspect-[4/3] overflow-hidden bg-surface-high lg:col-span-5 ${i % 2 ? "lg:order-2" : ""}`}
+                className={`relative aspect-[4/3] lg:col-span-5 ${i % 2 ? "lg:order-2" : ""}`}
               >
-                <Image
-                  src={photo.src}
-                  alt={t.portfolio.projects[photo.project].title}
-                  fill
-                  sizes="(min-width: 1024px) 40vw, 100vw"
-                  className="object-cover"
-                />
+                <div className="service-photo absolute inset-0 overflow-hidden bg-surface-high">
+                  <Image
+                    src={photo.src}
+                    alt={t.portfolio.projects[photo.project].title}
+                    fill
+                    sizes="(min-width: 1024px) 40vw, 100vw"
+                    className="object-cover"
+                  />
+                </div>
               </div>
               <div className={`lg:col-span-7 ${i % 2 ? "lg:order-1" : ""}`}>
                 <p className="font-display italic text-5xl md:text-6xl leading-none text-accent mb-5">
@@ -78,7 +80,7 @@ export default function ServicesContent({ lang }) {
         <div className={`${wrap} py-20 md:py-28 grid grid-cols-1 lg:grid-cols-2 gap-14 lg:gap-20`}>
           <div data-reveal>
             <h2 className="font-display text-3xl md:text-4xl text-primary mb-8">{sv.buildHeading}</h2>
-            <div className="flex flex-wrap gap-2.5">
+            <div className="dock-safe flex flex-wrap gap-2.5">
               {sv.buildTypes.map((type) => (
                 <span key={type} className={chip}>
                   {type}
@@ -89,7 +91,7 @@ export default function ServicesContent({ lang }) {
           <div data-reveal style={{ "--reveal-delay": "120ms" }}>
             <h2 className="font-display text-3xl md:text-4xl text-primary mb-4">{sv.areasHeading}</h2>
             <p className="text-base text-on-surface-muted mb-6">{sv.areasText}:</p>
-            <div className="flex flex-wrap gap-2.5">
+            <div className="dock-safe flex flex-wrap gap-2.5">
               {sv.areas.map((area) => (
                 <span key={area} className={chip}>
                   {area}
@@ -126,7 +128,7 @@ export default function ServicesContent({ lang }) {
       </section>
 
       <section className={`${wrap} pb-4 md:pb-8`}>
-        <ol data-door className="process-strip" aria-label={sv.processLabel}>
+        <ol data-door className="process-strip dock-safe" aria-label={sv.processLabel}>
           {sv.process.map((step) => (
             <li key={step}>{step}</li>
           ))}

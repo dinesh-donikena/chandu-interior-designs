@@ -83,12 +83,17 @@
    itself is the existing scroll observer. */
 /* The photo opens from a narrow doorway in the centre, like the Gadapa mark.
    Only clip-path moves. It stays fully open if motion is reduced or JS is off. */
-html.motion-ok .service-photo[data-door="closed"] {
+/* The frame stays unclipped so the observer can see a real 30% of it.
+   Only the photo inside eases open, and only after .motion-ok. */
+html.motion-ok [data-door="closed"] > .service-photo {
   clip-path: inset(10% 46% 0 46%);
 }
-html.motion-ok .service-photo[data-door="open"] {
-  clip-path: inset(0 0 0 0);
-  transition: clip-path 1.35s cubic-bezier(0.22, 0.61, 0.36, 1);
+html.motion-ok [data-door="open"] > .service-photo {
+  clip-path: inset(0);
+  transition: clip-path 1.1s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+html.motion-ok [data-door="open"].is-animating > .service-photo {
+  will-change: clip-path;
 }
 
 /* Four names and a line that draws across. No times, no prices. */
@@ -117,7 +122,10 @@ html.motion-ok .process-strip[data-door="closed"]::before {
 }
 html.motion-ok .process-strip[data-door="open"]::before {
   transform: scaleX(1);
-  transition: transform 1.15s cubic-bezier(0.22, 0.61, 0.36, 1);
+  transition: transform 1.2s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+html.motion-ok .process-strip[data-door="open"].is-animating::before {
+  will-change: transform;
 }
 .process-strip li {
   position: relative;
@@ -161,19 +169,19 @@ body {
   color: #1f1d1a;
 }
 
-/* WhatsApp and call sit in a strip under the page, so content keeps its
-   full width and nothing scrolls underneath the buttons. */
+/* The page scrolls the full viewport. The buttons float over the corner.
+   The footer padding lets the last line scroll clear of the stack, and
+   .dock-safe insets only the rows that run into that corner. */
 :root {
   --float-stack: calc(44px + 12px + 44px + 20px + env(safe-area-inset-bottom, 0px));
 }
-body {
-  height: 100dvh;
-  overflow: hidden;
+footer {
+  padding-bottom: var(--float-stack);
 }
-.page-scroll {
-  height: calc(100dvh - var(--float-stack));
-  overflow-x: hidden;
-  overflow-y: auto;
+@media (max-width: 767px) {
+  .dock-safe {
+    padding-right: 3.25rem;
+  }
 }
 
 .grain {
@@ -534,8 +542,7 @@ summary:focus-visible {
     animation: none;
     transition: none;
   }
-  .service-photo[data-door="closed"],
-  .service-photo[data-door="open"] {
+  .service-photo {
     clip-path: none;
   }
   .process-strip::before,

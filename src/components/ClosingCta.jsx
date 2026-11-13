@@ -18,7 +18,7 @@ export default function ClosingCta({ heading, text, button, href }) {
             {text}
           </p>
         )}
-        <div data-reveal className={`flex flex-col sm:flex-row gap-4 justify-center ${text ? "" : "mt-10"}`}>
+        <div data-reveal className={`dock-safe flex flex-col sm:flex-row gap-4 justify-center ${text ? "" : "mt-10"}`}>
           <Link href={href} className={btnPrimary}>
             {button}
           </Link>

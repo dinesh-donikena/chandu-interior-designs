@@ -3,11 +3,12 @@
 import { usePathname } from "next/navigation";
 import { useEffect } from "react";
 
-// Words are never hidden in CSS unless <html> has .motion-ok, and this
-// effect is the only thing that adds that class. It does so only when
-// IntersectionObserver exists and reduced motion is off.
-// Text already on screen is left visible. A door that has been on screen
-// for 1.5s without opening is opened, so a stuck animation cannot hide it.
+// Nothing is clipped unless <html> has .motion-ok, and this effect is the
+// only thing that adds it: IntersectionObserver must exist, and the visitor
+// must not have asked for reduced motion.
+// A door opens once, when about 30% of its frame is in view. One already
+// above the fold waits a moment so the slit is visible, then eases open.
+// Anything still shut after 1.5s on screen is opened.
 export default function RevealOnScroll() {
   const pathname = usePathname();
 
@@ -20,67 +21,73 @@ export default function RevealOnScroll() {
     }
     root.classList.add("motion-ok");
 
-    const scroller = document.querySelector(".page-scroll");
-    const scrollRoot =
-      scroller && getComputedStyle(scroller).overflowY === "auto" ? scroller : null;
-    const viewBox = () =>
-      scrollRoot
-        ? scrollRoot.getBoundingClientRect()
-        : { top: 0, bottom: window.innerHeight };
-    const onScreen = (el) => {
-      const rect = el.getBoundingClientRect();
-      const box = viewBox();
-      return rect.bottom > box.top + 2 && rect.top < box.bottom - 2;
+    const timers = new Set();
+    const later = (fn, ms) => {
+      const id = setTimeout(fn, ms);
+      timers.add(id);
+      return id;
     };
 
-    const show = (el) => {
-      if (el.hasAttribute("data-door")) el.dataset.door = "open";
-      if (el.hasAttribute("data-reveal")) el.dataset.revealState = "shown";
+    const finish = (el) => {
+      el.classList.remove("is-animating");
     };
 
+    const open = (el) => {
+      if (el.dataset.door === "open") return;
+      el.classList.add("is-animating");
+      el.dataset.door = "open";
+      const stop = (event) => {
+        if (event && event.target !== el && event.target !== el.querySelector(".service-photo")) return;
+        finish(el);
+      };
+      el.addEventListener("transitionend", stop, { once: true });
+      later(() => finish(el), 1400);
+    };
+
+    const started = new WeakSet();
     const observer = new IntersectionObserver(
       (entries) => {
         for (const entry of entries) {
-          if (!entry.isIntersecting) continue;
-          show(entry.target);
-          observer.unobserve(entry.target);
+          const el = entry.target;
+          const first = !started.has(el);
+          started.add(el);
+          if (entry.intersectionRatio < 0.28) continue;
+          observer.unobserve(el);
+          // Already on screen at the first check: hold the slit, then open.
+          later(() => open(el), first ? 450 : 0);
         }
       },
-      // A closed door is a narrow slit, so its intersection ratio stays
-      // under 0.1. Any visible pixel is enough to start the open.
-      { root: scrollRoot, rootMargin: "0px", threshold: 0 }
+      { root: null, rootMargin: "0px", threshold: [0.28, 0.35] }
     );
 
-    const seen = new WeakMap();
-    const frame = requestAnimationFrame(() => {
+    let frame = requestAnimationFrame(() => {
       document.querySelectorAll("[data-door]").forEach((el) => {
         el.dataset.door = "closed";
-        if (onScreen(el)) seen.set(el, Date.now());
+        el.classList.remove("is-animating");
       });
-      // Let the closed clip paint, then watch for the open.
-      requestAnimationFrame(() => {
+      frame = requestAnimationFrame(() => {
         document.querySelectorAll("[data-door]").forEach((el) => observer.observe(el));
       });
     });
 
     const watchdog = setInterval(() => {
-      document
-        .querySelectorAll('[data-reveal-state="waiting"], [data-door="closed"]')
-        .forEach((el) => {
-          if (!onScreen(el)) return;
-          const since = seen.get(el) ?? Date.now();
-          if (!seen.has(el)) seen.set(el, since);
-          if (Date.now() - since >= 1500) show(el);
-        });
-    }, 300);
+      document.querySelectorAll('[data-door="closed"]').forEach((el) => {
+        const rect = el.getBoundingClientRect();
+        const visible = Math.min(rect.bottom, window.innerHeight) - Math.max(rect.top, 0);
+        if (visible < rect.height * 0.28) return;
+        open(el);
+      });
+    }, 1500);
 
     return () => {
       cancelAnimationFrame(frame);
       clearInterval(watchdog);
+      timers.forEach((id) => clearTimeout(id));
       observer.disconnect();
-      document
-        .querySelectorAll('[data-reveal-state="waiting"], [data-door="closed"]')
-        .forEach(show);
+      document.querySelectorAll("[data-door]").forEach((el) => {
+        el.dataset.door = "open";
+        finish(el);
+      });
     };
   }, [pathname]);
 
