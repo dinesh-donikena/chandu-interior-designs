@@ -99,7 +99,7 @@ export default function HomeContent({ lang }) {
 
             <a
               href="#intro"
-              className="mt-4 md:mt-6 inline-flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.2em] text-on-surface-muted hover:text-accent transition-colors"
+              className="hero-cue mt-4 md:mt-6 inline-flex items-center min-h-11 gap-2 text-[11px] font-semibold uppercase tracking-[0.2em] text-primary hover:text-accent transition-colors"
             >
               {t.home.heroCue}
               <ArrowDown className="hero-cue-arrow w-4 h-4" />

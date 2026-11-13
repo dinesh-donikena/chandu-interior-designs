@@ -41,7 +41,10 @@ export default function ServicesContent({ lang }) {
               style={{ "--reveal-delay": `${i * 90}ms` }}
               className="service-card scroll-mt-24 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-center"
             >
-              <div className={`service-photo relative aspect-[4/3] overflow-hidden bg-surface-high lg:col-span-5 ${i % 2 ? "lg:order-2" : ""}`}>
+              <div
+                data-door
+                className={`service-photo relative aspect-[4/3] overflow-hidden bg-surface-high lg:col-span-5 ${i % 2 ? "lg:order-2" : ""}`}
+              >
                 <Image
                   src={photo.src}
                   alt={t.portfolio.projects[photo.project].title}
@@ -125,6 +128,14 @@ export default function ServicesContent({ lang }) {
             </div>
           ))}
         </div>
+      </section>
+
+      <section className={`${wrap} pb-4 md:pb-8`}>
+        <ol data-door className="process-strip" aria-label={sv.processLabel}>
+          {sv.process.map((step) => (
+            <li key={step}>{step}</li>
+          ))}
+        </ol>
       </section>
 
       <ClosingCta

@@ -77,9 +77,7 @@ export default function Footer({ lang }) {
       </div>
 
       <div className={wrap}>
-        {/* Right padding on phones keeps the line clear of the floating
-            WhatsApp/call buttons, which sit over this corner at page end. */}
-        <p className="border-t border-outline-light py-6 text-xs font-semibold text-on-surface-muted pr-20 md:pr-0">
+        <p className="border-t border-outline-light py-6 text-xs font-semibold text-on-surface-muted">
           &copy; {new Date().getFullYear()} {t.brand.full}, {t.footer.city}. {t.footer.rights}
         </p>
       </div>

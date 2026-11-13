@@ -197,6 +197,8 @@ export const translations = {
       ],
       ctaHeading: "Tell us what you're planning.",
       ctaButton: "Talk to Us",
+      processLabel: "How the work goes",
+      process: ["Visit", "Design", "Build", "Handover"],
     },
     portfolio: {
       title: "Our Work",
@@ -518,6 +520,8 @@ export const translations = {
       ],
       ctaHeading: "మీ ప్లాన్ ఏంటో చెప్పండి.",
       ctaButton: "కాంటాక్ట్ చేయండి",
+      processLabel: "పని ఎలా సాగుతుంది",
+      process: ["సందర్శన", "డిజైన్", "నిర్మాణం", "అప్పగింత"],
     },
     portfolio: {
       title: "మా పనులు",

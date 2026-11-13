@@ -26,11 +26,12 @@ export default function RevealOnScroll() {
       (entries) => {
         for (const entry of entries) {
           if (!entry.isIntersecting) continue;
-          entry.target.dataset.revealState = "shown";
+          if (entry.target.hasAttribute("data-door")) entry.target.dataset.door = "open";
+          else entry.target.dataset.revealState = "shown";
           observer.unobserve(entry.target);
         }
       },
-      { rootMargin: "0px 0px -10% 0px" }
+      { rootMargin: "0px 0px -8% 0px" }
     );
 
     // Only what is on screen right now counts as already seen. (Right after
@@ -42,6 +43,12 @@ export default function RevealOnScroll() {
         const { top, bottom } = el.getBoundingClientRect();
         if (top < fold && bottom > 0) return;
         el.dataset.revealState = "waiting";
+        observer.observe(el);
+      });
+      // Door photos and the process line start shut, then open when reached,
+      // including the one already on screen.
+      document.querySelectorAll("[data-door]").forEach((el) => {
+        el.dataset.door = "closed";
         observer.observe(el);
       });
     });
