@@ -15,7 +15,7 @@ export default function Footer({ lang }) {
 
   return (
     <footer className="bg-surface-container grain">
-      <div className={`${wrap} grid grid-cols-2 lg:grid-cols-12 gap-x-8 gap-y-12 pt-20 pb-16`}>
+      <div className={`${wrap} dock-safe grid grid-cols-2 lg:grid-cols-12 gap-x-8 gap-y-12 pt-20 pb-16`}>
         <div className="col-span-2 lg:col-span-5">
           <h2>
             <Logo lang={lang} large />
@@ -76,7 +76,7 @@ export default function Footer({ lang }) {
         </div>
       </div>
 
-      <div className={wrap}>
+      <div className={`${wrap} dock-safe`}>
         <p className="border-t border-outline-light py-6 text-xs font-semibold text-on-surface-muted">
           &copy; {new Date().getFullYear()} {t.brand.full}, {t.footer.city}. {t.footer.rights}
         </p>
