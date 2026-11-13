@@ -1,3 +1,4 @@
+import { themeColor } from "@/lib/brand";
 import { SITE } from "@/lib/site";
 import { localePath } from "@/lib/i18n";
 
@@ -15,11 +16,40 @@ const AREA = {
   te: "తెలంగాణ & ఆంధ్రప్రదేశ్",
 };
 
-// The picture WhatsApp / Facebook show beside a shared link — a real project
-// photo (public/og-image.jpg, 1200×630).
-const SHARE_IMAGE_ALT = {
-  en: "Hand-carved wooden hall arch and modular kitchen in a Hanamakonda home by Suma Sree Interiors and Constructions",
-  te: "హనుమకొండ ఇంట్లో సుమ శ్రీ ఇంటీరియర్స్ & కన్‌స్ట్రక్షన్స్ చేసిన చెక్క హాల్ ఆర్చ్, మాడ్యులర్ కిచెన్",
+// Share cards. Absolute URLs, built from the site address, so WhatsApp and
+// Facebook don't have to guess the host. The wide card is the og:image;
+// Twitter uses its own 1200×600 card. The square card is published at
+// /og-image-square.png for a 1:1 slot, and is not a second og:image — a
+// second image makes some apps pick the square and crop the wide card.
+const SHARE_ALT =
+  "Suma Sree Interiors and Constructions logo: an open door on a turmeric threshold";
+
+// Used only when a page has no description of its own (the unknown-address
+// pages). Real pages keep the description already written for them.
+const SHARE_DESCRIPTION =
+  "Design · Construction · Renovation | Telangana & Andhra Pradesh. Office: Hanamakonda, Warangal";
+
+const ogImage = {
+  url: new URL("/og-image.png", SITE.url).href,
+  width: 1200,
+  height: 630,
+  alt: SHARE_ALT,
+};
+
+const twitterImage = {
+  url: new URL("/twitter-card.png", SITE.url).href,
+  width: 1200,
+  height: 600,
+  alt: SHARE_ALT,
+};
+
+// Browser chrome. Light is limewash, dark is ink — the Gadapa palette,
+// not a restyle of the page.
+export const viewport = {
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: themeColor.light },
+    { media: "(prefers-color-scheme: dark)", color: themeColor.dark },
+  ],
 };
 
 const PAGES = {
@@ -90,6 +120,37 @@ const PAGES = {
 
 export const PAGE_PATHS = Object.values(PAGES).map((page) => page.path);
 
+// Unknown addresses. The title has to be in the first HTML response —
+// the layout default is the homepage title, which is what a 404 was showing.
+const NOT_FOUND = {
+  en: {
+    title: "Page not found",
+    description: "The link may be old, or the address mistyped. Everything else is one step away.",
+  },
+  te: {
+    title: "పేజీ దొరకలేదు",
+    description: "లింక్ పాతదై ఉండొచ్చు, లేదా అడ్రస్ తప్పుగా టైప్ అయి ఉండొచ్చు. మిగతావన్నీ ఇక్కడే ఉన్నాయి.",
+  },
+};
+
+export function notFoundMetadata(lang) {
+  const copy = NOT_FOUND[lang];
+  const fullTitle = `${copy.title} | ${SITE_NAME[lang]}`;
+  return {
+    title: copy.title,
+    description: copy.description,
+    robots: { index: false, follow: true },
+    openGraph: {
+      title: fullTitle,
+      description: copy.description,
+      siteName: SITE_NAME[lang],
+      locale: lang === "te" ? "te_IN" : "en_IN",
+      type: "website",
+      images: [ogImage],
+    },
+  };
+}
+
 // Site-wide defaults, set once in each language's layout.
 export function siteMetadata(lang) {
   return {
@@ -98,24 +159,45 @@ export function siteMetadata(lang) {
       default: `${SITE_NAME[lang]} | ${AREA[lang]}`,
       template: `%s | ${SITE_NAME[lang]}`,
     },
-    keywords: [
-      "interior design Telangana",
-      "interior design Andhra Pradesh",
-      "house construction Telangana",
-      "house construction Andhra Pradesh",
-      "home interiors Telangana and Andhra Pradesh",
-      "home renovation Telangana",
-      "home renovation Andhra Pradesh",
-      "modular kitchen Telangana",
-      "house plans Andhra Pradesh",
-      "Suma Sree Interiors",
-      "సుమ శ్రీ ఇంటీరియర్స్",
-      "ఇంటి నిర్మాణం తెలంగాణ",
-      "ఇంటీరియర్స్ ఆంధ్రప్రదేశ్",
-    ],
-    // The large card makes the share image fill the WhatsApp / Facebook
-    // link preview.
-    twitter: { card: "summary_large_image" },
+    keywords:
+      lang === "te"
+        ? [
+            "సుమ శ్రీ ఇంటీరియర్స్",
+            "ఇంటి నిర్మాణం తెలంగాణ",
+            "ఇంటి నిర్మాణం ఆంధ్రప్రదేశ్",
+            "ఇంటీరియర్స్ తెలంగాణ",
+            "ఇంటీరియర్స్ ఆంధ్రప్రదేశ్",
+            "ఇంటి రెనోవేషన్ వరంగల్",
+            "మాడ్యులర్ కిచెన్ హనుమకొండ",
+            "హనుమకొండ ఇంటీరియర్స్",
+            "Suma Sree Interiors",
+          ]
+        : [
+            "interior design Telangana",
+            "interior design Andhra Pradesh",
+            "house construction Telangana",
+            "house construction Andhra Pradesh",
+            "home interiors Telangana and Andhra Pradesh",
+            "home renovation Telangana",
+            "home renovation Andhra Pradesh",
+            "modular kitchen Hanamakonda",
+            "house plans Warangal",
+            "Suma Sree Interiors",
+          ],
+    // Fallback share text for a page that sets no description of its own.
+    // A page that sets openGraph replaces this whole object, and brings
+    // the image with it (see pageMetadata). Twitter is not replaced by
+    // those pages, so the card and image set here stay, and the description
+    // is filled from that page's own text.
+    openGraph: {
+      siteName: SITE_NAME[lang],
+      description: SHARE_DESCRIPTION,
+      images: [ogImage],
+    },
+    twitter: {
+      card: "summary_large_image",
+      images: [twitterImage],
+    },
     // Google Search Console: paste the verification code into the
     // GOOGLE_SITE_VERIFICATION setting in Vercel — no code change needed.
     verification: { google: process.env.GOOGLE_SITE_VERIFICATION },
@@ -151,14 +233,7 @@ export function pageMetadata(lang, key) {
       siteName: SITE_NAME[lang],
       locale: lang === "te" ? "te_IN" : "en_IN",
       type: "website",
-      images: [
-        {
-          url: "/og-image.jpg",
-          width: 1200,
-          height: 630,
-          alt: SHARE_IMAGE_ALT[lang],
-        },
-      ],
+      images: [ogImage],
     },
   };
 }

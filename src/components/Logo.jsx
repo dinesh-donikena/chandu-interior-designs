@@ -1,31 +1,50 @@
-// Two-line lockup — the full name is too long for one line beside the menu
-// on a phone, so the name carries the brand and the trade sits beneath.
-// సుమ శ్రీ on Telugu pages, Suma Sree on English ones.
-export default function Logo({ brand, lang, large = false }) {
+import Image from "next/image";
+
+// Gadapa horizontal lockup. Sized in CSS (globals.css) so the same SVG
+// stays sharp and still fits the 320px menu bar. The file is served as-is
+// (unoptimized): it is already a vector, and the image optimizer does not
+// handle SVG.
+//
+// Telugu pages use the Telugu lockup: it is the same height as the English
+// one but about half as wide, so the wordmark stays readable beside the
+// language switch. The English horizontal lockup is the one on English pages.
+//
+// Header and footer sit on limewash and sand, so they use the colour lockup.
+// Pass onDark where the logo is placed on ink — that swaps in the reversed
+// artwork (limewash lettering, pasupu threshold).
+
+const ALT = "Suma Sree Interiors and Constructions";
+
+export default function Logo({ lang = "en", large = false, onDark = false }) {
   const te = lang === "te";
+  const src = te
+    ? onDark
+      ? "/brand/telugu-reversed.svg"
+      : "/brand/telugu-colour.svg"
+    : onDark
+      ? "/brand/horizontal-reversed.svg"
+      : "/brand/horizontal-colour.svg";
+
+  const place = large
+    ? te
+      ? "brand-lockup-footer-te"
+      : "brand-lockup-footer"
+    : te
+      ? "brand-lockup-bar-te"
+      : "brand-lockup-bar";
+
+  // Intrinsic ratio only. Display width comes from the CSS class.
+  const width = te ? 432 : 849;
+  const height = 201;
 
   return (
-    <span className="flex flex-col leading-none text-primary whitespace-nowrap">
-      <span
-        className={`font-display tracking-tight ${
-          large ? (te ? "text-[1.7rem]" : "text-3xl") : te ? "text-[19px] lg:text-[21px]" : "text-[22px] lg:text-2xl"
-        }`}
-      >
-        {brand.name}
-      </span>
-      <span
-        className={`font-semibold text-accent ${
-          te
-            ? large
-              ? "text-sm mt-2.5"
-              : "text-[10px] lg:text-[11px] mt-1.5"
-            : large
-              ? "uppercase text-[11px] tracking-[0.22em] mt-2"
-              : "uppercase text-[8.5px] lg:text-[9.5px] tracking-[0.18em] max-[360px]:tracking-[0.08em] mt-1.5"
-        }`}
-      >
-        {brand.trade}
-      </span>
-    </span>
+    <Image
+      src={src}
+      alt={ALT}
+      width={width}
+      height={height}
+      unoptimized
+      className={`brand-lockup ${place}`}
+    />
   );
 }

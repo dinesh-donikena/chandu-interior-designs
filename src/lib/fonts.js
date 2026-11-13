@@ -1,40 +1,28 @@
-import {
-  Playfair_Display,
-  Montserrat,
-  Noto_Serif_Telugu,
-  Noto_Sans_Telugu,
-} from "next/font/google";
+import { Fraunces, DM_Sans, Noto_Serif_Telugu, Noto_Sans_Telugu } from "next/font/google";
 
-// One set of fonts for both languages. The Latin faces load up front. The
-// Telugu faces (over 200 KB together) are not preloaded, so a page only
-// fetches them if it actually shows Telugu text in them: every Telugu page,
-// and the English home page for the name in the intro. Other English pages
-// fetch none — the తెలుగు label in the language switch deliberately uses
-// the phone's own font (see Navbar). Until a Telugu face arrives, the
-// phone's own Telugu font shows the text, so nothing waits on it.
-// (A separate preloading set for the Telugu pages was tried: the build merges
-// both sets into every page's stylesheet, so fonts got fetched twice.)
+// Fraunces for headings (a soft, high-contrast serif) and DM Sans for
+// everything else. Telugu falls through to Noto Serif / Noto Sans, and
+// those files are not preloaded, so an English page does not download them.
+// Few weights, swap, and the latin/telugu subsets only.
 
-export const playfair = Playfair_Display({
+export const fraunces = Fraunces({
   subsets: ["latin"],
-  weight: ["500", "600", "700"],
+  weight: ["500", "600"],
   style: ["normal", "italic"],
-  variable: "--font-playfair",
+  variable: "--font-fraunces",
   display: "swap",
 });
 
-export const montserrat = Montserrat({
+export const dmSans = DM_Sans({
   subsets: ["latin"],
-  weight: ["400", "600", "700"],
-  variable: "--font-montserrat",
+  weight: ["400", "500", "600"],
+  variable: "--font-dm-sans",
   display: "swap",
 });
 
-// Playfair/Montserrat have no Telugu glyphs, so Telugu text falls through
-// to these.
 export const notoSerifTelugu = Noto_Serif_Telugu({
   subsets: ["telugu"],
-  weight: ["600", "700"],
+  weight: ["600"],
   variable: "--font-noto-serif-telugu",
   display: "swap",
   preload: false,
@@ -42,10 +30,10 @@ export const notoSerifTelugu = Noto_Serif_Telugu({
 
 export const notoSansTelugu = Noto_Sans_Telugu({
   subsets: ["telugu"],
-  weight: ["400", "600", "700"],
+  weight: ["400", "600"],
   variable: "--font-noto-sans-telugu",
   display: "swap",
   preload: false,
 });
 
-export const fontClasses = `${playfair.variable} ${montserrat.variable} ${notoSerifTelugu.variable} ${notoSansTelugu.variable}`;
+export const fontClasses = `${fraunces.variable} ${dmSans.variable} ${notoSerifTelugu.variable} ${notoSansTelugu.variable}`;

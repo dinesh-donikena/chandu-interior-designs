@@ -32,7 +32,7 @@ export default function Gallery({ projects, filters, labels }) {
             type="button"
             onClick={() => setFilter(f.key)}
             aria-pressed={filter === f.key}
-            className={`text-xs font-semibold uppercase tracking-[0.12em] pb-1 border-b-2 transition-colors ${
+            className={`inline-flex items-center min-h-11 text-xs font-semibold uppercase tracking-[0.12em] border-b-2 transition-colors ${
               filter === f.key
                 ? "text-primary border-accent"
                 : "text-on-surface-muted border-transparent hover:text-accent"
@@ -68,7 +68,7 @@ export default function Gallery({ projects, filters, labels }) {
               </span>
             </button>
             <figcaption className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1 mt-3 pt-3 border-t border-outline-light">
-              <h2 className="font-display text-lg md:text-xl text-primary">{project.title}</h2>
+              <h2 className="type-h3 text-primary">{project.title}</h2>
               <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-on-surface-muted">
                 {project.location}
               </p>
@@ -103,7 +103,7 @@ export default function Gallery({ projects, filters, labels }) {
                 type="button"
                 onClick={() => dialog.current.close()}
                 aria-label={labels.close}
-                className="p-2 -mr-2 text-white/80 hover:text-white transition-colors"
+                className="inline-flex items-center justify-center min-h-11 min-w-11 -mr-2 text-white/80 hover:text-white transition-colors"
               >
                 <Close />
               </button>

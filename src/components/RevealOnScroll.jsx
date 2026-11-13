@@ -3,56 +3,91 @@
 import { usePathname } from "next/navigation";
 import { useEffect } from "react";
 
-// Lets sections arrive as you reach them instead of all being there at
-// once: anything marked data-reveal fades up, and photos marked
-// data-reveal="photo" open out from a slightly smaller frame, like the
-// doorway at the top of the home page. (Looks live in globals.css.)
-//
-// Only what is still below the screen waits to be revealed, so nothing you
-// can already see blinks out and back. Without JavaScript, or for visitors
-// who ask for reduced motion, everything simply shows.
+// Nothing is clipped unless <html> has .motion-ok, and this effect is the
+// only thing that adds it: IntersectionObserver must exist, and the visitor
+// must not have asked for reduced motion.
+// A door opens once, when about 30% of its frame is in view. One already
+// above the fold waits a moment so the slit is visible, then eases open.
+// Anything still shut after 1.5s on screen is opened.
 export default function RevealOnScroll() {
   const pathname = usePathname();
 
   useEffect(() => {
-    if (
-      !("IntersectionObserver" in window) ||
-      window.matchMedia("(prefers-reduced-motion: reduce)").matches
-    ) {
+    const root = document.documentElement;
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (!("IntersectionObserver" in window) || reduce) {
+      root.classList.remove("motion-ok");
       return;
     }
+    root.classList.add("motion-ok");
 
+    const timers = new Set();
+    const later = (fn, ms) => {
+      const id = setTimeout(fn, ms);
+      timers.add(id);
+      return id;
+    };
+
+    const finish = (el) => {
+      el.classList.remove("is-animating");
+    };
+
+    const open = (el) => {
+      if (el.dataset.door === "open") return;
+      el.classList.add("is-animating");
+      el.dataset.door = "open";
+      const stop = (event) => {
+        if (event && event.target !== el && event.target !== el.querySelector(".service-photo")) return;
+        finish(el);
+      };
+      el.addEventListener("transitionend", stop, { once: true });
+      later(() => finish(el), 1400);
+    };
+
+    const started = new WeakSet();
     const observer = new IntersectionObserver(
       (entries) => {
         for (const entry of entries) {
-          if (!entry.isIntersecting) continue;
-          entry.target.dataset.revealState = "shown";
-          observer.unobserve(entry.target);
+          const el = entry.target;
+          const first = !started.has(el);
+          started.add(el);
+          if (entry.intersectionRatio < 0.28) continue;
+          observer.unobserve(el);
+          // Already on screen at the first check: hold the slit, then open.
+          later(() => open(el), first ? 450 : 0);
         }
       },
-      { rootMargin: "0px 0px -10% 0px" }
+      { root: null, rootMargin: "0px", threshold: [0.28, 0.35] }
     );
 
-    // Only what is on screen right now counts as already seen. (Right after
-    // moving to another page the window may still be scrolled down from
-    // the last one, so "above the screen" doesn't mean "seen".)
-    const frame = requestAnimationFrame(() => {
-      const fold = window.innerHeight;
-      document.querySelectorAll("[data-reveal]:not([data-reveal-state])").forEach((el) => {
-        const { top, bottom } = el.getBoundingClientRect();
-        if (top < fold && bottom > 0) return;
-        el.dataset.revealState = "waiting";
-        observer.observe(el);
+    let frame = requestAnimationFrame(() => {
+      document.querySelectorAll("[data-door]").forEach((el) => {
+        el.dataset.door = "closed";
+        el.classList.remove("is-animating");
+      });
+      frame = requestAnimationFrame(() => {
+        document.querySelectorAll("[data-door]").forEach((el) => observer.observe(el));
       });
     });
 
+    const watchdog = setInterval(() => {
+      document.querySelectorAll('[data-door="closed"]').forEach((el) => {
+        const rect = el.getBoundingClientRect();
+        const visible = Math.min(rect.bottom, window.innerHeight) - Math.max(rect.top, 0);
+        if (visible < rect.height * 0.28) return;
+        open(el);
+      });
+    }, 1500);
+
     return () => {
       cancelAnimationFrame(frame);
+      clearInterval(watchdog);
+      timers.forEach((id) => clearTimeout(id));
       observer.disconnect();
-      // Anything still waiting (you left before reaching it) just shows
-      document
-        .querySelectorAll('[data-reveal-state="waiting"]')
-        .forEach((el) => (el.dataset.revealState = "shown"));
+      document.querySelectorAll("[data-door]").forEach((el) => {
+        el.dataset.door = "open";
+        finish(el);
+      });
     };
   }, [pathname]);
 

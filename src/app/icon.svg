@@ -1,8 +1,1 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-  <rect width="64" height="64" rx="14" fill="#2e2a24"/>
-  <g fill="none" stroke="#d4af6a" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round">
-    <path d="M11 30 32 13l21 17"/>
-    <path d="M18 25v25h28V25"/>
-    <path d="M26.5 50v-8.5a5.5 5.5 0 0 1 11 0V50"/>
-  </g>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" shape-rendering="crispEdges" viewBox="0 0 16 16"><title>Suma Sree</title><style>.f{fill:#7a5c34}.t{fill:#cf9b2c}@media (prefers-color-scheme:dark){.f{fill:#f4f1eb}}</style><path d="M3 1h10v1H3zm0 1h2v1H3zm6 0h1v1H9zm2 0h2v1h-2zM3 3h2v1H3zm5 0h2v1H8zm3 0h2v1h-2zM3 4h2v1H3zm4 0h3v1H7zm4 0h2v1h-2zM3 5h2v1H3zm4 0h3v1H7zm4 0h2v1h-2zM3 6h2v1H3zm4 0h3v1H7zm4 0h2v1h-2zM3 7h2v1H3zm4 0h3v1H7zm4 0h2v1h-2zM3 8h2v1H3zm4 0h3v1H7zm4 0h2v1h-2zM3 9h2v1H3zm4 0h3v1H7zm4 0h2v1h-2zm-8 1h2v1H3zm5 0h2v1H8zm3 0h2v1h-2zm-8 1h2v1H3zm6 0h1v1H9zm2 0h2v1h-2z" class="f"/><path d="M1 12h14v1H1zm0 1h14v1H1zm0 1h14v1H1z" class="t"/></svg>

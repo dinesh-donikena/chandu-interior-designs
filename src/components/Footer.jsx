@@ -1,12 +1,14 @@
 import Link from "next/link";
 import Logo from "@/components/Logo";
+import { WhatsAppIcon } from "@/components/icons";
 import { localePath } from "@/lib/i18n";
 import { SITE } from "@/lib/site";
 import { translations } from "@/lib/translations";
-import { wrap } from "@/lib/ui";
+import { btnWhatsApp, wrap } from "@/lib/ui";
 
-const heading = "block text-xs font-semibold uppercase tracking-[0.12em] text-accent mb-5";
-const link = "text-on-surface-muted hover:text-primary transition-colors text-base";
+const heading = "type-small block text-accent mb-5";
+const link =
+  "inline-flex items-center min-h-12 text-on-surface-muted hover:text-primary transition-colors type-body";
 
 export default function Footer({ lang }) {
   const t = translations[lang];
@@ -14,15 +16,15 @@ export default function Footer({ lang }) {
 
   return (
     <footer className="bg-surface-container grain">
-      <div className={`${wrap} grid grid-cols-2 lg:grid-cols-12 gap-x-8 gap-y-12 pt-20 pb-16`}>
+      <div className={`${wrap} dock-safe grid grid-cols-2 lg:grid-cols-12 gap-x-8 gap-y-12 pt-20 pb-16`}>
         <div className="col-span-2 lg:col-span-5">
-          <h2 aria-label={t.brand.full}>
-            <Logo brand={t.brand} lang={lang} large />
+          <h2>
+            <Logo lang={lang} large />
           </h2>
           <p className="text-base text-on-surface-muted max-w-xs leading-relaxed mt-5">{t.footer.tagline}</p>
         </div>
 
-        <nav className="lg:col-span-2 flex flex-col gap-3" aria-label={t.footer.pages}>
+        <nav className="lg:col-span-2 flex flex-col" aria-label={t.footer.pages}>
           <span className={heading}>{t.footer.pages}</span>
           <Link href={path("/portfolio")} className={link}>
             {t.nav.portfolio}
@@ -38,16 +40,26 @@ export default function Footer({ lang }) {
           </Link>
         </nav>
 
-        <div className="lg:col-span-2 flex flex-col gap-3">
+        <div className="lg:col-span-2 flex flex-col">
           <span className={heading}>{t.footer.connect}</span>
-          <a href={SITE.phoneHref} className={`${link} whitespace-nowrap`}>
-            {SITE.phoneDisplay}
-          </a>
-          <a href={SITE.whatsapp} target="_blank" rel="noopener noreferrer" className={link}>
+          <a
+            href={SITE.whatsapp}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={btnWhatsApp}
+            aria-label={t.common.whatsappLabel}
+          >
+            <WhatsAppIcon className="w-5 h-5" />
             WhatsApp
           </a>
           {SITE.instagram && (
-            <a href={SITE.instagram} target="_blank" rel="noopener noreferrer" className={link}>
+            <a
+              href={SITE.instagram}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={link}
+              aria-label={t.common.instagramLabel}
+            >
               Instagram
             </a>
           )}
@@ -72,10 +84,8 @@ export default function Footer({ lang }) {
         </div>
       </div>
 
-      <div className={wrap}>
-        {/* Right padding on phones keeps the line clear of the floating
-            WhatsApp/call buttons, which sit over this corner at page end. */}
-        <p className="border-t border-outline-light py-6 text-xs font-semibold text-on-surface-muted pr-20 md:pr-0">
+      <div className={`${wrap} dock-safe`}>
+        <p className="border-t border-outline-light py-6 text-xs font-semibold text-on-surface-muted">
           &copy; {new Date().getFullYear()} {t.brand.full}, {t.footer.city}. {t.footer.rights}
         </p>
       </div>

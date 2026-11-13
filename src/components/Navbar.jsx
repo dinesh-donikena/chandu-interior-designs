@@ -15,7 +15,7 @@ const PAGES = [
   ["/contact", "contact"],
 ];
 
-export default function Navbar({ lang, nav, brand }) {
+export default function Navbar({ lang, nav }) {
   const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -67,7 +67,7 @@ export default function Navbar({ lang, nav, brand }) {
         variant === "drawer" ? "w-full" : "w-fit"
       }`}
       role="group"
-      aria-label="Language"
+      aria-label={nav.language}
     >
       {[
         { key: "en", label: "English" },
@@ -82,8 +82,8 @@ export default function Navbar({ lang, nav, brand }) {
           aria-current={lang === opt.key ? "true" : undefined}
           className={`${
             variant === "drawer"
-              ? "flex-1 py-2.5 text-sm text-center"
-              : "px-2.5 max-[360px]:px-2 lg:px-3 py-1.5 text-[11px] lg:text-xs"
+              ? "flex-1 min-h-11 py-2.5 text-sm text-center"
+              : "inline-flex items-center min-h-11 px-2.5 max-[360px]:px-2 lg:px-3 text-[11px] lg:text-xs"
           } font-semibold transition-colors duration-300 ${
             lang === opt.key ? "bg-primary text-white" : "text-secondary hover:text-primary"
           }`}
@@ -111,8 +111,8 @@ export default function Navbar({ lang, nav, brand }) {
         {/* The max-[360px] adjustments squeeze the bar onto the smallest
             phones (320px wide) without anything running off the edge. */}
         <div className="flex justify-between items-center w-full h-[72px] px-5 max-[360px]:px-4 md:px-8 lg:px-20 max-w-[1280px] mx-auto gap-3 max-[360px]:gap-2 md:gap-4">
-          <Link href={localePath(lang, "/")} className="shrink-0" aria-label={brand.full}>
-            <Logo brand={brand} lang={lang} />
+          <Link href={localePath(lang, "/")} className="min-w-0">
+            <Logo lang={lang} />
           </Link>
 
           {/* Laptop nav — links stay visible from lg up. Spacing tightens
@@ -136,14 +136,14 @@ export default function Navbar({ lang, nav, brand }) {
           </div>
 
           {/* Right group — kept clearly apart from the menu links */}
-          <div className="flex items-center gap-3 max-[360px]:gap-2 lg:gap-4 lg:ml-6 xl:ml-10">
+          <div className="flex shrink-0 items-center gap-3 max-[360px]:gap-2 lg:gap-4 lg:ml-6 xl:ml-10">
             {langSwitch()}
 
             {/* Same destination as the Contact link, so it only joins the
                 bar once there is room for both (xl). */}
             <Link
               href={localePath(lang, "/contact")}
-              className="hidden xl:block bg-accent text-white px-6 py-2 text-xs font-semibold uppercase tracking-[0.1em] whitespace-nowrap hover:bg-accent-dark transition-colors"
+              className="nav-talk btn btn-primary"
             >
               {nav.talk}
             </Link>
@@ -152,8 +152,8 @@ export default function Navbar({ lang, nav, brand }) {
             <button
               type="button"
               onClick={() => setMenuOpen(true)}
-              className="lg:hidden text-primary p-1"
-              aria-label="Open menu"
+              className="lg:hidden btn btn-secondary btn-icon"
+              aria-label={nav.openMenu}
               aria-expanded={menuOpen}
             >
               <Menu />
@@ -172,12 +172,12 @@ export default function Navbar({ lang, nav, brand }) {
           />
           <div className="drawer-panel absolute top-0 right-0 h-full w-[84%] max-w-sm bg-surface grain shadow-2xl flex flex-col">
             <div className="flex items-center justify-between px-6 h-[72px] border-b border-outline-light/60">
-              <Logo brand={brand} lang={lang} />
+              <Logo lang={lang} />
               <button
                 type="button"
                 onClick={() => setMenuOpen(false)}
-                className="text-primary p-1"
-                aria-label="Close menu"
+                className="btn btn-secondary btn-icon"
+                aria-label={nav.closeMenu}
               >
                 <Close />
               </button>
@@ -194,7 +194,7 @@ export default function Navbar({ lang, nav, brand }) {
                     href={link.href}
                     onClick={() => setMenuOpen(false)}
                     aria-current={current ? "page" : undefined}
-                    className={`flex items-center justify-between py-4 font-display text-2xl border-b border-outline-light/50 transition-colors ${
+                    className={`flex items-center justify-between py-4 type-h3 border-b border-outline-light/50 transition-colors ${
                       current ? "text-accent" : "text-primary hover:text-accent"
                     }`}
                   >
@@ -209,7 +209,7 @@ export default function Navbar({ lang, nav, brand }) {
               <Link
                 href={localePath(lang, "/contact")}
                 onClick={() => setMenuOpen(false)}
-                className="block text-center bg-accent text-white px-6 py-4 text-xs font-semibold uppercase tracking-[0.12em] hover:bg-accent-dark transition-colors"
+                className="btn btn-primary w-full"
               >
                 {nav.talk}
               </Link>

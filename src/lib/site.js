@@ -4,7 +4,7 @@ export const SITE = {
   whatsapp: "https://wa.me/919133509293",
   // Instagram stays hidden until a handle exists. Set its URL here and it
   // appears in the footer, Contact page and schema.
-  instagram: null,
+  instagram: "https://www.instagram.com/sumasreeinteriorsconstructions/",
   phoneDisplay: "+91 91335 09293",
   phoneHref: "tel:+919133509293",
   // No business inbox yet, so email is hidden everywhere. Set a real address

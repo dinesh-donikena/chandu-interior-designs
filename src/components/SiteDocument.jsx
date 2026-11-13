@@ -78,7 +78,7 @@ export default function SiteDocument({ lang, fontClasses, children }) {
             __html: JSON.stringify(localBusinessSchema),
           }}
         />
-        <Navbar lang={lang} nav={t.nav} brand={t.brand} />
+        <Navbar lang={lang} nav={t.nav} />
         <main className="flex-1">
           <PageTransition>{children}</PageTransition>
         </main>
