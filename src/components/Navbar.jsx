@@ -15,7 +15,7 @@ const PAGES = [
   ["/contact", "contact"],
 ];
 
-export default function Navbar({ lang, nav, brand }) {
+export default function Navbar({ lang, nav }) {
   const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -111,8 +111,8 @@ export default function Navbar({ lang, nav, brand }) {
         {/* The max-[360px] adjustments squeeze the bar onto the smallest
             phones (320px wide) without anything running off the edge. */}
         <div className="flex justify-between items-center w-full h-[72px] px-5 max-[360px]:px-4 md:px-8 lg:px-20 max-w-[1280px] mx-auto gap-3 max-[360px]:gap-2 md:gap-4">
-          <Link href={localePath(lang, "/")} className="shrink-0" aria-label={brand.full}>
-            <Logo brand={brand} lang={lang} />
+          <Link href={localePath(lang, "/")} className="min-w-0">
+            <Logo lang={lang} />
           </Link>
 
           {/* Laptop nav — links stay visible from lg up. Spacing tightens
@@ -136,7 +136,7 @@ export default function Navbar({ lang, nav, brand }) {
           </div>
 
           {/* Right group — kept clearly apart from the menu links */}
-          <div className="flex items-center gap-3 max-[360px]:gap-2 lg:gap-4 lg:ml-6 xl:ml-10">
+          <div className="flex shrink-0 items-center gap-3 max-[360px]:gap-2 lg:gap-4 lg:ml-6 xl:ml-10">
             {langSwitch()}
 
             {/* Same destination as the Contact link, so it only joins the
@@ -172,7 +172,7 @@ export default function Navbar({ lang, nav, brand }) {
           />
           <div className="drawer-panel absolute top-0 right-0 h-full w-[84%] max-w-sm bg-surface grain shadow-2xl flex flex-col">
             <div className="flex items-center justify-between px-6 h-[72px] border-b border-outline-light/60">
-              <Logo brand={brand} lang={lang} />
+              <Logo lang={lang} />
               <button
                 type="button"
                 onClick={() => setMenuOpen(false)}

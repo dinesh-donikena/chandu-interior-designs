@@ -16,8 +16,8 @@ export default function Footer({ lang }) {
     <footer className="bg-surface-container grain">
       <div className={`${wrap} grid grid-cols-2 lg:grid-cols-12 gap-x-8 gap-y-12 pt-20 pb-16`}>
         <div className="col-span-2 lg:col-span-5">
-          <h2 aria-label={t.brand.full}>
-            <Logo brand={t.brand} lang={lang} large />
+          <h2>
+            <Logo lang={lang} large />
           </h2>
           <p className="text-base text-on-surface-muted max-w-xs leading-relaxed mt-5">{t.footer.tagline}</p>
         </div>
