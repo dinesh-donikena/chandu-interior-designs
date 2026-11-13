@@ -13,9 +13,9 @@
 export const translations = {
   en: {
     brand: {
-      name: "Suma Sri",
+      name: "Suma Sree",
       trade: "Interiors & Constructions",
-      full: "Suma Sri Interiors and Constructions",
+      full: "Suma Sree Interiors and Constructions",
     },
     nav: {
       home: "Home",
@@ -35,7 +35,7 @@ export const translations = {
       promise: ["Quality materials", "Stunning designs", "Experienced workmanship"],
       introHeading: "Construction, renovation, interiors — we do it all.",
       introP1:
-        "Suma Sri Interiors and Constructions is a house construction and interior design company from Warangal. Whether you're building a new house or renovating the one you live in, we take care of everything — planning, construction, renovation and interiors — under one roof.",
+        "Suma Sree Interiors and Constructions is a house construction and interior design company from Warangal. Whether you're building a new house or renovating the one you live in, we take care of everything — planning, construction, renovation and interiors — under one roof.",
       introP2:
         "We work across Telangana and Andhra Pradesh.",
       servicesLabel: "Our Services",

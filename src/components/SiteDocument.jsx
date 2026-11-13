@@ -23,7 +23,9 @@ const localBusinessSchema = {
   "@context": "https://schema.org",
   "@type": "HomeAndConstructionBusiness",
   name: SITE.name,
-  alternateName: "సుమ శ్రీ ఇంటీరియర్స్ & కన్‌స్ట్రక్షన్స్",
+  // The Telugu name, and the earlier English spelling, so a search for
+  // either still finds the business
+  alternateName: ["సుమ శ్రీ ఇంటీరియర్స్ & కన్‌స్ట్రక్షన్స్", "Suma Sri Interiors and Constructions"],
   description:
     "House construction, renovation and interior design from Warangal, serving Telangana and Andhra Pradesh.",
   url: SITE.url,

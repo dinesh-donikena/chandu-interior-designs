@@ -1,6 +1,6 @@
 // Two-line lockup — the full name is too long for one line beside the menu
 // on a phone, so the name carries the brand and the trade sits beneath.
-// సుమ శ్రీ on Telugu pages, Suma Sri on English ones.
+// సుమ శ్రీ on Telugu pages, Suma Sree on English ones.
 export default function Logo({ brand, lang, large = false }) {
   const te = lang === "te";
 
@@ -21,7 +21,7 @@ export default function Logo({ brand, lang, large = false }) {
               : "text-[10px] lg:text-[11px] mt-1.5"
             : large
               ? "uppercase text-[11px] tracking-[0.22em] mt-2"
-              : "uppercase text-[8.5px] lg:text-[9.5px] tracking-[0.18em] mt-1.5"
+              : "uppercase text-[8.5px] lg:text-[9.5px] tracking-[0.18em] max-[360px]:tracking-[0.08em] mt-1.5"
         }`}
       >
         {brand.trade}

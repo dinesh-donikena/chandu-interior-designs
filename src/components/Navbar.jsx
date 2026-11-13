@@ -81,7 +81,9 @@ export default function Navbar({ lang, nav, brand }) {
           onClick={() => rememberLang(opt.key)}
           aria-current={lang === opt.key ? "true" : undefined}
           className={`${
-            variant === "drawer" ? "flex-1 py-2.5 text-sm text-center" : "px-2.5 lg:px-3 py-1.5 text-[11px] lg:text-xs"
+            variant === "drawer"
+              ? "flex-1 py-2.5 text-sm text-center"
+              : "px-2.5 max-[360px]:px-2 lg:px-3 py-1.5 text-[11px] lg:text-xs"
           } font-semibold transition-colors duration-300 ${
             lang === opt.key ? "bg-primary text-white" : "text-secondary hover:text-primary"
           }`}
@@ -106,7 +108,9 @@ export default function Navbar({ lang, nav, brand }) {
           scrolled || menuOpen ? "border-outline-light/70" : "border-transparent"
         }`}
       >
-        <div className="flex justify-between items-center w-full h-[72px] px-5 md:px-8 lg:px-20 max-w-[1280px] mx-auto gap-3 md:gap-4">
+        {/* The max-[360px] adjustments squeeze the bar onto the smallest
+            phones (320px wide) without anything running off the edge. */}
+        <div className="flex justify-between items-center w-full h-[72px] px-5 max-[360px]:px-4 md:px-8 lg:px-20 max-w-[1280px] mx-auto gap-3 max-[360px]:gap-2 md:gap-4">
           <Link href={localePath(lang, "/")} className="shrink-0" aria-label={brand.full}>
             <Logo brand={brand} lang={lang} />
           </Link>
@@ -132,7 +136,7 @@ export default function Navbar({ lang, nav, brand }) {
           </div>
 
           {/* Right group — kept clearly apart from the menu links */}
-          <div className="flex items-center gap-3 lg:gap-4 lg:ml-6 xl:ml-10">
+          <div className="flex items-center gap-3 max-[360px]:gap-2 lg:gap-4 lg:ml-6 xl:ml-10">
             {langSwitch()}
 
             {/* Same destination as the Contact link, so it only joins the

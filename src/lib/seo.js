@@ -15,7 +15,7 @@ const CITY = { en: "Warangal", te: "వరంగల్" };
 // The picture WhatsApp / Facebook show beside a shared link — a real project
 // photo (public/og-image.jpg, 1200×630).
 const SHARE_IMAGE_ALT = {
-  en: "Hand-carved wooden hall arch and modular kitchen in a Hanamakonda home by Suma Sri Interiors and Constructions",
+  en: "Hand-carved wooden hall arch and modular kitchen in a Hanamakonda home by Suma Sree Interiors and Constructions",
   te: "హనుమకొండ ఇంట్లో సుమ శ్రీ ఇంటీరియర్స్ & కన్‌స్ట్రక్షన్స్ చేసిన చెక్క హాల్ ఆర్చ్, మాడ్యులర్ కిచెన్",
 };
 
@@ -36,7 +36,7 @@ const PAGES = {
     en: {
       title: "Services",
       description:
-        "Construction, renovation and interiors by Suma Sri Interiors and Constructions — 2D & 3D plans, civil works, modular kitchens, wardrobes, false ceilings and more, across Telangana & Andhra Pradesh.",
+        "Construction, renovation and interiors by Suma Sree Interiors and Constructions — 2D & 3D plans, civil works, modular kitchens, wardrobes, false ceilings and more, across Telangana & Andhra Pradesh.",
     },
     te: {
       title: "సర్వీసులు",
@@ -62,7 +62,7 @@ const PAGES = {
     en: {
       title: "Testimonials",
       description:
-        "What families say about building with Suma Sri Interiors and Constructions, and how our simple 4-step process works.",
+        "What families say about building with Suma Sree Interiors and Constructions, and how our simple 4-step process works.",
     },
     te: {
       title: "కస్టమర్ల మాటలు",
@@ -75,7 +75,7 @@ const PAGES = {
     en: {
       title: "Contact",
       description:
-        "Contact Suma Sri Interiors and Constructions in Hanamakonda, Warangal — call, WhatsApp or send a message to start your house project.",
+        "Contact Suma Sree Interiors and Constructions in Hanamakonda, Warangal — call, WhatsApp or send a message to start your house project.",
     },
     te: {
       title: "కాంటాక్ట్",
@@ -103,7 +103,7 @@ export function siteMetadata(lang) {
       "house plans Warangal",
       "modular kitchen Warangal",
       "home renovation Telangana",
-      "Suma Sri Interiors",
+      "Suma Sree Interiors",
       "సుమ శ్రీ ఇంటీరియర్స్",
       "ఇంటి నిర్మాణం వరంగల్",
     ],

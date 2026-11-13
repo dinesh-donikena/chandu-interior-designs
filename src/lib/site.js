@@ -1,15 +1,15 @@
 // Central place for business identity & links — edit once, updates everywhere.
 export const SITE = {
-  name: "Suma Sri Interiors and Constructions",
+  name: "Suma Sree Interiors and Constructions",
   whatsapp: "https://wa.me/919133509293",
-  // No Suma Sri Instagram yet (the old link was the sister company Chandu
+  // No Suma Sree Instagram yet (the old link was the sister company Chandu
   // Homely Interiors' page), so Instagram is hidden everywhere. Set the new
   // handle's URL here and it appears in the footer, Contact page and schema.
   instagram: null,
   phoneDisplay: "+91 91335 09293",
   phoneHref: "tel:+919133509293",
   // No business inbox yet, so email is hidden everywhere. Set a real address
-  // (e.g. "hello@sumasriinteriors.com") and it appears on Contact + footer.
+  // (e.g. "hello@sumasreeinteriors.com") and it appears on Contact + footer.
   email: null,
 
   // Swap for the Google Business Profile link / exact street address once
