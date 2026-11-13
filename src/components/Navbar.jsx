@@ -67,7 +67,7 @@ export default function Navbar({ lang, nav }) {
         variant === "drawer" ? "w-full" : "w-fit"
       }`}
       role="group"
-      aria-label="Language"
+      aria-label={nav.language}
     >
       {[
         { key: "en", label: "English" },
@@ -82,8 +82,8 @@ export default function Navbar({ lang, nav }) {
           aria-current={lang === opt.key ? "true" : undefined}
           className={`${
             variant === "drawer"
-              ? "flex-1 py-2.5 text-sm text-center"
-              : "px-2.5 max-[360px]:px-2 lg:px-3 py-1.5 text-[11px] lg:text-xs"
+              ? "flex-1 min-h-11 py-2.5 text-sm text-center"
+              : "inline-flex items-center min-h-11 px-2.5 max-[360px]:px-2 lg:px-3 text-[11px] lg:text-xs"
           } font-semibold transition-colors duration-300 ${
             lang === opt.key ? "bg-primary text-white" : "text-secondary hover:text-primary"
           }`}
@@ -152,8 +152,8 @@ export default function Navbar({ lang, nav }) {
             <button
               type="button"
               onClick={() => setMenuOpen(true)}
-              className="lg:hidden text-primary p-1"
-              aria-label="Open menu"
+              className="lg:hidden inline-flex items-center justify-center min-h-11 min-w-11 text-primary"
+              aria-label={nav.openMenu}
               aria-expanded={menuOpen}
             >
               <Menu />
@@ -176,8 +176,8 @@ export default function Navbar({ lang, nav }) {
               <button
                 type="button"
                 onClick={() => setMenuOpen(false)}
-                className="text-primary p-1"
-                aria-label="Close menu"
+                className="inline-flex items-center justify-center min-h-11 min-w-11 text-primary"
+                aria-label={nav.closeMenu}
               >
                 <Close />
               </button>

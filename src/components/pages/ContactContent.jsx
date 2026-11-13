@@ -1,6 +1,6 @@
 import EnquiryForm from "@/components/EnquiryForm";
 import PageHeader from "@/components/PageHeader";
-import { InstagramIcon, MailIcon, PhoneIcon, PinIcon, WhatsAppIcon } from "@/components/icons";
+import { InstagramIcon, MailIcon, PhoneIcon, PinIcon } from "@/components/icons";
 import { SITE } from "@/lib/site";
 import { translations } from "@/lib/translations";
 import { wrap } from "@/lib/ui";
@@ -8,11 +8,12 @@ import { wrap } from "@/lib/ui";
 const heading = "text-xs font-semibold uppercase tracking-[0.12em] text-outline mb-5";
 
 // One way to reach us: an icon, the main line, and a small note beneath.
-function Channel({ href, icon, children, note, external = false }) {
+function Channel({ href, icon, children, note, external = false, label }) {
   return (
     <a
       href={href}
-      className="flex items-start gap-4 group"
+      aria-label={label}
+      className="flex items-center gap-4 min-h-11 py-1 group"
       {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
     >
       <span className="text-accent mt-0.5 shrink-0">{icon}</span>
@@ -49,16 +50,18 @@ export default function ContactContent({ lang }) {
                 <Channel href={SITE.phoneHref} icon={<PhoneIcon />} note={c.hours}>
                   {SITE.phoneDisplay}
                 </Channel>
-                <Channel href={SITE.whatsapp} icon={<WhatsAppIcon />} note={c.responseTime} external>
-                  WhatsApp
-                </Channel>
                 {SITE.email && (
                   <Channel href={`mailto:${SITE.email}`} icon={<MailIcon />}>
                     {SITE.email}
                   </Channel>
                 )}
                 {SITE.instagram && (
-                  <Channel href={SITE.instagram} icon={<InstagramIcon />} external>
+                  <Channel
+                    href={SITE.instagram}
+                    icon={<InstagramIcon />}
+                    external
+                    label={t.common.instagramLabel}
+                  >
                     {c.instagram}
                   </Channel>
                 )}

@@ -2,9 +2,8 @@ import Image from "next/image";
 import Link from "next/link";
 import PageHeader from "@/components/PageHeader";
 import { localePath } from "@/lib/i18n";
-import { SITE } from "@/lib/site";
 import { translations } from "@/lib/translations";
-import { btnOutline, btnPrimary, numeral, wrap } from "@/lib/ui";
+import { btnPrimary, numeral, wrap } from "@/lib/ui";
 
 export default function TestimonialsContent({ lang }) {
   const t = translations[lang];
@@ -77,7 +76,7 @@ export default function TestimonialsContent({ lang }) {
           <div data-reveal="photo" className="lg:col-span-7 relative aspect-[16/10] overflow-hidden bg-surface-high">
             <Image
               src="/portfolio/hanamakonda-hall-arch.jpg"
-              alt="Wood-carved teak hall arch opening onto the pooja room and kitchen"
+              alt={ts.photoAlt}
               fill
               sizes="(min-width: 1024px) 60vw, 100vw"
               className="object-cover"
@@ -89,9 +88,6 @@ export default function TestimonialsContent({ lang }) {
               <Link href={localePath(lang, "/contact")} className={btnPrimary}>
                 {ts.ctaButton}
               </Link>
-              <a href={SITE.whatsapp} target="_blank" rel="noopener noreferrer" className={btnOutline}>
-                {t.home.ctaWhatsApp}
-              </a>
             </div>
           </div>
         </div>

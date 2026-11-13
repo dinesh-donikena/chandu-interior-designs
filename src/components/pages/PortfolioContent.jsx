@@ -10,13 +10,13 @@ import { wrap } from "@/lib/ui";
 // translations (portfolio.projects) by index. Width/height are each photo's
 // real proportions, so the wall reserves the right space before images load.
 const PHOTOS = [
-  { category: "hall", image: "/portfolio/hanamakonda-tv-unit.jpg", w: 2000, h: 3000 },
+  { category: "hall", image: "/portfolio/hanamakonda-tv-unit.jpg", w: 1333, h: 2000 },
   { category: "kitchen", image: "/portfolio/hanamakonda-kitchen.jpg", w: 2000, h: 1125 },
-  { category: "bedroom", image: "/portfolio/hanamakonda-bedroom-olive.jpg", w: 2000, h: 1125 },
-  { category: "hall", image: "/portfolio/hanamakonda-hall-arch.jpg", w: 2600, h: 1625 },
+  { category: "bedroom", image: "/portfolio/hanamakonda-bedroom-olive.jpg", w: 2000, h: 1126 },
+  { category: "hall", image: "/portfolio/hanamakonda-hall-arch.jpg", w: 2000, h: 1250 },
   { category: "pooja", image: "/portfolio/hanamakonda-pooja-panel.jpg", w: 1200, h: 1800 },
   { category: "pooja", image: "/portfolio/hanamakonda-pooja-room.jpg", w: 1200, h: 1800 },
-  { category: "hall", image: "/portfolio/hanamakonda-wash-counter.jpg", w: 2000, h: 3000 },
+  { category: "hall", image: "/portfolio/hanamakonda-wash-counter.jpg", w: 1333, h: 2000 },
 ];
 
 export default function PortfolioContent({ lang }) {
@@ -39,7 +39,6 @@ export default function PortfolioContent({ lang }) {
         heading={pf.ctaHeading}
         button={pf.ctaButton}
         href={localePath(lang, "/contact")}
-        whatsapp={t.home.ctaWhatsApp}
       />
     </>
   );

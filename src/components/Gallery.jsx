@@ -32,7 +32,7 @@ export default function Gallery({ projects, filters, labels }) {
             type="button"
             onClick={() => setFilter(f.key)}
             aria-pressed={filter === f.key}
-            className={`text-xs font-semibold uppercase tracking-[0.12em] pb-1 border-b-2 transition-colors ${
+            className={`inline-flex items-center min-h-11 text-xs font-semibold uppercase tracking-[0.12em] border-b-2 transition-colors ${
               filter === f.key
                 ? "text-primary border-accent"
                 : "text-on-surface-muted border-transparent hover:text-accent"
@@ -103,7 +103,7 @@ export default function Gallery({ projects, filters, labels }) {
                 type="button"
                 onClick={() => dialog.current.close()}
                 aria-label={labels.close}
-                className="p-2 -mr-2 text-white/80 hover:text-white transition-colors"
+                className="inline-flex items-center justify-center min-h-11 min-w-11 -mr-2 text-white/80 hover:text-white transition-colors"
               >
                 <Close />
               </button>

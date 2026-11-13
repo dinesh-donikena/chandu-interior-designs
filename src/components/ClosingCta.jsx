@@ -1,12 +1,11 @@
 import Link from "next/link";
-import { SITE } from "@/lib/site";
-import { btnOutlineLight, btnPrimary, wrap } from "@/lib/ui";
+import { btnPrimary, wrap } from "@/lib/ui";
 
 // The dark band that closes a page with an invitation. A hairline arch
 // (two brass lines, like a carved door frame) stands behind the words, so
 // the band reads as an open doorway without saying so. Drawn in CSS
 // (.cta-arch in globals.css), wide enough that no text ever crosses it.
-export default function ClosingCta({ heading, text, button, href, whatsapp }) {
+export default function ClosingCta({ heading, text, button, href }) {
   return (
     <section className="relative overflow-hidden bg-primary text-center">
       <div className="cta-arch" aria-hidden="true" />
@@ -23,9 +22,6 @@ export default function ClosingCta({ heading, text, button, href, whatsapp }) {
           <Link href={href} className={btnPrimary}>
             {button}
           </Link>
-          <a href={SITE.whatsapp} target="_blank" rel="noopener noreferrer" className={btnOutlineLight}>
-            {whatsapp}
-          </a>
         </div>
       </div>
     </section>

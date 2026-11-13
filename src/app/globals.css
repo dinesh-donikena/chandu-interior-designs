@@ -13,7 +13,8 @@
   /* Antique brass — buttons, eyebrows, numerals, hovers */
   --color-accent: #7a5c34;
   --color-accent-dark: #634a29;
-  --color-accent-light: #c9a66b;
+  /* Pasupu — the logo's threshold gold. Doorway lines only, not text. */
+  --color-accent-light: #cf9b2c;
 
   --color-surface: #f4f1eb;
   --color-surface-dim: #d9d1c4;
@@ -76,6 +77,20 @@
 }
 .brand-lockup-footer-te {
   width: min(9.5rem, 100%);
+}
+
+/* Services: the photo eases in a little on hover or tap. The reveal
+   itself is the existing scroll observer. */
+.service-photo img {
+  transition: transform 0.9s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+@media (hover: hover) {
+  .service-card:hover .service-photo img {
+    transform: scale(1.045);
+  }
+}
+.service-card:active .service-photo img {
+  transform: scale(1.02);
 }
 
 ::selection {
@@ -216,7 +231,7 @@ summary:focus-visible {
 .cta-arch,
 .cta-arch::after {
   position: absolute;
-  border: 1px solid rgba(201, 166, 107, 0.3);
+  border: 1px solid rgba(207, 155, 44, 0.45);
   border-bottom: 0;
   border-radius: 999px 999px 0 0;
   pointer-events: none;
@@ -231,7 +246,7 @@ summary:focus-visible {
 .cta-arch::after {
   content: "";
   inset: 14px 14px 0;
-  border-color: rgba(201, 166, 107, 0.16);
+  border-color: rgba(207, 155, 44, 0.22);
 }
 @media (min-width: 768px) {
   .cta-arch {
@@ -467,8 +482,10 @@ summary:focus-visible {
   .drawer-backdrop,
   .hero-cue-arrow,
   .hero-copy > *,
-  .lightbox-photo {
+  .lightbox-photo,
+  .service-photo img {
     animation: none;
+    transition: none;
   }
   html {
     scroll-behavior: auto;

@@ -6,7 +6,7 @@ import { ArrowDown, ArrowRight, Plus, Tick } from "@/components/icons";
 import { localePath } from "@/lib/i18n";
 import { SITE } from "@/lib/site";
 import { translations } from "@/lib/translations";
-import { btnOutline, btnPrimary, numeral, textLink, wrap } from "@/lib/ui";
+import { btnPrimary, numeral, textLink, wrap } from "@/lib/ui";
 
 // Real photos of the Hanamakonda home — no stock. Titles come from
 // translations (home.projects) by index. The hall arch opens the section
@@ -74,7 +74,7 @@ export default function HomeContent({ lang }) {
           <div className="hero-door">
             <Image
               src="/portfolio/hanamakonda-tv-unit.jpg"
-              alt="Backlit TV unit with fluted panelling in a Hanamakonda home"
+              alt={t.home.heroPhotoAlt}
               fill
               preload
               sizes="(min-width: 1024px) 45vw, 100vw"
@@ -90,14 +90,11 @@ export default function HomeContent({ lang }) {
               <em className="italic text-accent">{t.home.heroTitle2}</em>
             </h1>
 
-            <div className="hidden md:flex flex-wrap justify-center gap-4 mt-7 lg:mt-8">
+            <div className="flex flex-wrap justify-center gap-4 mt-6 md:mt-7 lg:mt-8">
               <Link href={path("/portfolio")} className={`${btnPrimary} group`}>
                 {t.home.heroCta}
                 <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
               </Link>
-              <a href={SITE.whatsapp} target="_blank" rel="noopener noreferrer" className={btnOutline}>
-                {t.home.ctaWhatsApp}
-              </a>
             </div>
 
             <a
@@ -282,7 +279,6 @@ export default function HomeContent({ lang }) {
         text={t.home.ctaText}
         button={t.home.ctaButton}
         href={path("/contact")}
-        whatsapp={t.home.ctaWhatsApp}
       />
     </>
   );

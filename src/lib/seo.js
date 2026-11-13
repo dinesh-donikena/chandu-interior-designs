@@ -120,6 +120,37 @@ const PAGES = {
 
 export const PAGE_PATHS = Object.values(PAGES).map((page) => page.path);
 
+// Unknown addresses. The title has to be in the first HTML response —
+// the layout default is the homepage title, which is what a 404 was showing.
+const NOT_FOUND = {
+  en: {
+    title: "Page not found",
+    description: "The link may be old, or the address mistyped. Everything else is one step away.",
+  },
+  te: {
+    title: "పేజీ దొరకలేదు",
+    description: "లింక్ పాతదై ఉండొచ్చు, లేదా అడ్రస్ తప్పుగా టైప్ అయి ఉండొచ్చు. మిగతావన్నీ ఇక్కడే ఉన్నాయి.",
+  },
+};
+
+export function notFoundMetadata(lang) {
+  const copy = NOT_FOUND[lang];
+  const fullTitle = `${copy.title} | ${SITE_NAME[lang]}`;
+  return {
+    title: copy.title,
+    description: copy.description,
+    robots: { index: false, follow: true },
+    openGraph: {
+      title: fullTitle,
+      description: copy.description,
+      siteName: SITE_NAME[lang],
+      locale: lang === "te" ? "te_IN" : "en_IN",
+      type: "website",
+      images: [ogImage],
+    },
+  };
+}
+
 // Site-wide defaults, set once in each language's layout.
 export function siteMetadata(lang) {
   return {
@@ -128,21 +159,31 @@ export function siteMetadata(lang) {
       default: `${SITE_NAME[lang]} | ${AREA[lang]}`,
       template: `%s | ${SITE_NAME[lang]}`,
     },
-    keywords: [
-      "interior design Telangana",
-      "interior design Andhra Pradesh",
-      "house construction Telangana",
-      "house construction Andhra Pradesh",
-      "home interiors Telangana and Andhra Pradesh",
-      "home renovation Telangana",
-      "home renovation Andhra Pradesh",
-      "modular kitchen Telangana",
-      "house plans Andhra Pradesh",
-      "Suma Sree Interiors",
-      "సుమ శ్రీ ఇంటీరియర్స్",
-      "ఇంటి నిర్మాణం తెలంగాణ",
-      "ఇంటీరియర్స్ ఆంధ్రప్రదేశ్",
-    ],
+    keywords:
+      lang === "te"
+        ? [
+            "సుమ శ్రీ ఇంటీరియర్స్",
+            "ఇంటి నిర్మాణం తెలంగాణ",
+            "ఇంటి నిర్మాణం ఆంధ్రప్రదేశ్",
+            "ఇంటీరియర్స్ తెలంగాణ",
+            "ఇంటీరియర్స్ ఆంధ్రప్రదేశ్",
+            "ఇంటి రెనోవేషన్ వరంగల్",
+            "మాడ్యులర్ కిచెన్ హనుమకొండ",
+            "హనుమకొండ ఇంటీరియర్స్",
+            "Suma Sree Interiors",
+          ]
+        : [
+            "interior design Telangana",
+            "interior design Andhra Pradesh",
+            "house construction Telangana",
+            "house construction Andhra Pradesh",
+            "home interiors Telangana and Andhra Pradesh",
+            "home renovation Telangana",
+            "home renovation Andhra Pradesh",
+            "modular kitchen Hanamakonda",
+            "house plans Warangal",
+            "Suma Sree Interiors",
+          ],
     // Fallback share text for a page that sets no description of its own.
     // A page that sets openGraph replaces this whole object, and brings
     // the image with it (see pageMetadata). Twitter is not replaced by

@@ -6,7 +6,8 @@ import { translations } from "@/lib/translations";
 import { wrap } from "@/lib/ui";
 
 const heading = "block text-xs font-semibold uppercase tracking-[0.12em] text-accent mb-5";
-const link = "text-on-surface-muted hover:text-primary transition-colors text-base";
+const link =
+  "inline-flex items-center min-h-11 text-on-surface-muted hover:text-primary transition-colors text-base";
 
 export default function Footer({ lang }) {
   const t = translations[lang];
@@ -22,7 +23,7 @@ export default function Footer({ lang }) {
           <p className="text-base text-on-surface-muted max-w-xs leading-relaxed mt-5">{t.footer.tagline}</p>
         </div>
 
-        <nav className="lg:col-span-2 flex flex-col gap-3" aria-label={t.footer.pages}>
+        <nav className="lg:col-span-2 flex flex-col" aria-label={t.footer.pages}>
           <span className={heading}>{t.footer.pages}</span>
           <Link href={path("/portfolio")} className={link}>
             {t.nav.portfolio}
@@ -38,16 +39,19 @@ export default function Footer({ lang }) {
           </Link>
         </nav>
 
-        <div className="lg:col-span-2 flex flex-col gap-3">
+        <div className="lg:col-span-2 flex flex-col">
           <span className={heading}>{t.footer.connect}</span>
           <a href={SITE.phoneHref} className={`${link} whitespace-nowrap`}>
             {SITE.phoneDisplay}
           </a>
-          <a href={SITE.whatsapp} target="_blank" rel="noopener noreferrer" className={link}>
-            WhatsApp
-          </a>
           {SITE.instagram && (
-            <a href={SITE.instagram} target="_blank" rel="noopener noreferrer" className={link}>
+            <a
+              href={SITE.instagram}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={link}
+              aria-label={t.common.instagramLabel}
+            >
               Instagram
             </a>
           )}

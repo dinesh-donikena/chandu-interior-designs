@@ -24,6 +24,9 @@ export const translations = {
       testimonials: "Testimonials",
       contact: "Contact",
       talk: "Talk to Us",
+      language: "Language",
+      openMenu: "Open menu",
+      closeMenu: "Close menu",
     },
     home: {
       heroEyebrow: "House Construction & Interiors",
@@ -32,6 +35,7 @@ export const translations = {
       heroCta: "See Our Work",
       heroCue: "Step inside",
       heroCaption: "TV unit & wall panelling · Hanamakonda",
+      heroPhotoAlt: "Backlit TV unit with fluted panelling in a Hanamakonda home",
       promise: ["Quality materials", "Stunning designs", "Experienced workmanship"],
       introHeading: "Construction, renovation, interiors — we do it all.",
       introP1:
@@ -271,6 +275,7 @@ export const translations = {
       ],
       ctaHeading: "Let's talk about your house.",
       ctaButton: "Contact Us",
+      photoAlt: "Wood-carved teak hall arch opening onto the pooja room and kitchen",
     },
     contact: {
       title: "Let's Talk About Your House.",
@@ -286,6 +291,7 @@ export const translations = {
         messagePlaceholder: "Tell us about your house or plot...",
         send: "Send on WhatsApp",
         sendNote: "Opens WhatsApp with your message ready — just tap send.",
+        required: "Please fill this in.",
         // Pieces of the pre-filled WhatsApp message
         waHello: "Hello, I'm",
         waNeed: "Need",
@@ -315,6 +321,7 @@ export const translations = {
     common: {
       whatsappLabel: "Message us on WhatsApp",
       callLabel: "Call us",
+      instagramLabel: "Suma Sree on Instagram",
     },
     notFound: {
       label: "Page not found",
@@ -338,6 +345,9 @@ export const translations = {
       testimonials: "కస్టమర్ల మాటలు",
       contact: "కాంటాక్ట్",
       talk: "కాంటాక్ట్ చేయండి",
+      language: "భాష",
+      openMenu: "మెనూ తెరవండి",
+      closeMenu: "మెనూ మూసివేయండి",
     },
     home: {
       heroEyebrow: "ఇంటి నిర్మాణం & ఇంటీరియర్స్",
@@ -346,6 +356,7 @@ export const translations = {
       heroCta: "మా పనులు చూడండి",
       heroCue: "లోపలికి రండి",
       heroCaption: "టీవీ యూనిట్ & వాల్ ప్యానెలింగ్ · హనుమకొండ",
+      heroPhotoAlt: "హనుమకొండ ఇంట్లో లైటింగ్‌తో టీవీ యూనిట్, ఫ్లూటెడ్ ప్యానెలింగ్",
       promise: ["నాణ్యమైన మెటీరియల్స్", "అద్భుతమైన డిజైన్లు", "అనుభవజ్ఞులైన వర్క్"],
       introHeading: "కన్‌స్ట్రక్షన్, రెనోవేషన్, ఇంటీరియర్స్ — అన్నీ మేమే చూసుకుంటాం.",
       introP1:
@@ -584,6 +595,7 @@ export const translations = {
       ],
       ctaHeading: "రండి, మీ ఇంటి గురించి మాట్లాడుకుందాం.",
       ctaButton: "కాంటాక్ట్ చేయండి",
+      photoAlt: "పూజ గది, కిచెన్ తెరిచే చెక్క పనితో కూడిన హాల్ ఆర్చ్",
     },
     contact: {
       title: "మీ ఇంటి గురించి మాట్లాడుకుందాం.",
@@ -599,6 +611,7 @@ export const translations = {
         messagePlaceholder: "మీ ఇల్లు లేదా స్థలం గురించి రెండు మాటలు రాయండి...",
         send: "WhatsApp లో పంపండి",
         sendNote: "మీ మెసేజ్ WhatsApp లో రెడీగా ఓపెన్ అవుతుంది — సెండ్ నొక్కితే చాలు.",
+        required: "దయచేసి ఇది నింపండి.",
         waHello: "నమస్తే, నా పేరు",
         waNeed: "కావాల్సింది",
         waSite: "సైట్",
@@ -626,6 +639,7 @@ export const translations = {
     common: {
       whatsappLabel: "WhatsApp లో మెసేజ్ చేయండి",
       callLabel: "కాల్ చేయండి",
+      instagramLabel: "సుమ శ్రీ Instagram",
     },
     notFound: {
       label: "పేజీ దొరకలేదు",

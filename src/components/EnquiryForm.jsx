@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import { track } from "@vercel/analytics";
 import { WhatsAppIcon } from "@/components/icons";
 import { SITE } from "@/lib/site";
@@ -7,23 +8,36 @@ import { btnPrimary } from "@/lib/ui";
 
 const labelClass = "block text-xs font-semibold uppercase tracking-[0.12em] text-primary mb-2";
 const inputClass =
-  "w-full bg-transparent py-2.5 px-0 border-0 border-b border-outline-light focus:border-accent focus:outline-none text-base transition-colors placeholder:text-outline/70";
+  "w-full min-h-11 bg-transparent py-2.5 px-0 border-0 border-b border-outline-light focus:border-accent focus:outline-none text-base transition-colors placeholder:text-outline/70";
 
 // The enquiry form hands off to WhatsApp with the message pre-filled —
 // enquiries land where the owner already replies, and there is no form
 // backend or API key that can quietly break.
 export default function EnquiryForm({ f, services }) {
+  const [errors, setErrors] = useState({});
+
   function handleSubmit(e) {
     e.preventDefault();
     const form = e.currentTarget;
     const data = new FormData(form);
-    const need = data.getAll("service").join(", ");
-    const site = data.get("location").trim();
+    const name = String(data.get("name") || "").trim();
+    const message = String(data.get("message") || "").trim();
+    const next = {};
+    if (!name) next.name = f.required;
+    if (!message) next.message = f.required;
+    setErrors(next);
+    if (next.name || next.message) {
+      form.querySelector(next.name ? "#name" : "#message")?.focus();
+      return;
+    }
 
-    const lines = [`${f.waHello} ${data.get("name").trim()}.`];
+    const need = data.getAll("service").join(", ");
+    const site = String(data.get("location") || "").trim();
+
+    const lines = [`${f.waHello} ${name}.`];
     if (need) lines.push(`${f.waNeed}: ${need}`);
     if (site) lines.push(`${f.waSite}: ${site}`);
-    lines.push("", data.get("message").trim());
+    lines.push("", message);
 
     // Counted without any of the visitor's details — only that the form
     // was used, and on which page.
@@ -51,7 +65,15 @@ export default function EnquiryForm({ f, services }) {
             type="text"
             autoComplete="name"
             required
+            aria-invalid={errors.name ? true : undefined}
+            aria-describedby={errors.name ? "name-error" : undefined}
+            onChange={() => errors.name && setErrors((prev) => ({ ...prev, name: undefined }))}
           />
+          {errors.name && (
+            <p id="name-error" className="mt-2 text-sm text-error" role="alert">
+              {errors.name}
+            </p>
+          )}
         </div>
         <div>
           <label className={labelClass} htmlFor="location">
@@ -74,7 +96,7 @@ export default function EnquiryForm({ f, services }) {
           {services.map((service) => (
             <label key={service} className="cursor-pointer">
               <input type="checkbox" name="service" value={service} className="peer sr-only" />
-              <span className="inline-block px-4 py-2 rounded-full border border-outline-light text-sm text-secondary transition-colors peer-checked:bg-primary peer-checked:border-primary peer-checked:text-white peer-focus-visible:ring-2 peer-focus-visible:ring-accent peer-focus-visible:ring-offset-2 hover:border-accent">
+              <span className="inline-flex items-center min-h-11 px-4 rounded-full border border-outline-light text-sm text-secondary transition-colors peer-checked:bg-primary peer-checked:border-primary peer-checked:text-white peer-focus-visible:ring-2 peer-focus-visible:ring-accent peer-focus-visible:ring-offset-2 hover:border-accent">
                 {service}
               </span>
             </label>
@@ -93,7 +115,15 @@ export default function EnquiryForm({ f, services }) {
           placeholder={f.messagePlaceholder}
           rows={4}
           required
+          aria-invalid={errors.message ? true : undefined}
+          aria-describedby={errors.message ? "message-error" : undefined}
+          onChange={() => errors.message && setErrors((prev) => ({ ...prev, message: undefined }))}
         />
+        {errors.message && (
+          <p id="message-error" className="mt-2 text-sm text-error" role="alert">
+            {errors.message}
+          </p>
+        )}
       </div>
 
       <div className="pt-1 space-y-4">
